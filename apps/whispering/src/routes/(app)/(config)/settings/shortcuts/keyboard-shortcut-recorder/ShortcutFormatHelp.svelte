@@ -48,22 +48,22 @@
 	size="icon"
 	class="size-6"
 	onclick={() => (dialogOpen = true)}
-	tooltip="Click for shortcut format guide"
+	tooltip="点击查看快捷键格式指南"
 >
 	<HelpCircle class="size-4" />
-	<span class="sr-only">Shortcut format help</span>
+	<span class="sr-only">快捷键格式帮助</span>
 </Button>
 
 <Dialog.Root bind:open={dialogOpen}>
 	<Dialog.Content class="sm:max-w-3xl">
 		<Dialog.Header>
 			<Dialog.Title>
-				{isLocal ? 'Local' : 'Global'} Shortcut Format Guide
+				{isLocal ? '应用内' : '全局'}快捷键格式指南
 			</Dialog.Title>
 			<Dialog.Description>
-				Learn how to format keyboard shortcuts for {isLocal
-					? 'in-app'
-					: 'system-wide'} use.
+				了解{isLocal
+					? '应用内'
+					: '系统级'}快捷键的格式写法。
 			</Dialog.Description>
 		</Dialog.Header>
 
@@ -71,13 +71,13 @@
 			<!-- Quick format summary -->
 			<div class="rounded-lg bg-muted p-4">
 				<p class="text-sm">
-					Use <code class="font-mono text-xs">modifier+key</code> format or just
-					<code class="font-mono text-xs">key</code> for single keys.
+					使用 <code class="font-mono text-xs">modifier+key</code> 格式，或单个按键直接用
+					<code class="font-mono text-xs">key</code>。
 				</p>
 				{#if isLocal}
 					<p class="text-sm text-muted-foreground mt-1">
-						Any key from your keyboard can be used (lowercase). Below are common
-						examples:
+						可使用键盘上的任意按键（小写）。以下是常见
+						示例：
 					</p>
 				{/if}
 			</div>
@@ -86,8 +86,8 @@
 			<div class="flex flex-col sm:flex-row sm:divide-x">
 				<!-- Left column: Modifiers -->
 				<div class="sm:pr-4">
-					<h4 class="text-sm font-semibold mb-1">Modifiers</h4>
-					<p class="text-xs text-muted-foreground mb-2">Hold with other keys</p>
+					<h4 class="text-sm font-semibold mb-1">修饰键</h4>
+					<p class="text-xs text-muted-foreground mb-2">与其他键组合使用</p>
 					<div class="flex flex-wrap sm:flex-col gap-1">
 						{#each (isLocal ? KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS[0] : ACCELERATOR_SECTIONS[0]).keys as modifier}
 							<Kbd.Root>{modifier}</Kbd.Root>
@@ -117,7 +117,7 @@
 
 			<!-- Examples -->
 			<div>
-				<h4 class="mb-2 font-medium">Examples</h4>
+				<h4 class="mb-2 font-medium">示例</h4>
 				<div class="space-y-2 rounded-lg border p-3">
 					{#each SHORTCUT_EXAMPLES[isLocal ? 'local' : 'global'] as example}
 						<code class="block text-sm">{example}</code>
@@ -128,21 +128,21 @@
 			{#if IS_MACOS}
 				<Alert.Root variant="warning">
 					<AlertTriangle class="size-4" />
-					<Alert.Title>macOS Option Key Limitations</Alert.Title>
+					<Alert.Title>macOS Option 键限制</Alert.Title>
 					<Alert.Description class="space-y-2">
 						<p>
-							On macOS, certain Option (Alt) key combinations act as "dead keys"
-							that don't register properly when recording:
+							在 macOS 上，某些 Option（Alt）键组合会作为"死键"
+							录制时无法正确注册：
 						</p>
 						<div class="flex flex-wrap gap-1 my-2">
 							{#each OPTION_DEAD_KEYS as key}
 								<Kbd.Root>Option + {key.toUpperCase()}</Kbd.Root>
 							{/each}
 						</div>
-						<p class="font-medium">Workarounds:</p>
+						<p class="font-medium">替代方案：</p>
 						<ul class="list-disc list-inside space-y-1 ml-2">
-							<li>Record in reverse: Press the letter first, then Option</li>
-							<li>Edit manually: Type "alt+e" instead of recording</li>
+							<li>反向录制：先按字母，再按 Option</li>
+							<li>手动编辑：输入"alt+e"代替录制</li>
 						</ul>
 					</Alert.Description>
 				</Alert.Root>
@@ -158,10 +158,10 @@
 					rel="noreferrer"
 				>
 					<ExternalLink class="size-4" />
-					View documentation
+					查看文档
 				</Button>
 			{/if}
-			<Button onclick={() => (dialogOpen = false)}>Close</Button>
+			<Button onclick={() => (dialogOpen = false)}>关闭</Button>
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>

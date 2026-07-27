@@ -108,11 +108,11 @@
 						break;
 					case 'Finished':
 						rpc.notify.success.execute({
-							title: 'Update installed successfully!',
-							description: 'Restart Whispering to apply the update.',
+							title: '更新安装成功!',
+							description: '重启 Whispering 以应用更新。',
 							action: {
 								type: 'button',
-								label: 'Restart Whispering',
+								label: '重启 Whispering',
 								onClick: () => relaunch(),
 							},
 						});
@@ -122,7 +122,7 @@
 		} catch (err) {
 			updateDialog.setError(extractErrorMessage(err));
 			rpc.notify.error.execute({
-				title: 'Failed to install update',
+				title: '更新安装失败',
 				description: extractErrorMessage(err),
 			});
 		}
@@ -132,9 +132,9 @@
 <Dialog.Root bind:open={updateDialog.isOpen}>
 	<Dialog.Content class="sm:max-w-lg">
 		<Dialog.Header>
-			<Dialog.Title>Update Available</Dialog.Title>
+			<Dialog.Title>有可用更新</Dialog.Title>
 			<Dialog.Description>
-				Version {updateDialog.update?.version} is ready to install
+				版本 {updateDialog.update?.version} 已可安装
 				{#if updateDialog.update?.date}
 					&middot; {new Date(updateDialog.update.date).toLocaleDateString()}
 				{/if}
@@ -145,7 +145,7 @@
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						View release notes
+						查看发布说明
 					</Link>
 				{/if}
 			</Dialog.Description>
@@ -167,8 +167,8 @@
 				>
 					<span>
 						{updateDialog.isDownloadComplete
-							? 'Download complete'
-							: 'Downloading...'}
+							? '下载完成'
+							: '下载中...'}
 					</span>
 					<span class="tabular-nums">
 						{Math.round(updateDialog.progressPercentage)}%
@@ -181,7 +181,7 @@
 		{#if updateDialog.error}
 			<Alert.Root variant="destructive">
 				<AlertTriangleIcon />
-				<Alert.Title>Installation failed</Alert.Title>
+				<Alert.Title>安装失败</Alert.Title>
 				<Alert.Description>
 					{updateDialog.error}
 				</Alert.Description>
@@ -194,20 +194,20 @@
 				onclick={() => updateDialog.close()}
 				disabled={updateDialog.isDownloading}
 			>
-				Later
+				稍后
 			</Button>
 			{#if updateDialog.isDownloadComplete}
-				<Button onclick={() => relaunch()}>Restart Now</Button>
+				<Button onclick={() => relaunch()}>立即重启</Button>
 			{:else}
 				<Button
 					onclick={handleDownloadAndInstall}
 					disabled={updateDialog.isDownloading}
 				>
 					{#if updateDialog.isDownloading}
-						Downloading...
+						下载中...
 					{:else}
 						<DownloadIcon />
-						Install Update
+						安装更新
 					{/if}
 				</Button>
 			{/if}

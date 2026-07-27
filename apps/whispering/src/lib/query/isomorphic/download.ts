@@ -17,8 +17,8 @@ export const download = {
 
 			if (getAudioBlobError) {
 				return WhisperingErr({
-					title: '⚠️ Failed to fetch audio',
-					description: `Unable to load audio for recording: ${getAudioBlobError.message}`,
+					title: '⚠️ 获取音频失败',
+					description: `无法为录音加载音频:${getAudioBlobError.message}`,
 				});
 			}
 

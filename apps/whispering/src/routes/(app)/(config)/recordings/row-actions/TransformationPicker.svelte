@@ -23,7 +23,7 @@
 		{#snippet child({ props })}
 			<Button
 				{...props}
-				tooltip="Run a post-processing transformation to run on your recording"
+				tooltip="对您的录音运行后处理转换"
 				role="combobox"
 				aria-expanded={combobox.open}
 				variant="ghost"
@@ -41,9 +41,9 @@
 				const toastId = nanoid();
 				rpc.notify.loading.execute({
 					id: toastId,
-					title: '🔄 Running transformation...',
+					title: '🔄 正在运行转换...',
 					description:
-						'Applying your selected transformation to the transcribed text...',
+						'正在将所选转换应用到转录文本...',
 				});
 
 				transformRecording.mutate(
@@ -53,7 +53,7 @@
 						onSuccess: (transformationRun) => {
 							if (transformationRun.status === 'failed') {
 								rpc.notify.error.execute({
-									title: '⚠️ Transformation error',
+									title: '⚠️ 转换错误',
 									description: transformationRun.error,
 									action: {
 										type: 'more-details',
@@ -77,7 +77,7 @@
 				combobox.closeAndFocusTrigger();
 				goto('/transformations');
 			}}
-			placeholder="Select transcription post-processing..."
+			placeholder="选择转录后处理..."
 		/>
 	</Popover.Content>
 </Popover.Root>

@@ -24,6 +24,6 @@
 		controls
 		src={audioUrlQuery.data}
 	>
-		Your browser does not support the audio element.
+		您的浏览器不支持 audio 元素。
 	</audio>
 {/if}

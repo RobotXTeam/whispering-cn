@@ -42,8 +42,8 @@
 <Dialog.Root bind:open={notificationLog.isOpen}>
 	<Dialog.Content class="max-w-md">
 		<Dialog.Header>
-			<Dialog.Title>Notification History</Dialog.Title>
-			<Dialog.Description>View past notifications</Dialog.Description>
+			<Dialog.Title>通知历史</Dialog.Title>
+			<Dialog.Description>查看过往通知</Dialog.Description>
 		</Dialog.Header>
 
 		<ScrollArea
@@ -100,9 +100,9 @@
 						<Empty.Media variant="icon">
 							<BellIcon />
 						</Empty.Media>
-						<Empty.Title>No notifications yet</Empty.Title>
+						<Empty.Title>暂无通知</Empty.Title>
 						<Empty.Description>
-							Notifications will appear here as they occur.
+							通知会在出现时显示在这里。
 						</Empty.Description>
 					</Empty.Header>
 				</Empty.Root>

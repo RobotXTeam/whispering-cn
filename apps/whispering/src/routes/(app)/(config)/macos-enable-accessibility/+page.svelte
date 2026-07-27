@@ -18,11 +18,11 @@
 		const { error } = await desktopServices.permissions.accessibility.request();
 
 		if (error) {
-			toast.error('Failed to open accessibility settings', {
+			toast.error('打开辅助功能设置失败', {
 				description:
-					'Please enable Accessibility in System Settings > Privacy & Security > Accessibility manually',
+					'请在系统设置 > 隐私与安全性 > 辅助功能中手动启用辅助功能',
 				action: {
-					label: 'Open Accessibility Settings',
+					label: '打开辅助功能设置',
 					onClick: () => openSystemSettings(),
 				},
 			});
@@ -41,35 +41,33 @@
 			console.error('Failed to open System Settings:', commandError);
 
 			// Fallback: Show detailed instructions
-			toast.info('Open System Settings Manually', {
+			toast.info('手动打开系统设置', {
 				description:
-					'Click Apple menu → System Settings → Privacy & Security → Accessibility',
+					'点击 Apple 菜单 → 系统设置 → 隐私与安全性 → 辅助功能',
 				duration: 10000,
 			});
 			return;
 		}
 
 		// Show helpful toast since we can't open directly to accessibility
-		toast.info('System Settings Opened', {
+		toast.info('系统设置已打开', {
 			description:
-				'Navigate to Privacy & Security > Accessibility to grant permissions.',
+				'前往隐私与安全性 > 辅助功能以授予权限。',
 			duration: 8000,
 		});
 	}
 </script>
 
 <svelte:head>
-	<title>MacOS Accessibility</title>
+	<title>macOS 辅助功能</title>
 </svelte:head>
 
 <main class="flex flex-1 items-center justify-center">
 	<Card.Root class="w-full max-w-2xl">
 		<Card.Header>
-			<Card.Title class="text-xl">MacOS Accessibility</Card.Title>
+			<Card.Title class="text-xl">macOS 辅助功能</Card.Title>
 			<Card.Description class="leading-7">
-				Follow the steps below to re-enable Whispering in your macOS
-				Accessibility settings. This often is needed after installing new
-				versions of Whispering due to a macOS bug.
+				请按照以下步骤在您的 macOS 辅助功能设置中重新启用 Whispering。由于 macOS 的一个 bug,在安装新版本的 Whispering 后通常需要执行此操作。
 			</Card.Description>
 		</Card.Header>
 		<Card.Content>
@@ -81,7 +79,7 @@
 						width="560"
 						height="315"
 						src="https://www.youtube.com/embed/FJRktNkr1Fs"
-						title="macOS Accessibility Settings Guide"
+						title="macOS 辅助功能设置指南"
 						frameborder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen
@@ -98,8 +96,8 @@
 						playsinline
 					>
 						<p class="text-muted-foreground text-sm">
-							Video guide not available. Please follow the written instructions
-							below.
+							视频指南不可用。请按照下方的文字说明
+							操作。
 						</p>
 					</video>
 				{/if}
@@ -107,21 +105,21 @@
 					class="text-muted-foreground list-inside list-decimal space-y-1 text-sm leading-7"
 				>
 					<li>
-						Go to <span class="text-primary font-semibold tracking-tight">
-							System Settings > Privacy & Security > Accessibility
-						</span> or click the button below.
+						前往 <span class="text-primary font-semibold tracking-tight">
+							系统设置 > 隐私与安全性 > 辅助功能
+						</span> 或点击下方按钮。
 					</li>
 
 					<li>
-						Click on <span class="text-primary font-semibold tracking-tight"
+						点击 <span class="text-primary font-semibold tracking-tight"
 							>🎙️ Whispering</span
-						> and remove it using the minus icon (-).
+						> 并使用减号图标(-)将其移除。
 					</li>
 					<li>
-						Re-add Whispering by pressing the plus icon (+) and selecting <span
+						按加号图标(+)并选择 <span
 							class="text-primary font-semibold tracking-tight"
 							>🎙️ Whispering.app</span
-						>
+						> 以重新添加 Whispering
 					</li>
 				</ol>
 			</div>
@@ -135,21 +133,21 @@
 						class="flex-1 text-sm"
 					>
 						<ArrowLeft class="size-4" />
-						Back to Home
+						返回主页
 					</Button>
 					<Button
 						onclick={() => requestPermissionOrShowGuidance()}
 						class="flex-1 text-sm"
 					>
 						<SettingsIcon class="size-4" />
-						Request Permission
+						请求权限
 					</Button>
 				</div>
 			{:else}
 				<div class="flex flex-col gap-3 w-full">
 					<Badge variant="success">
 						<CheckIcon class="size-4" />
-						Accessibility permissions granted
+						已授予辅助功能权限
 					</Badge>
 					<div class="flex gap-3">
 						<Button
@@ -158,7 +156,7 @@
 							class="flex-1 text-sm"
 						>
 							<ArrowLeft class="size-4" />
-							Back to Home
+							返回主页
 						</Button>
 						<Button
 							onclick={() => openSystemSettings()}
@@ -166,7 +164,7 @@
 							class="flex-1 text-sm"
 						>
 							<SettingsIcon class="size-4" />
-							Open Settings
+							打开设置
 						</Button>
 					</div>
 				</div>

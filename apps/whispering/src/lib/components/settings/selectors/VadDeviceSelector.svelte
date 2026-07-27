@@ -40,8 +40,8 @@
 			<Button
 				{...props}
 				tooltip={isDeviceSelected
-					? 'Change VAD recording device'
-					: 'Select a VAD recording device'}
+					? '更改 VAD 录音设备'
+					: '选择 VAD 录音设备'}
 				role="combobox"
 				aria-expanded={combobox.open}
 				variant="ghost"
@@ -58,15 +58,15 @@
 	</Popover.Trigger>
 	<Popover.Content class="p-0">
 		<Command.Root loop>
-			<Command.Input placeholder="Select VAD recording device..." />
-			<Command.Empty>No recording devices found.</Command.Empty>
+			<Command.Input placeholder="选择 VAD 录音设备..." />
+			<Command.Empty>未找到录音设备。</Command.Empty>
 			<div class="px-3 py-2 text-xs text-muted-foreground bg-muted/30 border-b">
-				Voice detection uses Web Audio API
+				语音检测使用 Web Audio API
 			</div>
 			<Command.Group class="overflow-y-auto max-h-[400px]">
 				{#if getDevicesQuery.isPending}
 					<div class="p-4 text-center text-sm text-muted-foreground">
-						Loading VAD devices...
+						加载 VAD 设备中...
 					</div>
 				{:else if getDevicesQuery.isError}
 					<div class="p-4 text-center text-sm text-destructive">
@@ -108,7 +108,7 @@
 					{:else}
 						<RefreshCwIcon class="size-4" />
 					{/if}
-					Refresh devices
+					刷新设备
 				</Command.Item>
 			</Command.Group>
 		</Command.Root>

@@ -6,17 +6,17 @@
 	import { crossfade } from 'svelte/transition';
 
 	const items = [
-		{ title: 'General', href: '/settings' },
-		{ title: 'Recording', href: '/settings/recording' },
-		{ title: 'Transcription', href: '/settings/transcription' },
-		{ title: 'API Keys', href: '/settings/api-keys' },
-		{ title: 'Sound', href: '/settings/sound' },
+		{ title: '通用', href: '/settings' },
+		{ title: '录音', href: '/settings/recording' },
+		{ title: '转录', href: '/settings/transcription' },
+		{ title: 'API 密钥', href: '/settings/api-keys' },
+		{ title: '声音', href: '/settings/sound' },
 		{
-			title: 'Shortcuts',
+			title: '快捷键',
 			href: '/settings/shortcuts/local',
 			activePathPrefix: '/settings/shortcuts',
 		},
-		{ title: 'Privacy & Analytics', href: '/settings/analytics' },
+		{ title: '隐私与分析', href: '/settings/analytics' },
 	] satisfies {
 		title: string;
 		href: string;
@@ -35,7 +35,7 @@
 
 <nav
 	class="flex gap-2 overflow-auto lg:flex-col lg:gap-1"
-	aria-label="Settings navigation"
+	aria-label="设置导航"
 >
 	{#each items as item (item.href)}
 		{@const isActive = item.activePathPrefix

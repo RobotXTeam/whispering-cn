@@ -181,7 +181,7 @@
 				): Promise<void> => {
 					const response = await fetch(url);
 					if (!response.ok) {
-						throw new Error(`Failed to download: ${response.status}`);
+						throw new Error(`下载失败:${response.status}`);
 					}
 
 					const contentLength = response.headers.get('content-length');
@@ -191,7 +191,7 @@
 
 					const reader = response.body?.getReader();
 					if (!reader) {
-						throw new Error('Failed to read response body');
+						throw new Error('读取响应正文失败');
 					}
 
 					// Create or truncate the file first
@@ -217,7 +217,7 @@
 						const downloadedMB = Math.round(downloadedBytes / 1_000_000);
 						const expectedMB = Math.round(totalBytes / 1_000_000);
 						throw new Error(
-							`Download incomplete: received ${downloadedMB}MB but expected ${expectedMB}MB. Please check your network connection and try again.`,
+							`下载不完整:已接收 ${downloadedMB}MB,但预期 ${expectedMB}MB。请检查你的网络连接后重试。`,
 						);
 					}
 				};
@@ -230,7 +230,7 @@
 					if (modelState.type === 'ready') {
 						await activateModel();
 					}
-					toast.success('Model already downloaded and activated');
+					toast.success('模型已下载并启用');
 					return;
 				}
 
@@ -283,11 +283,11 @@
 				// After download, activate the model
 				await activateModel();
 				modelState = { type: 'active' };
-				toast.success('Model downloaded and activated successfully');
+				toast.success('模型下载并启用成功');
 			},
 			catch: (error) => {
 				console.error('Download failed:', error);
-				toast.error('Failed to download model', {
+				toast.error('下载模型失败', {
 					description: extractErrorMessage(error),
 				});
 				modelState = { type: 'not-downloaded' };
@@ -302,7 +302,7 @@
 
 		settings.updateKey(settingsKey, path);
 		// The settings watcher will update modelState to 'active'
-		toast.success('Model activated');
+		toast.success('模型已启用');
 	}
 
 	async function deleteModel() {
@@ -323,10 +323,10 @@
 				}
 
 				modelState = { type: 'not-downloaded' };
-				toast.success('Model deleted');
+				toast.success('模型已删除');
 			},
 			catch: (error) => {
-				toast.error('Failed to delete model', {
+				toast.error('删除模型失败', {
 					description: extractErrorMessage(error),
 				});
 				return Ok(undefined);
@@ -345,9 +345,9 @@
 		<div class="flex items-center gap-2">
 			<span class="font-medium">{model.name}</span>
 			{#if modelState.type === 'active'}
-				<Badge variant="default" class="text-xs">Active</Badge>
+				<Badge variant="default" class="text-xs">已启用</Badge>
 			{:else if modelState.type === 'ready'}
-				<Badge variant="secondary" class="text-xs">Downloaded</Badge>
+				<Badge variant="secondary" class="text-xs">已下载</Badge>
 			{/if}
 		</div>
 		<div class="text-sm text-muted-foreground">
@@ -366,7 +366,7 @@
 			</div>
 		{:else if modelState.type === 'ready'}
 			<Button size="sm" variant="outline" onclick={activateModel}>
-				Activate
+				启用
 			</Button>
 			<Button size="sm" variant="ghost" onclick={deleteModel}>
 				<X class="size-4" />
@@ -374,7 +374,7 @@
 		{:else if modelState.type === 'active'}
 			<Button size="sm" variant="default" disabled>
 				<CheckIcon class="size-4 mr-1" />
-				Activated
+				已启用
 			</Button>
 			<Button size="sm" variant="ghost" onclick={deleteModel}>
 				<X class="size-4" />
@@ -382,7 +382,7 @@
 		{:else}
 			<Button size="sm" variant="outline" onclick={downloadModel}>
 				<Download class="size-4" />
-				Download
+				下载
 			</Button>
 		{/if}
 	</div>

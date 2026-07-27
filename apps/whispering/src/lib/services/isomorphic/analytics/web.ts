@@ -16,7 +16,7 @@ export function createAnalyticsServiceWeb(): AnalyticsService {
 				},
 				catch: (error) =>
 					AnalyticsServiceErr({
-						message: `Failed to log analytics event: ${extractErrorMessage(error)}`,
+						message: `记录分析事件失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

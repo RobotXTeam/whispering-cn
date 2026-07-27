@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { onNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { listen } from '@tauri-apps/api/event';
+	import { commands } from '$lib/commands';
 	import { queryClient } from '$lib/query/client';
 	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
@@ -35,6 +38,19 @@
 				await navigation.complete;
 			});
 		});
+	});
+
+	// Wayland global-hotkey bridge: GNOME runs `whispering <command-id>` as a
+	// second instance; the Rust single-instance handler forwards the id here
+	// via the `whispering://command` event. Find the matching command and fire
+	// its callback — the same path the X11 global-shortcut plugin would take.
+	onMount(() => {
+		const unlisten = listen<string>('whispering://command', (event) => {
+			commands.find((c) => c.id === event.payload)?.callback();
+		});
+		return () => {
+			unlisten.then((fn) => fn());
+		};
 	});
 </script>
 

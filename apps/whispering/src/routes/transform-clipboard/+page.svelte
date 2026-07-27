@@ -57,7 +57,7 @@
 
 		if (clipboardQuery.error) {
 			rpc.notify.error.execute({
-				title: '❌ Failed to read clipboard',
+				title: '❌ 读取剪贴板失败',
 				description: clipboardQuery.error.message,
 				action: { type: 'more-details', error: clipboardQuery.error },
 			});
@@ -66,8 +66,8 @@
 
 		if (clipboardQuery.isSuccess && !clipboardQuery.data?.trim()) {
 			rpc.notify.info.execute({
-				title: 'Empty clipboard',
-				description: 'Please copy some text before running a transformation.',
+				title: '剪贴板为空',
+				description: '请在运行转换前复制一些文本。',
 			});
 			void transformClipboardWindow.hide();
 		}
@@ -76,15 +76,15 @@
 
 <div class="flex h-screen flex-col p-6 gap-4">
 	<div class="space-y-2">
-		<h2 class="text-2xl font-semibold">Transform Clipboard</h2>
+		<h2 class="text-2xl font-semibold">转换剪贴板</h2>
 		<p class="text-sm text-muted-foreground">
-			Select a transformation to apply to your clipboard text
+			选择一个要应用到剪贴板文本的转换
 		</p>
 	</div>
 
 	{#if clipboardQuery.isPending}
 		<div class="flex min-h-32 items-center justify-center">
-			<p class="text-sm text-muted-foreground">Reading clipboard...</p>
+			<p class="text-sm text-muted-foreground">正在读取剪贴板...</p>
 		</div>
 	{:else}
 		<Textarea
@@ -105,7 +105,7 @@
 					class="w-full justify-start gap-2"
 				>
 					<LayersIcon class="size-4" />
-					Select Transformation
+					选择转换
 				</Button>
 			{/snippet}
 		</Popover.Trigger>
@@ -119,8 +119,8 @@
 					const toastId = nanoid();
 					rpc.notify.loading.execute({
 						id: toastId,
-						title: '🔄 Running transformation...',
-						description: 'Transforming your clipboard text...',
+						title: '🔄 正在运行转换...',
+						description: '正在转换您的剪贴板文本...',
 					});
 
 					const { data: output, error: transformError } =
@@ -149,7 +149,7 @@
 					await transformClipboardWindow.hide();
 					await emit('navigate-main-window', { path: '/transformations' });
 				}}
-				placeholder="Search transformations..."
+				placeholder="搜索转换..."
 			/>
 		</Popover.Content>
 	</Popover.Root>

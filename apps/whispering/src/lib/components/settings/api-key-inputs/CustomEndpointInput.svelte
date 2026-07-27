@@ -14,11 +14,11 @@
 	{#if showBaseUrl}
 		<Field.Field>
 			<Field.Label for="custom-endpoint-base-url"
-				>Custom API Base URL</Field.Label
+				>自定义 API 基础 URL</Field.Label
 			>
 			<Input
 				id="custom-endpoint-base-url"
-				placeholder="e.g. http://localhost:11434/v1"
+				placeholder="例如 http://localhost:11434/v1"
 				autocomplete="off"
 				bind:value={
 					() => settings.value['completion.custom.baseUrl'],
@@ -26,18 +26,18 @@
 				}
 			/>
 			<Field.Description>
-				Global default URL for OpenAI-compatible endpoints (Ollama, LM Studio,
-				llama.cpp, etc.). Can be overridden per-step in transformations.
+				OpenAI 兼容端点(Ollama、LM Studio、
+				llama.cpp 等)的全局默认 URL。可在转换中按步骤覆盖。
 			</Field.Description>
 		</Field.Field>
 	{/if}
 
 	<Field.Field>
-		<Field.Label for="custom-endpoint-api-key">Custom API Key</Field.Label>
+		<Field.Label for="custom-endpoint-api-key">自定义 API 密钥</Field.Label>
 		<Input
 			id="custom-endpoint-api-key"
 			type="password"
-			placeholder="Leave empty if not required"
+			placeholder="如不需要请留空"
 			autocomplete="off"
 			bind:value={
 				() => settings.value['apiKeys.custom'],
@@ -45,8 +45,8 @@
 			}
 		/>
 		<Field.Description>
-			Most local endpoints don't require authentication. Only enter a key if
-			your endpoint requires it.
+			大多数本地端点不需要身份验证。仅当
+			你的端点需要时才输入密钥。
 		</Field.Description>
 	</Field.Field>
 </div>

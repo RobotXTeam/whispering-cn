@@ -7,13 +7,13 @@ export const MISTRAL_TRANSCRIPTION_MODELS = [
 	{
 		name: 'voxtral-mini-latest',
 		description:
-			'API-optimized Voxtral Mini model delivering unparalleled cost and latency efficiency. Supports multilingual transcription with high accuracy.',
+			'API 优化的 Voxtral Mini 模型,提供无与伦比的成本和延迟效率。支持高准确度的多语言转录。',
 		cost: '$0.12/hour',
 	},
 	{
 		name: 'voxtral-small-latest',
 		description:
-			'Voxtral Small model for higher accuracy and broader language support. Suitable for most transcription needs with a balance of cost and performance.',
+			'Voxtral Small 模型,具备更高的准确度和更广泛的语言支持。适合大多数转录需求,在成本与性能之间取得平衡。',
 		cost: '$0.24/hour',
 	},
 ] as const;
@@ -37,11 +37,11 @@ export function createMistralTranscriptionService() {
 			// Pre-validate API key
 			if (!options.apiKey) {
 				return WhisperingErr({
-					title: '🔑 API Key Required',
-					description: 'Please enter your Mistral API key in settings.',
+					title: '🔑 需要API密钥',
+					description: '请在设置中输入您的 Mistral API 密钥。',
 					action: {
 						type: 'link',
-						label: 'Add API key',
+						label: '添加 API 密钥',
 						href: '/settings/transcription',
 					},
 				});
@@ -51,8 +51,8 @@ export function createMistralTranscriptionService() {
 			const blobSizeInMb = audioBlob.size / (1024 * 1024);
 			if (blobSizeInMb > MAX_FILE_SIZE_MB) {
 				return WhisperingErr({
-					title: `The file size (${blobSizeInMb}MB) is too large`,
-					description: `Please upload a file smaller than ${MAX_FILE_SIZE_MB}MB.`,
+					title: `文件大小 (${blobSizeInMb}MB) 过大`,
+					description: `请上传小于 ${MAX_FILE_SIZE_MB}MB 的文件。`,
 				});
 			}
 
@@ -66,9 +66,9 @@ export function createMistralTranscriptionService() {
 					),
 				catch: (error) =>
 					WhisperingErr({
-						title: '📄 File Creation Failed',
+						title: '📄 文件创建失败',
 						description:
-							'Failed to create audio file for transcription. Please try again.',
+							'为转录创建音频文件失败。请重试。',
 						action: { type: 'more-details', error },
 					}),
 			});
@@ -102,7 +102,7 @@ export function createMistralTranscriptionService() {
 				const errorMessage =
 					mistralApiError instanceof Error
 						? mistralApiError.message
-						: 'Unknown error occurred';
+						: '发生了未知错误';
 
 				// Check for common HTTP status codes
 				if (
@@ -110,12 +110,12 @@ export function createMistralTranscriptionService() {
 					errorMessage.includes('Unauthorized')
 				) {
 					return WhisperingErr({
-						title: '🔑 Authentication Required',
+						title: '🔑 需要认证',
 						description:
-							'Your API key appears to be invalid or expired. Please update your API key in settings.',
+							'您的 API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -126,8 +126,8 @@ export function createMistralTranscriptionService() {
 					errorMessage.includes('rate limit')
 				) {
 					return WhisperingErr({
-						title: '⏱️ Rate Limit Reached',
-						description: 'Too many requests. Please try again later.',
+						title: '⏱️ 已达请求频率限制',
+						description: '请求过于频繁。请稍后重试。',
 						action: { type: 'more-details', error: mistralApiError },
 					});
 				}
@@ -137,16 +137,16 @@ export function createMistralTranscriptionService() {
 					errorMessage.includes('too large')
 				) {
 					return WhisperingErr({
-						title: '📦 Audio File Too Large',
+						title: '📦 音频文件过大',
 						description:
-							'Your audio file exceeds the maximum size limit. Try reducing the file size.',
+							'您的音频文件超过了最大大小限制。请尝试减小文件大小。',
 						action: { type: 'more-details', error: mistralApiError },
 					});
 				}
 
 				// Generic error fallback
 				return WhisperingErr({
-					title: '❌ Transcription Failed',
+					title: '❌ 转录失败',
 					description: errorMessage,
 					action: { type: 'more-details', error: mistralApiError },
 				});
@@ -155,8 +155,8 @@ export function createMistralTranscriptionService() {
 			// Check if transcription is valid
 			if (!transcription || typeof transcription.text !== 'string') {
 				return WhisperingErr({
-					title: '❌ Invalid Transcription Response',
-					description: 'Mistral API returned an invalid response format.',
+					title: '❌ 无效的转录响应',
+					description: 'Mistral API 返回了无效的响应格式。',
 				});
 			}
 

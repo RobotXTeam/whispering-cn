@@ -42,27 +42,27 @@
 		class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
 	>
 		<div class="space-y-0.5">
-			<h2 class="text-2xl font-bold tracking-tight">Settings</h2>
+			<h2 class="text-2xl font-bold tracking-tight">设置</h2>
 			<p class="text-muted-foreground">
 				{#await versionPromise}
-					Customize your Whispering experience.
+					自定义你的 Whispering 体验。
 				{:then v}
 					{#if v.isOutdated}
 						{@const { latestVersion, currentVersion, latestReleaseUrl } = v}
-						Customize your experience for Whispering {currentVersion} (latest
+						自定义你的 Whispering {currentVersion} 体验（最新版
 						<Link
 							href={latestReleaseUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							{latestVersion}
-						</Link>).
+						</Link>）。
 					{:else}
 						{@const { version } = v}
-						Customize your experience for Whispering {version}.
+						自定义你的 Whispering {version} 体验。
 					{/if}
 				{:catch error}
-					Customize your Whispering experience.
+					自定义你的 Whispering 体验。
 				{/await}
 			</p>
 		</div>
@@ -71,15 +71,15 @@
 			size="sm"
 			onclick={() => {
 				confirmationDialog.open({
-					title: 'Reset All Settings',
+					title: '重置所有设置',
 					description:
-						'This will reset all settings to their default values. This action cannot be undone.',
-					confirm: { text: 'Reset Settings', variant: 'destructive' },
+						'此操作将把所有设置重置为默认值。此操作无法撤销。',
+					confirm: { text: '重置设置', variant: 'destructive' },
 					onConfirm: () => {
 						settings.reset();
 						rpc.notify.success.execute({
-							title: 'Settings reset',
-							description: 'All settings have been reset to defaults.',
+							title: '设置已重置',
+							description: '所有设置已重置为默认值。',
 						});
 					},
 				});
@@ -87,7 +87,7 @@
 			class="shrink-0"
 		>
 			<RotateCcw class="size-4" />
-			Reset to defaults
+			重置为默认值
 		</Button>
 	</div>
 	<Separator class="my-6" />

@@ -36,7 +36,7 @@
 				});
 			if (unregisterError) {
 				rpc.notify.error.execute({
-					title: 'Error unregistering local shortcut',
+					title: '取消注册应用内快捷键出错',
 					description: unregisterError.message,
 					action: { type: 'more-details', error: unregisterError },
 				});
@@ -49,7 +49,7 @@
 
 			if (registerError) {
 				rpc.notify.error.execute({
-					title: 'Error registering local shortcut',
+					title: '注册应用内快捷键出错',
 					description: registerError.message,
 					action: { type: 'more-details', error: registerError },
 				});
@@ -62,8 +62,8 @@
 			);
 
 			rpc.notify.success.execute({
-				title: `Local shortcut set to ${keyCombination}`,
-				description: `Press the shortcut to trigger "${command.title}"`,
+				title: `应用内快捷键已设置为 ${keyCombination}`,
+				description: `按快捷键以触发"${command.title}"`,
 			});
 		},
 		onClear: async () => {
@@ -73,7 +73,7 @@
 				});
 			if (unregisterError) {
 				rpc.notify.error.execute({
-					title: 'Error clearing local shortcut',
+					title: '清除应用内快捷键出错',
 					description: unregisterError.message,
 					action: { type: 'more-details', error: unregisterError },
 				});
@@ -81,8 +81,8 @@
 			settings.updateKey(`shortcuts.local.${command.id}`, null);
 
 			rpc.notify.success.execute({
-				title: 'Local shortcut cleared',
-				description: `Please set a new shortcut to trigger "${command.title}"`,
+				title: '应用内快捷键已清除',
+				description: `请设置新的快捷键以触发"${command.title}"`,
 			});
 		},
 	});

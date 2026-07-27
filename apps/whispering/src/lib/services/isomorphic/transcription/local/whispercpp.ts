@@ -15,7 +15,7 @@ export const WHISPER_MODELS = [
 	{
 		id: 'tiny',
 		name: 'Tiny',
-		description: 'Fastest, basic accuracy',
+		description: '最快,基础准确率',
 		size: '78 MB',
 		sizeBytes: 77_691_713,
 		engine: 'whispercpp',
@@ -27,7 +27,7 @@ export const WHISPER_MODELS = [
 	{
 		id: 'small',
 		name: 'Small',
-		description: 'Fast, good accuracy',
+		description: '快,准确率较好',
 		size: '488 MB',
 		sizeBytes: 487_601_967,
 		engine: 'whispercpp',
@@ -39,7 +39,7 @@ export const WHISPER_MODELS = [
 	{
 		id: 'medium',
 		name: 'Medium',
-		description: 'Balanced speed & accuracy',
+		description: '速度与准确率均衡',
 		size: '1.5 GB',
 		sizeBytes: 1_533_763_059,
 		engine: 'whispercpp',
@@ -51,7 +51,7 @@ export const WHISPER_MODELS = [
 	{
 		id: 'large-v3-turbo',
 		name: 'Large v3 Turbo',
-		description: 'Best accuracy, slower',
+		description: '准确率最高,较慢',
 		size: '1.6 GB',
 		sizeBytes: 1_624_555_275,
 		engine: 'whispercpp',
@@ -80,11 +80,11 @@ export function createWhisperCppTranscriptionService() {
 			// Pre-validation
 			if (!options.modelPath) {
 				return WhisperingErr({
-					title: '📁 Model File Required',
-					description: 'Please select a Whisper model file in settings.',
+					title: '📁 需要模型文件',
+					description: '请在设置中选择一个 Whisper 模型文件。',
 					action: {
 						type: 'link',
-						label: 'Configure model',
+						label: '配置模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -98,11 +98,11 @@ export function createWhisperCppTranscriptionService() {
 
 			if (!isExists) {
 				return WhisperingErr({
-					title: '❌ Model File Not Found',
-					description: `The model file "${options.modelPath}" does not exist.`,
+					title: '❌ 未找到模型文件',
+					description: `模型文件 "${options.modelPath}" 不存在。`,
 					action: {
 						type: 'link',
-						label: 'Select model',
+						label: '选择模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -122,11 +122,11 @@ export function createWhisperCppTranscriptionService() {
 					!isModelFileSizeValid(fileStats.size, modelConfig.sizeBytes)
 				) {
 					return WhisperingErr({
-						title: '⚠️ Model File Appears Corrupted',
-						description: `The model file is ${Math.round(fileStats.size / 1000000)}MB but should be ~${Math.round(modelConfig.sizeBytes / 1000000)}MB. This usually happens when a download was interrupted. Please delete and re-download the model.`,
+						title: '⚠️ 模型文件似乎已损坏',
+						description: `模型文件大小为 ${Math.round(fileStats.size / 1000000)}MB,但应为 ~${Math.round(modelConfig.sizeBytes / 1000000)}MB。这通常是因为下载中断造成的。请删除并重新下载模型。`,
 						action: {
 							type: 'link',
-							label: 'Re-download model',
+							label: '重新下载模型',
 							href: '/settings/transcription',
 						},
 					});
@@ -152,7 +152,7 @@ export function createWhisperCppTranscriptionService() {
 					const result = WhisperCppErrorType(unknownError);
 					if (result instanceof type.errors) {
 						return WhisperingErr({
-							title: '❌ Unexpected Whisper C++ Error',
+							title: '❌ Whisper C++ 意外错误',
 							description: extractErrorMessage(unknownError),
 							action: { type: 'more-details', error: unknownError },
 						});
@@ -162,7 +162,7 @@ export function createWhisperCppTranscriptionService() {
 					switch (error.name) {
 						case 'ModelLoadError':
 							return WhisperingErr({
-								title: '🤖 Model Loading Error',
+								title: '🤖 模型加载错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -172,30 +172,30 @@ export function createWhisperCppTranscriptionService() {
 
 						case 'GpuError':
 							return WhisperingErr({
-								title: '🎮 GPU Error',
+								title: '🎮 GPU 错误',
 								description: error.message,
 								action: {
 									type: 'link',
-									label: 'Configure settings',
+									label: '配置设置',
 									href: '/settings/transcription',
 								},
 							});
 
 						case 'FfmpegNotFoundError':
 							return WhisperingErr({
-								title: '🛠️ FFmpeg Required for This Recording Format',
+								title: '🛠️ 此录音格式需要 FFmpeg',
 								description:
-									'This recording is in a compressed format (webm/ogg/mp4) that requires FFmpeg. Install FFmpeg or switch to CPAL recording (which produces WAV files that work without FFmpeg).',
+									'此录音使用压缩格式(webm/ogg/mp4),需要 FFmpeg。请安装 FFmpeg 或切换到 CPAL 录制(可生成 WAV 文件,无需 FFmpeg 即可使用)。',
 								action: {
 									type: 'link',
-									label: 'Install FFmpeg',
+									label: '安装 FFmpeg',
 									href: '/install-ffmpeg',
 								},
 							});
 
 						case 'AudioReadError':
 							return WhisperingErr({
-								title: '🔊 Audio Read Error',
+								title: '🔊 音频读取错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -205,7 +205,7 @@ export function createWhisperCppTranscriptionService() {
 
 						case 'TranscriptionError':
 							return WhisperingErr({
-								title: '❌ Transcription Error',
+								title: '❌ 转录错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -215,8 +215,8 @@ export function createWhisperCppTranscriptionService() {
 
 						default:
 							return WhisperingErr({
-								title: '❌ Whisper C++ Error',
-								description: 'An unexpected error occurred.',
+								title: '❌ Whisper C++ 错误',
+								description: '发生了意外错误。',
 								action: {
 									type: 'more-details',
 									error: new Error(String(error)),

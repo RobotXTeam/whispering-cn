@@ -22,8 +22,8 @@
 
 	const displayText = $derived(
 		isTransformationActive
-			? 'Transformation selected to run on future transcriptions'
-			: 'Select this transformation to run on future transcriptions',
+			? '已选择此转换应用于未来的转录'
+			: '选择此转换应用于未来的转录',
 	);
 </script>
 

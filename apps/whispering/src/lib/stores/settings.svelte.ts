@@ -53,13 +53,13 @@ export const settings = (() => {
 		},
 		onUpdateSuccess: () => {
 			rpc.notify.success.execute({
-				title: 'Settings updated!',
+				title: '设置已更新！',
 				description: '',
 			});
 		},
 		onUpdateError: (err) => {
 			rpc.notify.error.execute({
-				title: 'Error updating settings',
+				title: '更新设置时出错',
 				description: extractErrorMessage(err),
 			});
 		},
@@ -146,9 +146,9 @@ export const settings = (() => {
 				console.error('Failed to stop active recordings:', errs);
 				rpc.notify.warning.execute({
 					id: toastId,
-					title: '⚠️ Recording may still be active',
+					title: '⚠️ 录音可能仍在进行',
 					description:
-						'Previous recording could not be stopped automatically. Please stop it manually.',
+						'之前的录音未能自动停止，请手动停止。',
 				});
 			}
 
@@ -162,8 +162,8 @@ export const settings = (() => {
 				// Show success notification
 				rpc.notify.success.execute({
 					id: toastId,
-					title: '✅ Recording mode switched',
-					description: `Switched to ${newMode} recording mode`,
+					title: '✅ 录音模式已切换',
+					description: `已切换到 ${newMode} 录音模式`,
 				});
 			}
 

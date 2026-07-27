@@ -15,7 +15,7 @@ export function createTextServiceDesktop(): TextService {
 				},
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error reading from the clipboard using the Tauri Clipboard Manager API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用 Tauri 剪贴板管理器 API 从剪贴板读取时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -24,7 +24,7 @@ export function createTextServiceDesktop(): TextService {
 				try: () => writeText(text),
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error copying to the clipboard using the Tauri Clipboard Manager API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用 Tauri 剪贴板管理器 API 复制到剪贴板时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -33,7 +33,7 @@ export function createTextServiceDesktop(): TextService {
 				try: () => invoke<void>('write_text', { text }),
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error writing the text. Please try pasting manually with Cmd/Ctrl+V. ${extractErrorMessage(error)}`,
+						message: `写入文本时出错。请尝试使用 Cmd/Ctrl+V 手动粘贴。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -42,7 +42,7 @@ export function createTextServiceDesktop(): TextService {
 				try: () => invoke<void>('simulate_enter_keystroke'),
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error simulating the Enter keystroke. Please press Enter manually. ${extractErrorMessage(error)}`,
+						message: `模拟 Enter 键按下时出错。请手动按 Enter 键。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

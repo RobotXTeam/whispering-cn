@@ -78,13 +78,13 @@ class WhisperingDatabase extends Dexie {
 				const dumpString = JSON.stringify(dumpState, null, 2);
 
 				moreDetailsDialog.open({
-					title: `Failed to upgrade IndexedDb Database to version ${version}`,
+					title: `将 IndexedDB 数据库升级到版本 ${version} 失败`,
 					description:
-						'Please download the database dump and delete the database to start fresh.',
+						'请下载数据库转储文件并删除数据库以重新开始。',
 					content: dumpString,
 					buttons: [
 						{
-							label: 'Download Database Dump',
+							label: '下载数据库转储',
 							onClick: async () => {
 								const blob = new Blob([dumpString], {
 									type: 'application/json',
@@ -96,32 +96,32 @@ class WhisperingDatabase extends Dexie {
 									});
 								if (downloadError) {
 									rpc.notify.error.execute({
-										title: 'Failed to download IndexedDB dump!',
-										description: 'Your IndexedDB dump could not be downloaded.',
+										title: '下载 IndexedDB 转储失败!',
+										description: '无法下载您的 IndexedDB 转储。',
 										action: { type: 'more-details', error: downloadError },
 									});
 								} else {
 									rpc.notify.success.execute({
-										title: 'IndexedDB dump downloaded!',
-										description: 'Your IndexedDB dump is being downloaded.',
+										title: 'IndexedDB 转储已下载!',
+										description: '正在下载您的 IndexedDB 转储。',
 									});
 								}
 							},
 						},
 						{
-							label: 'Delete Database and Reload',
+							label: '删除数据库并重新加载',
 							variant: 'destructive',
 							onClick: async () => {
 								try {
 									// Delete the database
 									await this.delete();
 									rpc.notify.success.execute({
-										title: 'Database Deleted',
+										title: '数据库已删除',
 										description:
-											'The database has been successfully deleted. Please refresh the page.',
+											'数据库已成功删除。请刷新页面。',
 										action: {
 											type: 'button',
-											label: 'Refresh',
+											label: '刷新',
 											onClick: () => {
 												window.location.reload();
 											},
@@ -131,9 +131,9 @@ class WhisperingDatabase extends Dexie {
 									const error = extractErrorMessage(err);
 
 									rpc.notify.error.execute({
-										title: 'Failed to Delete Database',
+										title: '删除数据库失败',
 										description:
-											'There was an error deleting the database. Please try again.',
+											'删除数据库时出错。请重试。',
 										action: {
 											type: 'more-details',
 											error,
@@ -400,7 +400,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all recordings from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取所有录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -419,7 +419,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting latest recording from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取最新录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -433,7 +433,7 @@ export function createDbServiceWeb({
 							.primaryKeys(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transcribing recording ids from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取正在转录的录音 ID 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -449,7 +449,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting recording by id from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 按 ID 获取录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -473,7 +473,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error adding recording(s) to Dexie: ${extractErrorMessage(error)}`,
+							message: `向 Dexie 添加录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -501,7 +501,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating recording in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中更新录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (updateRecordingError) return Err(updateRecordingError);
@@ -517,7 +517,7 @@ export function createDbServiceWeb({
 					try: () => db.recordings.bulkDelete(ids),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting recording(s) from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 删除录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -545,7 +545,7 @@ export function createDbServiceWeb({
 							try: () => db.recordings.count(),
 							catch: (error) =>
 								DbServiceErr({
-									message: `Unable to get recording count while cleaning up old recordings: ${extractErrorMessage(error)}`,
+									message: `清理旧录音时无法获取录音数量:${extractErrorMessage(error)}`,
 								}),
 						});
 						if (countError) return Err(countError);
@@ -565,7 +565,7 @@ export function createDbServiceWeb({
 							},
 							catch: (error) =>
 								DbServiceErr({
-									message: `Unable to clean up old recordings: ${extractErrorMessage(error)}`,
+									message: `无法清理旧录音:${extractErrorMessage(error)}`,
 								}),
 						});
 					}
@@ -578,11 +578,11 @@ export function createDbServiceWeb({
 						const recordingWithAudio = await db.recordings.get(recordingId);
 
 						if (!recordingWithAudio) {
-							throw new Error(`Recording ${recordingId} not found`);
+							throw new Error(`找不到录音 ${recordingId}`);
 						}
 
 						if (!recordingWithAudio.serializedAudio) {
-							throw new Error(`No audio found for recording ${recordingId}`);
+							throw new Error(`找不到录音 ${recordingId} 的音频`);
 						}
 
 						const blob = serializedAudioToBlob(
@@ -592,7 +592,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting audio blob from IndexedDB: ${extractErrorMessage(error)}`,
+							message: `从 IndexedDB 获取音频 blob 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -610,11 +610,11 @@ export function createDbServiceWeb({
 						const recordingWithAudio = await db.recordings.get(recordingId);
 
 						if (!recordingWithAudio) {
-							throw new Error(`Recording ${recordingId} not found`);
+							throw new Error(`找不到录音 ${recordingId}`);
 						}
 
 						if (!recordingWithAudio.serializedAudio) {
-							throw new Error(`No audio found for recording ${recordingId}`);
+							throw new Error(`找不到录音 ${recordingId} 的音频`);
 						}
 
 						const blob = serializedAudioToBlob(
@@ -627,7 +627,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error ensuring audio playback URL from IndexedDB: ${extractErrorMessage(error)}`,
+							message: `从 IndexedDB 获取音频回放 URL 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -645,7 +645,7 @@ export function createDbServiceWeb({
 					try: () => db.recordings.clear(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing recordings from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 清空录音时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -655,7 +655,7 @@ export function createDbServiceWeb({
 					try: () => db.recordings.count(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting recordings count from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取录音数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -667,7 +667,7 @@ export function createDbServiceWeb({
 					try: () => db.transformations.toArray(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all transformations from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取所有转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -681,7 +681,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation by id from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 按 ID 获取转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -696,7 +696,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error adding transformation(s) to Dexie: ${extractErrorMessage(error)}`,
+							message: `向 Dexie 添加转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -711,7 +711,7 @@ export function createDbServiceWeb({
 					try: () => db.transformations.put(transformationWithTimestamp),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating transformation in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中更新转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (updateTransformationError) return Err(updateTransformationError);
@@ -729,7 +729,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting transformation(s) from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 删除转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -739,7 +739,7 @@ export function createDbServiceWeb({
 					try: () => db.transformations.clear(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing transformations from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 清空转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -749,7 +749,7 @@ export function createDbServiceWeb({
 					try: () => db.transformations.count(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformations count from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取转换数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -764,7 +764,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all transformation runs from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取所有转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -777,7 +777,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.where('id').equals(id).first(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation run by id from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 按 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (getTransformationRunByIdError)
@@ -804,7 +804,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs by transformation id from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 按转换 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -827,7 +827,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs by recording id from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 按录音 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -840,7 +840,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error adding transformation run(s) to Dexie: ${extractErrorMessage(error)}`,
+							message: `向 Dexie 添加转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -865,7 +865,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.put(updatedRun),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error adding step run to transformation run in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中向转换运行添加步骤运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (addStepRunToTransformationRunError)
@@ -901,7 +901,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.put(failedRun),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating transformation run as failed in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中将转换运行更新为失败状态时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (updateTransformationStepRunError)
@@ -934,7 +934,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.put(updatedRun),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating transformation step run status in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中更新转换步骤运行状态时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (updateTransformationStepRunError)
@@ -958,7 +958,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.put(completedRun),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating transformation run as completed in Dexie: ${extractErrorMessage(error)}`,
+							message: `在 Dexie 中将转换运行更新为已完成状态时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (updateTransformationStepRunError)
@@ -976,7 +976,7 @@ export function createDbServiceWeb({
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting transformation run(s) from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 删除转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -986,7 +986,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.clear(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing transformation runs from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 清空转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -996,7 +996,7 @@ export function createDbServiceWeb({
 					try: () => db.transformationRuns.count(),
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs count from Dexie: ${extractErrorMessage(error)}`,
+							message: `从 Dexie 获取转换运行数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},

@@ -13,16 +13,16 @@
 	});
 
 	const items = [
-		{ href: '/settings/shortcuts/local', title: 'Local Shortcuts' },
-		{ href: '/settings/shortcuts/global', title: 'Global Shortcuts' },
+		{ href: '/settings/shortcuts/local', title: '应用内快捷键' },
+		{ href: '/settings/shortcuts/global', title: '全局快捷键' },
 	] as const;
 </script>
 
 <div class="mx-auto max-w-4xl space-y-6 py-6">
 	<header>
-		<h1 class="text-3xl font-bold tracking-tight">Keyboard Shortcuts</h1>
+		<h1 class="text-3xl font-bold tracking-tight">键盘快捷键</h1>
 		<p class="mt-2 text-muted-foreground">
-			Configure keyboard shortcuts to quickly access Whispering features.
+			配置键盘快捷键以快速访问 Whispering 功能。
 		</p>
 	</header>
 

@@ -169,7 +169,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`Invalid request to ${config.providerLabel} API. ${error?.message ?? ''}`.trim(),
+							`对 ${config.providerLabel} API 的请求无效。${error?.message ?? ''}`.trim(),
 					});
 				}
 
@@ -177,7 +177,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`Your ${config.providerLabel} API key appears to be invalid or expired. Please update your API key in settings.`,
+							`您的 ${config.providerLabel} API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥。`,
 					});
 				}
 
@@ -185,7 +185,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`Your ${config.providerLabel} account doesn't have access to this model or feature.`,
+							`您的 ${config.providerLabel} 账户无权访问此模型或功能。`,
 					});
 				}
 
@@ -193,7 +193,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`The requested model was not found on ${config.providerLabel}. Please check the model name.`,
+							`在 ${config.providerLabel} 上未找到请求的模型。请检查模型名称。`,
 					});
 				}
 
@@ -201,7 +201,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`The request was valid but ${config.providerLabel} cannot process it. Please check your parameters.`,
+							`请求有效,但 ${config.providerLabel} 无法处理。请检查您的参数。`,
 					});
 				}
 
@@ -209,7 +209,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`${config.providerLabel} rate limit exceeded. Please try again later.`,
+							`已超过 ${config.providerLabel} 的请求频率限制。请稍后重试。`,
 					});
 				}
 
@@ -217,7 +217,7 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`The ${config.providerLabel} service is temporarily unavailable (Error ${status}). Please try again in a few minutes.`,
+							`${config.providerLabel} 服务暂时不可用(错误 ${status})。请稍后重试。`,
 					});
 				}
 
@@ -225,21 +225,21 @@ export function createOpenAiCompatibleCompletionService(
 					return CompletionServiceErr({
 						message:
 							message ??
-							`Unable to connect to the ${config.providerLabel} service. This could be a network issue or temporary service interruption.`,
+							`无法连接到 ${config.providerLabel} 服务。这可能是网络问题或服务暂时中断。`,
 					});
 				}
 
 				return CompletionServiceErr({
 					message:
 						message ??
-						`An unexpected error occurred with ${config.providerLabel}. Please try again.`,
+						`${config.providerLabel} 发生了意外错误。请重试。`,
 				});
 			}
 
 			const responseText = completion.choices.at(0)?.message?.content;
 			if (!responseText) {
 				return CompletionServiceErr({
-					message: `${config.providerLabel} API returned an empty response`,
+					message: `${config.providerLabel} API 返回了空响应`,
 				});
 			}
 

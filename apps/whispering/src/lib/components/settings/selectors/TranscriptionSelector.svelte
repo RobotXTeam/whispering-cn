@@ -90,7 +90,7 @@
 								? ` - ${getSelectedModelNameOrUrl(selectedService)}`
 								: ''
 						}`
-					: 'Select transcription service'}
+					: '选择转录服务'}
 				role="combobox"
 				aria-expanded={combobox.open}
 				variant="ghost"
@@ -121,12 +121,12 @@
 	</Popover.Trigger>
 	<Popover.Content class="p-0">
 		<Command.Root loop>
-			<Command.Input placeholder="Search services..." class="h-9 text-sm" />
+			<Command.Input placeholder="搜索服务..." class="h-9 text-sm" />
 			<Command.List class="max-h-[40vh]">
-				<Command.Empty>No service found.</Command.Empty>
+				<Command.Empty>未找到服务。</Command.Empty>
 
 				<!-- Local Services -->
-				<Command.Group heading="Local">
+				<Command.Group heading="本地">
 					{#each localServices as service (service.id)}
 						{@const isSelected =
 							settings.value['transcription.selectedTranscriptionService'] ===
@@ -159,7 +159,7 @@
 									</div>
 								{:else if !isConfigured}
 									<span class="text-xs text-warning">
-										Model file required
+										需要模型文件
 									</span>
 								{/if}
 							</div>
@@ -168,7 +168,7 @@
 				</Command.Group>
 
 				<!-- Cloud Services -->
-				<Command.Group heading="Cloud">
+				<Command.Group heading="云端">
 					{#each cloudServices as service (service.id)}
 						{@const isSelected =
 							settings.value['transcription.selectedTranscriptionService'] ===
@@ -194,7 +194,7 @@
 								<div class="flex items-center gap-2">
 									<span class="font-medium text-sm">{service.name}</span>
 									{#if !isConfigured}
-										<span class="text-xs text-warning"> API key required </span>
+										<span class="text-xs text-warning"> API 密钥必填 </span>
 									{/if}
 								</div>
 								{#if isSelected && currentSelectedModelName}
@@ -246,7 +246,7 @@
 				</Command.Group>
 
 				<!-- Self-Hosted Services -->
-				<Command.Group heading="Self-Hosted">
+				<Command.Group heading="自托管">
 					{#each selfHostedServices as service (service.id)}
 						{@const isSelected =
 							settings.value['transcription.selectedTranscriptionService'] ===
@@ -278,7 +278,7 @@
 										{serverUrl}
 									</div>
 								{:else if !isConfigured}
-									<div class="text-xs text-warning">Server URL required</div>
+									<div class="text-xs text-warning">需要服务器 URL</div>
 								{/if}
 							</div>
 						</Command.Item>
@@ -295,7 +295,7 @@
 					class="flex items-center gap-2 px-2 py-2 text-sm text-muted-foreground"
 				>
 					<SettingsIcon class="size-3.5" />
-					Configure services
+					配置服务
 				</Command.Item>
 			</Command.List>
 		</Command.Root>

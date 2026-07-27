@@ -33,33 +33,33 @@
 
 	const navItems = [
 		{
-			label: 'Recordings',
+			label: '录音记录',
 			icon: ListIcon,
 			type: 'anchor',
 			href: '/recordings',
 		},
 		{
-			label: 'Transformations',
+			label: '转换',
 			icon: LayersIcon,
 			type: 'anchor',
 			href: '/transformations',
 		},
 		{
-			label: 'Settings',
+			label: '设置',
 			icon: SettingsIcon,
 			type: 'anchor',
 			href: '/settings',
 			activePathPrefix: '/settings',
 		},
 		{
-			label: 'View project on GitHub',
+			label: '在 GitHub 上查看项目',
 			icon: GithubIcon,
 			href: 'https://github.com/EpicenterHQ/epicenter',
 			type: 'anchor',
 			external: true,
 		},
 		{
-			label: 'Toggle dark mode',
+			label: '切换深色模式',
 			icon: SunIcon,
 			type: 'theme',
 			action: toggleMode,
@@ -67,7 +67,7 @@
 		...(window.__TAURI_INTERNALS__
 			? ([
 					{
-						label: 'Minimize',
+						label: '最小化',
 						icon: Minimize2Icon,
 						type: 'button',
 						action: () => getCurrentWindow().setSize(new LogicalSize(72, 84)),
@@ -114,7 +114,7 @@
 		<DropdownMenu.Trigger>
 			{#snippet child({ props })}
 				<Button
-					tooltip="Menu"
+					tooltip="菜单"
 					variant="ghost"
 					size="icon"
 					class={className}
@@ -181,7 +181,7 @@
 									class="absolute -right-0.5 -top-0.5 size-2 rounded-full bg-warning before:absolute before:left-0 before:top-0 before:h-full before:w-full before:rounded-full before:bg-warning/50 before:animate-ping"
 								></span>
 							</div>
-							<span>Database Migration Manager</span>
+							<span>数据库迁移管理器</span>
 						</DropdownMenu.Item>
 					{/snippet}
 				</MigrationDialog>
@@ -237,7 +237,7 @@
 			<MigrationDialog>
 				{#snippet trigger({ props })}
 					<Button
-						tooltip="Database Migration Manager"
+						tooltip="数据库迁移管理器"
 						variant="ghost"
 						size="icon"
 						class="relative"

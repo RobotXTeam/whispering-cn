@@ -141,7 +141,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all recordings from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取所有录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -158,7 +158,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting latest recording from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取最新录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -175,7 +175,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transcribing recording ids from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取正在转录的录音 ID 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -196,7 +196,7 @@ export function createFileSystemDb(): DbService {
 						const frontMatter = RecordingFrontMatter(data);
 						if (frontMatter instanceof type.errors) {
 							throw new Error(
-								`Invalid recording front matter: ${frontMatter.summary}`,
+								`无效的录音元数据:${frontMatter.summary}`,
 							);
 						}
 
@@ -204,7 +204,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting recording by id from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统按 ID 获取录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -246,7 +246,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error creating recording(s) in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中创建录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -267,7 +267,7 @@ export function createFileSystemDb(): DbService {
 						const fileExists = await exists(mdPath);
 						if (!fileExists) {
 							throw new Error(
-								`Cannot update recording ${recording.id}: file does not exist. Use create() to create new recordings.`,
+								`无法更新录音 ${recording.id}:文件不存在。请使用 create() 创建新录音。`,
 							);
 						}
 
@@ -286,7 +286,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating recording in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中更新录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -319,7 +319,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting recording(s) from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统删除录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -344,7 +344,7 @@ export function createFileSystemDb(): DbService {
 							},
 							catch: (error) =>
 								DbServiceErr({
-									message: `Error cleaning up expired recordings: ${extractErrorMessage(error)}`,
+									message: `清理过期录音记录时出错:${extractErrorMessage(error)}`,
 								}),
 						});
 					}
@@ -359,7 +359,7 @@ export function createFileSystemDb(): DbService {
 
 						if (!audioFile) {
 							throw new Error(
-								`Audio file not found for recording ${recordingId}`,
+								`找不到录音 ${recordingId} 的音频文件`,
 							);
 						}
 
@@ -374,7 +374,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting audio blob from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取音频 Blob 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -387,7 +387,7 @@ export function createFileSystemDb(): DbService {
 
 						if (!audioFile) {
 							throw new Error(
-								`Audio file not found for recording ${recordingId}`,
+								`找不到录音 ${recordingId} 的音频文件`,
 							);
 						}
 
@@ -400,7 +400,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting audio playback URL from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取音频播放 URL 时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -427,7 +427,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing recordings from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统清除录音记录时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -443,7 +443,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting recordings count from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取录音记录数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -485,7 +485,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all transformations from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取所有转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -505,14 +505,14 @@ export function createFileSystemDb(): DbService {
 						// Validate with migrating schema (accepts V1 or V2, outputs V2)
 						const validated = Transformation(data);
 						if (validated instanceof type.errors) {
-							throw new Error(`Invalid transformation: ${validated.summary}`);
+							throw new Error(`无效的转换:${validated.summary}`);
 						}
 
 						return validated;
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation by id from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统按 ID 获取转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -540,7 +540,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error creating transformation(s) in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中创建转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -572,7 +572,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error updating transformation in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中更新转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -593,7 +593,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting transformation(s) from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统删除转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -610,7 +610,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing transformations from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统清除转换时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -624,7 +624,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformations count from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取转换数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -665,7 +665,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting all transformation runs from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取所有转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -686,7 +686,7 @@ export function createFileSystemDb(): DbService {
 						const validated = TransformationRun(data);
 						if (validated instanceof type.errors) {
 							throw new Error(
-								`Invalid transformation run: ${validated.summary}`,
+								`无效的转换运行:${validated.summary}`,
 							);
 						}
 
@@ -694,7 +694,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation run by id from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统按 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -743,7 +743,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs by transformation id from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统按转换 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -792,7 +792,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs by recording id from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统按录音 ID 获取转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -816,7 +816,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error creating transformation run(s) in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中创建转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -855,7 +855,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error adding step to transformation run in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中向转换运行添加步骤时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -898,7 +898,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (e) =>
 						DbServiceErr({
-							message: `Error failing step in transformation run in file system: ${extractErrorMessage(e)}`,
+							message: `在文件系统中将转换运行的步骤标记为失败时出错:${extractErrorMessage(e)}`,
 						}),
 				});
 			},
@@ -938,7 +938,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error completing step in transformation run in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中完成转换运行的步骤时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -970,7 +970,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error completing transformation run in file system: ${extractErrorMessage(error)}`,
+							message: `在文件系统中完成转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -987,7 +987,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error deleting transformation run(s) from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统删除转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -1004,7 +1004,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error clearing transformation runs from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统清除转换运行时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -1018,7 +1018,7 @@ export function createFileSystemDb(): DbService {
 					},
 					catch: (error) =>
 						DbServiceErr({
-							message: `Error getting transformation runs count from file system: ${extractErrorMessage(error)}`,
+							message: `从文件系统获取转换运行数量时出错:${extractErrorMessage(error)}`,
 						}),
 				});
 			},

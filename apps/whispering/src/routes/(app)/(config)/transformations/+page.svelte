@@ -54,7 +54,7 @@
 				renderComponent(Checkbox, {
 					checked: row.getIsSelected(),
 					onCheckedChange: (value) => row.toggleSelected(!!value),
-					'aria-label': 'Select row',
+					'aria-label': '选择行',
 				}),
 			enableSorting: false,
 			enableHiding: false,
@@ -85,7 +85,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Title',
+					headerText: '标题',
 				}),
 		},
 		{
@@ -93,13 +93,13 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Description',
+					headerText: '描述',
 				}),
 		},
 		{
 			id: 'actions',
 			accessorFn: (transformation) => transformation,
-			header: 'Actions',
+			header: '操作',
 			cell: ({ getValue }) => {
 				const transformation = getValue<Transformation>();
 				return renderComponent(TransformationRowActions, {
@@ -193,51 +193,51 @@
 </script>
 
 <svelte:head>
-	<title>All Transformations</title>
+	<title>所有转换</title>
 </svelte:head>
 
 <main class="flex w-full flex-1 flex-col gap-2 px-4 py-4 sm:px-8 mx-auto">
 	<h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-		Transformations
+		转换
 	</h1>
 	<p class="text-muted-foreground">
-		Your text transformations, stored locally in IndexedDB.
+		您的文本转换已本地存储在 IndexedDB 中。
 	</p>
 
 	<div class="flex items-center justify-between gap-2 w-full">
 		<Input
-			placeholder="Filter transformations..."
+			placeholder="筛选转换..."
 			type="text"
 			class="w-full"
 			bind:value={globalFilter}
 		/>
 		{#if selectedTransformationRows.length > 0}
 			<Button
-				tooltip="Delete selected transformations"
+				tooltip="删除所选转换"
 				variant="outline"
 				size="icon"
 				onclick={() => {
 					confirmationDialog.open({
-						title: 'Delete transformations',
+						title: '删除转换',
 						description:
-							'Are you sure you want to delete these transformations?',
-						confirm: { text: 'Delete', variant: 'destructive' },
+							'确定要删除这些转换吗?',
+						confirm: { text: '删除', variant: 'destructive' },
 						onConfirm: async () => {
 							const { error } = await rpc.db.transformations.delete.execute(
 								selectedTransformationRows.map(({ original }) => original),
 							);
 							if (error) {
 								rpc.notify.error.execute({
-									title: 'Failed to delete transformations!',
-									description: 'Your transformations could not be deleted.',
+									title: '删除转换失败!',
+									description: '无法删除您的转换。',
 									action: { type: 'more-details', error },
 								});
 								throw error;
 							}
 							rpc.notify.success.execute({
-								title: 'Deleted transformations!',
+								title: '已删除转换!',
 								description:
-									'Your transformations have been deleted successfully.',
+									'您的转换已成功删除。',
 							});
 						},
 					});
@@ -249,7 +249,7 @@
 
 		<OpenFolderButton
 			getFolderPath={PATHS.DB.TRANSFORMATIONS}
-			tooltipText="Open transformations folder"
+			tooltipText="打开转换文件夹"
 		/>
 
 		<CreateTransformationButton />
@@ -316,16 +316,16 @@
 									</Empty.Media>
 									<Empty.Title>
 										{#if globalFilter}
-											No transformations found
+											未找到转换
 										{:else}
-											No transformations yet
+											暂无转换
 										{/if}
 									</Empty.Title>
 									<Empty.Description>
 										{#if globalFilter}
-											Try adjusting your search or filters.
+											请尝试调整搜索或筛选条件。
 										{:else}
-											Click "Create Transformation" to add one.
+											点击"创建转换"添加一个。
 										{/if}
 									</Empty.Description>
 								</Empty.Header>
@@ -339,8 +339,8 @@
 
 	<div class="flex items-center justify-between">
 		<div class="text-muted-foreground text-sm">
-			{selectedTransformationRows.length} of {table.getFilteredRowModel().rows
-				.length} row(s) selected.
+			已选 {selectedTransformationRows.length} / {table.getFilteredRowModel().rows
+				.length} 行。
 		</div>
 		<ButtonGroup.Root>
 			<Button
@@ -349,7 +349,7 @@
 				onclick={() => table.previousPage()}
 				disabled={!table.getCanPreviousPage()}
 			>
-				Previous
+				上一页
 			</Button>
 			<Button
 				variant="outline"
@@ -357,7 +357,7 @@
 				onclick={() => table.nextPage()}
 				disabled={!table.getCanNextPage()}
 			>
-				Next
+				下一页
 			</Button>
 		</ButtonGroup.Root>
 	</div>

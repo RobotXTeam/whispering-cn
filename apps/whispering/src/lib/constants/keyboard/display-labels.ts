@@ -8,8 +8,8 @@ const BROWSER_KEY_DISPLAY_LABELS: Partial<
 	Record<KeyboardEventSupportedKey, string>
 > = {
 	// Whitespace (PRIMARY FIX)
-	' ': 'Space',
-	enter: 'Enter',
+	' ': '空格',
+	enter: '回车',
 	tab: 'Tab',
 
 	// Modifiers
@@ -26,44 +26,44 @@ const BROWSER_KEY_DISPLAY_LABELS: Partial<
 	super: 'Super',
 
 	// Navigation
-	arrowleft: '←',
-	arrowright: '→',
-	arrowup: '↑',
-	arrowdown: '↓',
+	arrowleft: '左',
+	arrowright: '右',
+	arrowup: '上',
+	arrowdown: '下',
 	home: 'Home',
 	end: 'End',
 	pageup: 'PgUp',
 	pagedown: 'PgDn',
 
 	// Editing
-	backspace: '⌫',
+	backspace: '退格',
 	delete: 'Del',
 	insert: 'Ins',
 	clear: 'Clear',
-	copy: 'Copy',
-	cut: 'Cut',
-	paste: 'Paste',
-	redo: 'Redo',
-	undo: 'Undo',
+	copy: '复制',
+	cut: '剪切',
+	paste: '粘贴',
+	redo: '重做',
+	undo: '撤销',
 
 	// Special
 	escape: 'Esc',
-	contextmenu: 'Menu',
-	pause: 'Pause',
+	contextmenu: '菜单',
+	pause: '暂停',
 	break: 'Break',
 	printscreen: 'PrtSc',
-	help: 'Help',
+	help: '帮助',
 
 	// Media
-	mediaplaypause: 'Play/Pause',
-	mediaplay: 'Play',
-	mediapause: 'Pause',
-	mediastop: 'Stop',
-	mediatracknext: 'Next Track',
-	mediatrackprevious: 'Prev Track',
+	mediaplaypause: '播放/暂停',
+	mediaplay: '播放',
+	mediapause: '暂停',
+	mediastop: '停止',
+	mediatracknext: '下一曲',
+	mediatrackprevious: '上一曲',
 	volumeup: 'Vol+',
 	volumedown: 'Vol-',
-	volumemute: 'Mute',
+	volumemute: '静音',
 
 	// Other keys
 	dead: 'Dead',
@@ -71,14 +71,14 @@ const BROWSER_KEY_DISPLAY_LABELS: Partial<
 	accept: 'Accept',
 	again: 'Again',
 	attn: 'Attn',
-	cancel: 'Cancel',
-	execute: 'Execute',
-	find: 'Find',
-	finish: 'Finish',
+	cancel: '取消',
+	execute: '执行',
+	find: '查找',
+	finish: '完成',
 	props: 'Props',
-	select: 'Select',
-	zoomout: 'Zoom Out',
-	zoomin: 'Zoom In',
+	select: '选择',
+	zoomout: '缩小',
+	zoomin: '放大',
 };
 
 /**

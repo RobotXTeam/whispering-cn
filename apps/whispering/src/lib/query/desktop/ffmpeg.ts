@@ -10,7 +10,7 @@ export const ffmpeg = {
 			const { data, error } = await desktopServices.ffmpeg.checkInstalled();
 			if (error) {
 				return WhisperingErr({
-					title: '❌ Error checking FFmpeg installation',
+					title: '❌ 检查 FFmpeg 安装时出错',
 					serviceError: error,
 				});
 			}

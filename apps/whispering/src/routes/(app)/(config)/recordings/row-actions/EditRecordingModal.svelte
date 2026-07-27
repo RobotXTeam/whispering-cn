@@ -81,9 +81,9 @@
 		}
 
 		confirmationDialog.open({
-			title: 'Unsaved changes',
-			description: 'You have unsaved changes. Are you sure you want to leave?',
-			confirm: { text: 'Leave' },
+			title: '未保存的更改',
+			description: '您有未保存的更改。确定要离开吗?',
+			confirm: { text: '离开' },
 			onConfirm: () => {
 				// Reset working copy and dirty flag
 				workingCopy = recording;
@@ -102,7 +102,7 @@
 <Modal.Root bind:open={isDialogOpen}>
 	<Modal.Trigger>
 		{#snippet child({ props })}
-			<Button tooltip="Edit recording" variant="ghost" size="icon" {...props}>
+			<Button tooltip="编辑录音" variant="ghost" size="icon" {...props}>
 				<EditIcon class="size-4" />
 			</Button>
 		{/snippet}
@@ -122,14 +122,14 @@
 		}}
 	>
 		<Modal.Header>
-			<Modal.Title>Edit recording</Modal.Title>
+			<Modal.Title>编辑录音</Modal.Title>
 			<Modal.Description>
-				Make changes to your recording and click save when you're done.
+				对您的录音进行修改,完成后点击保存。
 			</Modal.Description>
 		</Modal.Header>
 		<div class="space-y-4 p-4">
 			<div class="grid grid-cols-4 items-center gap-4">
-				<Label for="title" class="text-right">Title</Label>
+				<Label for="title" class="text-right">标题</Label>
 				<Input
 					id="title"
 					value={workingCopy.title}
@@ -141,7 +141,7 @@
 				/>
 			</div>
 			<div class="grid grid-cols-4 items-center gap-4">
-				<Label for="subtitle" class="text-right">Subtitle</Label>
+				<Label for="subtitle" class="text-right">副标题</Label>
 				<Input
 					id="subtitle"
 					value={workingCopy.subtitle}
@@ -153,7 +153,7 @@
 				/>
 			</div>
 			<div class="grid grid-cols-4 items-center gap-4">
-				<Label for="timestamp" class="text-right">Created At</Label>
+				<Label for="timestamp" class="text-right">创建时间</Label>
 				<Input
 					id="timestamp"
 					value={workingCopy.timestamp}
@@ -165,7 +165,7 @@
 				/>
 			</div>
 			<div class="grid grid-cols-4 items-center gap-4">
-				<Label for="transcribedText" class="text-right">Transcript</Label>
+				<Label for="transcribedText" class="text-right">转录文本</Label>
 				<Textarea
 					id="transcribedText"
 					value={workingCopy.transcribedText}
@@ -181,7 +181,7 @@
 			</div>
 			{#if audioUrl}
 				<div class="grid grid-cols-4 items-center gap-4">
-					<Label for="audio" class="text-right">Audio</Label>
+					<Label for="audio" class="text-right">音频</Label>
 					<audio src={audioUrl} controls class="col-span-3 h-8 w-full"></audio>
 				</div>
 			{/if}
@@ -190,50 +190,50 @@
 			<Button
 				onclick={() => {
 					confirmationDialog.open({
-						title: 'Delete recording',
-						description: 'Are you sure? This action cannot be undone.',
-						confirm: { text: 'Delete', variant: 'destructive' },
+						title: '删除录音',
+						description: '确定吗?此操作无法撤销。',
+						confirm: { text: '删除', variant: 'destructive' },
 						onConfirm: async () => {
 							const { error } = await rpc.db.recordings.delete.execute(
 								$state.snapshot(recording),
 							);
 							if (error) {
 								rpc.notify.error.execute({
-									title: 'Failed to delete recording!',
-									description: 'Your recording could not be deleted.',
+									title: '删除录音失败!',
+									description: '您的录音无法删除。',
 									action: { type: 'more-details', error },
 								});
 								throw error;
 							}
 							isDialogOpen = false;
 							rpc.notify.success.execute({
-								title: 'Deleted recording!',
-								description: 'Your recording has been deleted successfully.',
+								title: '已删除录音!',
+								description: '您的录音已成功删除。',
 							});
 						},
 					});
 				}}
 				variant="destructive"
 			>
-				Delete
+				删除
 			</Button>
 			<Button variant="outline" onclick={() => promptUserConfirmLeave()}>
-				Close
+				关闭
 			</Button>
 			<Button
 				onclick={() => {
 					updateRecording.mutate($state.snapshot(workingCopy), {
 						onSuccess: () => {
 							rpc.notify.success.execute({
-								title: 'Updated recording!',
-								description: 'Your recording has been updated successfully.',
+								title: '已更新录音!',
+								description: '您的录音已成功更新。',
 							});
 							isDialogOpen = false;
 						},
 						onError: (error) => {
 							rpc.notify.error.execute({
-								title: 'Failed to update recording!',
-								description: 'Your recording could not be updated.',
+								title: '更新录音失败!',
+								description: '您的录音无法更新。',
 								action: { type: 'more-details', error: error },
 							});
 						},
@@ -244,7 +244,7 @@
 				{#if updateRecording.isPending}
 					<Spinner />
 				{/if}
-				Save
+				保存
 			</Button>
 		</Modal.Footer>
 	</Modal.Content>

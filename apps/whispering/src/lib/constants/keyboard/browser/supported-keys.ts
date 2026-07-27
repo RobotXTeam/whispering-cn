@@ -7,8 +7,8 @@ import type { KeyboardEventPossibleKey } from './possible-keys';
  */
 export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 	{
-		title: 'Modifiers',
-		description: 'Hold with other keys',
+		title: '修饰键',
+		description: '与其他键组合使用',
 		keys: [
 			'control',
 			'shift',
@@ -24,8 +24,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Letters',
-		description: 'Any letter A-Z',
+		title: '字母',
+		description: '任意字母 A-Z',
 		keys: [
 			'a',
 			'b',
@@ -56,8 +56,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Numbers',
-		description: 'Number keys 0-9',
+		title: '数字',
+		description: '数字键 0-9',
 		keys: [
 			'0',
 			'1',
@@ -72,8 +72,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Symbols & Punctuation',
-		description: 'Common symbols and punctuation',
+		title: '符号与标点',
+		description: '常用符号和标点',
 		keys: [
 			'`',
 			'~',
@@ -110,13 +110,13 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Whitespace',
-		description: 'Space, enter, and tab keys',
+		title: '空白键',
+		description: '空格、回车和 Tab 键',
 		keys: [' ', 'enter', 'tab'] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Navigation',
-		description: 'Arrow and positioning keys',
+		title: '导航',
+		description: '方向键和定位键',
 		keys: [
 			'arrowleft',
 			'arrowright',
@@ -129,8 +129,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Editing',
-		description: 'Text editing keys',
+		title: '编辑',
+		description: '文本编辑键',
 		keys: [
 			'backspace',
 			'delete',
@@ -144,8 +144,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Function Keys',
-		description: 'F1-F24 function keys',
+		title: '功能键',
+		description: 'F1-F24 功能键',
 		keys: [
 			'f1',
 			'f2',
@@ -174,8 +174,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Special Keys',
-		description: 'System and browser keys',
+		title: '特殊键',
+		description: '系统和浏览器键',
 		keys: [
 			'escape',
 			'contextmenu',
@@ -186,8 +186,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Media Keys',
-		description: 'Media control keys',
+		title: '媒体键',
+		description: '媒体控制键',
 		keys: [
 			'mediaplaypause',
 			'mediaplay',
@@ -201,8 +201,8 @@ export const KEYBOARD_EVENT_SUPPORTED_KEY_SECTIONS = [
 		] as const satisfies KeyboardEventPossibleKey[],
 	},
 	{
-		title: 'Other Keys',
-		description: 'Additional special keys',
+		title: '其他键',
+		description: '其他特殊键',
 		keys: [
 			'dead',
 			'compose',

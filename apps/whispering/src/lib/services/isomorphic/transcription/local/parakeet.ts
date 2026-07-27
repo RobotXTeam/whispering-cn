@@ -14,7 +14,7 @@ export const PARAKEET_MODELS = [
 	{
 		id: 'parakeet-tdt-0.6b-v3-int8',
 		name: 'Parakeet TDT 0.6B v3 (INT8)',
-		description: 'Fast and accurate NVIDIA NeMo model',
+		description: '快速且准确的 NVIDIA NeMo 模型',
 		size: '~670 MB',
 		sizeBytes: 670_619_803, // Total size of all individual files
 		engine: 'parakeet',
@@ -63,11 +63,11 @@ export function createParakeetTranscriptionService() {
 			// Pre-validation
 			if (!options.modelPath) {
 				return WhisperingErr({
-					title: '📁 Model Directory Required',
-					description: 'Please select a Parakeet model directory in settings.',
+					title: '📁 需要模型目录',
+					description: '请在设置中选择一个 Parakeet 模型目录。',
 					action: {
 						type: 'link',
-						label: 'Configure model',
+						label: '配置模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -81,11 +81,11 @@ export function createParakeetTranscriptionService() {
 
 			if (!isExists) {
 				return WhisperingErr({
-					title: '❌ Model Directory Not Found',
-					description: `The model directory "${options.modelPath}" does not exist.`,
+					title: '❌ 未找到模型目录',
+					description: `模型目录 "${options.modelPath}" 不存在。`,
 					action: {
 						type: 'link',
-						label: 'Select model',
+						label: '选择模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -99,12 +99,12 @@ export function createParakeetTranscriptionService() {
 
 			if (!stats || !stats.isDirectory) {
 				return WhisperingErr({
-					title: '❌ Invalid Model Path',
+					title: '❌ 模型路径无效',
 					description:
-						'Parakeet models must be directories containing model files.',
+						'Parakeet 模型必须是包含模型文件的目录。',
 					action: {
 						type: 'link',
-						label: 'Select model directory',
+						label: '选择模型目录',
 						href: '/settings/transcription',
 					},
 				});
@@ -126,7 +126,7 @@ export function createParakeetTranscriptionService() {
 					const result = ParakeetErrorType(unknownError);
 					if (result instanceof type.errors) {
 						return WhisperingErr({
-							title: '❌ Unexpected Parakeet Error',
+							title: '❌ Parakeet 意外错误',
 							description: extractErrorMessage(unknownError),
 							action: { type: 'more-details', error: unknownError },
 						});
@@ -136,7 +136,7 @@ export function createParakeetTranscriptionService() {
 					switch (error.name) {
 						case 'ModelLoadError':
 							return WhisperingErr({
-								title: '🤖 Model Loading Error',
+								title: '🤖 模型加载错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -146,19 +146,19 @@ export function createParakeetTranscriptionService() {
 
 						case 'FfmpegNotFoundError':
 							return WhisperingErr({
-								title: '🛠️ FFmpeg Not Installed',
+								title: '🛠️ 未安装 FFmpeg',
 								description:
-									'Parakeet requires FFmpeg to convert audio formats. Please install FFmpeg or switch to CPAL recording at 16kHz.',
+									'Parakeet 需要 FFmpeg 来转换音频格式。请安装 FFmpeg 或切换到 16kHz 的 CPAL 录制。',
 								action: {
 									type: 'link',
-									label: 'Install FFmpeg',
+									label: '安装 FFmpeg',
 									href: '/install-ffmpeg',
 								},
 							});
 
 						case 'AudioReadError':
 							return WhisperingErr({
-								title: '🔊 Audio Read Error',
+								title: '🔊 音频读取错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -168,7 +168,7 @@ export function createParakeetTranscriptionService() {
 
 						case 'TranscriptionError':
 							return WhisperingErr({
-								title: '❌ Transcription Error',
+								title: '❌ 转录错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -178,8 +178,8 @@ export function createParakeetTranscriptionService() {
 
 						default:
 							return WhisperingErr({
-								title: '❌ Parakeet Error',
-								description: 'An unexpected error occurred.',
+								title: '❌ Parakeet 错误',
+								description: '发生了意外错误。',
 								action: {
 									type: 'more-details',
 									error: new Error(String(error)),

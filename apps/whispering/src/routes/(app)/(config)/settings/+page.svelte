@@ -12,17 +12,17 @@
 	import { settings } from '$lib/stores/settings.svelte';
 
 	const retentionItems = [
-		{ value: 'keep-forever', label: 'Keep All Recordings' },
-		{ value: 'limit-count', label: 'Keep Limited Number' },
+		{ value: 'keep-forever', label: '保留所有录音' },
+		{ value: 'limit-count', label: '保留有限数量' },
 	];
 
 	const maxRecordingItems = [
-		{ value: '0', label: '0 Recordings (Never Save)' },
-		{ value: '5', label: '5 Recordings' },
-		{ value: '10', label: '10 Recordings' },
-		{ value: '25', label: '25 Recordings' },
-		{ value: '50', label: '50 Recordings' },
-		{ value: '100', label: '100 Recordings' },
+		{ value: '0', label: '0 条录音（从不保存）' },
+		{ value: '5', label: '5 条录音' },
+		{ value: '10', label: '10 条录音' },
+		{ value: '25', label: '25 条录音' },
+		{ value: '50', label: '50 条录音' },
+		{ value: '100', label: '100 条录音' },
 	];
 
 	const retentionLabel = $derived(
@@ -55,20 +55,20 @@
 </script>
 
 <svelte:head>
-	<title>Settings - Whispering</title>
+	<title>设置 - Whispering</title>
 </svelte:head>
 
 <Field.Set>
-	<Field.Legend>General</Field.Legend>
+	<Field.Legend>通用</Field.Legend>
 	<Field.Description>
-		Configure your general Whispering preferences.
+		配置你的 Whispering 通用偏好。
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
 		<Field.Set>
-			<Field.Legend variant="label">Transcription output</Field.Legend>
+			<Field.Legend variant="label">转录输出</Field.Legend>
 			<Field.Description>
-				Applies immediately after an audio transcription finishes.
+				在音频转录完成后立即应用。
 			</Field.Description>
 			<Field.Group>
 				<Field.Field orientation="horizontal">
@@ -81,7 +81,7 @@
 						}
 					/>
 					<Field.Label for="transcription.copyToClipboardOnSuccess">
-						Copy transcript to clipboard
+						复制转录文本到剪贴板
 					</Field.Label>
 				</Field.Field>
 
@@ -95,7 +95,7 @@
 						}
 					/>
 					<Field.Label for="transcription.writeToCursorOnSuccess">
-						Paste transcript at cursor
+						在光标处粘贴转录文本
 					</Field.Label>
 				</Field.Field>
 
@@ -113,7 +113,7 @@
 							}
 						/>
 						<Field.Label for="transcription.simulateEnterAfterOutput">
-							Press Enter after pasting transcript
+							粘贴转录文本后按回车键
 						</Field.Label>
 					</Field.Field>
 				{/if}
@@ -123,9 +123,9 @@
 		<Field.Separator />
 
 		<Field.Set>
-			<Field.Legend variant="label">Transformation output</Field.Legend>
+			<Field.Legend variant="label">转换输出</Field.Legend>
 			<Field.Description>
-				Applies after you run a saved transformation on a transcription.
+				在你对转录文本运行已保存的转换后应用。
 			</Field.Description>
 			<Field.Group>
 				<Field.Field orientation="horizontal">
@@ -138,7 +138,7 @@
 						}
 					/>
 					<Field.Label for="transformation.copyToClipboardOnSuccess">
-						Copy transformed text to clipboard
+						复制转换后的文本到剪贴板
 					</Field.Label>
 				</Field.Field>
 
@@ -152,7 +152,7 @@
 						}
 					/>
 					<Field.Label for="transformation.writeToCursorOnSuccess">
-						Paste transformed text at cursor
+						在光标处粘贴转换后的文本
 					</Field.Label>
 				</Field.Field>
 
@@ -170,7 +170,7 @@
 							}
 						/>
 						<Field.Label for="transformation.simulateEnterAfterOutput">
-							Press Enter after pasting transformed text
+							粘贴转换后的文本后按回车键
 						</Field.Label>
 					</Field.Field>
 				{/if}
@@ -181,7 +181,7 @@
 
 		<Field.Field>
 			<Field.Label for="recording-retention-strategy"
-				>Auto Delete Recordings</Field.Label
+				>自动删除录音</Field.Label
 			>
 			<Select.Root
 				type="single"
@@ -191,7 +191,7 @@
 				}
 			>
 				<Select.Trigger id="recording-retention-strategy" class="w-full">
-					{retentionLabel ?? 'Select retention strategy'}
+					{retentionLabel ?? '选择保留策略'}
 				</Select.Trigger>
 				<Select.Content>
 					{#each retentionItems as item}
@@ -203,7 +203,7 @@
 
 		{#if settings.value['database.recordingRetentionStrategy'] === 'limit-count'}
 			<Field.Field>
-				<Field.Label for="max-recording-count">Maximum Recordings</Field.Label>
+				<Field.Label for="max-recording-count">最大录音数</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -212,7 +212,7 @@
 					}
 				>
 					<Select.Trigger id="max-recording-count" class="w-full">
-						{maxRecordingLabel ?? 'Select maximum recordings'}
+						{maxRecordingLabel ?? '选择最大录音数'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each maxRecordingItems as item}
@@ -226,9 +226,9 @@
 		{#if window.__TAURI_INTERNALS__}
 			<Field.Field orientation="horizontal">
 				<Field.Content>
-					<Field.Label for="autostart">Launch on Startup</Field.Label>
+					<Field.Label for="autostart">开机启动</Field.Label>
 					<Field.Description>
-						Automatically open Whispering when you log in
+						登录时自动打开 Whispering
 					</Field.Description>
 				</Field.Content>
 				<Switch
@@ -251,7 +251,7 @@
 				/>
 			</Field.Field>
 			<Field.Field>
-				<Field.Label for="always-on-top">Always On Top</Field.Label>
+				<Field.Label for="always-on-top">置顶</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -260,7 +260,7 @@
 					}
 				>
 					<Select.Trigger id="always-on-top" class="w-full">
-						{alwaysOnTopLabel ?? 'Select always on top mode'}
+						{alwaysOnTopLabel ?? '选择置顶模式'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each ALWAYS_ON_TOP_MODE_OPTIONS as item}
@@ -274,8 +274,8 @@
 		<Field.Separator />
 
 		<Field.Set>
-			<Field.Legend variant="label">Navigation Layout</Field.Legend>
-			<Field.Description>Choose how you navigate the app.</Field.Description>
+			<Field.Legend variant="label">导航布局</Field.Legend>
+			<Field.Description>选择你浏览应用的方式。</Field.Description>
 			<RadioGroup.Root
 				bind:value={
 					() => settings.value['ui.layoutMode'],

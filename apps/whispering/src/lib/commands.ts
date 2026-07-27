@@ -31,7 +31,7 @@ type SatisfiedCommand = {
 export const commands = [
 	{
 		id: 'pushToTalk',
-		title: 'Push to talk',
+		title: '按住说话',
 		on: ['Pressed', 'Released'],
 		callback: (state?: ShortcutEventState) => {
 			if (state === 'Pressed') {
@@ -43,55 +43,55 @@ export const commands = [
 	},
 	{
 		id: 'toggleManualRecording',
-		title: 'Toggle recording',
+		title: '切换录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.toggleManualRecording.execute(undefined),
 	},
 	{
 		id: 'startManualRecording',
-		title: 'Start recording',
+		title: '开始录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.startManualRecording.execute(undefined),
 	},
 	{
 		id: 'stopManualRecording',
-		title: 'Stop recording',
+		title: '停止录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.stopManualRecording.execute(undefined),
 	},
 	{
 		id: 'cancelManualRecording',
-		title: 'Cancel recording',
+		title: '取消录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.cancelManualRecording.execute(undefined),
 	},
 	{
 		id: 'startVadRecording',
-		title: 'Start voice activated recording',
+		title: '开始语音活动录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.startVadRecording.execute(undefined),
 	},
 	{
 		id: 'stopVadRecording',
-		title: 'Stop voice activated recording',
+		title: '停止语音活动录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.stopVadRecording.execute(undefined),
 	},
 	{
 		id: 'toggleVadRecording',
-		title: 'Toggle voice activated recording',
+		title: '切换语音活动录音',
 		on: ['Pressed'],
 		callback: () => rpc.commands.toggleVadRecording.execute(undefined),
 	},
 	{
 		id: 'openTransformationPicker',
-		title: 'Open transformation picker',
+		title: '打开转换选择器',
 		on: ['Pressed'],
 		callback: () => rpc.commands.openTransformationPicker.execute(undefined),
 	},
 	{
 		id: 'runTransformationOnClipboard',
-		title: 'Run transformation on clipboard',
+		title: '对剪贴板运行转换',
 		on: ['Pressed'],
 		callback: () =>
 			rpc.commands.runTransformationOnClipboard.execute(undefined),

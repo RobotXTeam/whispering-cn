@@ -32,7 +32,7 @@ export function createFfmpegService() {
 					},
 					catch: (error) =>
 						FfmpegServiceErr({
-							message: `Unable to determine if FFmpeg is installed through shell. ${extractErrorMessage(error)}`,
+							message: `无法通过 shell 确定 FFmpeg 是否已安装。${extractErrorMessage(error)}`,
 						}),
 				});
 
@@ -77,7 +77,7 @@ export function createFfmpegService() {
 							try: () => FsServiceLive.pathToBlob(inputPath),
 							catch: (error) =>
 								FfmpegServiceErr({
-									message: `Temp file not accessible: ${extractErrorMessage(error)}`,
+									message: `临时文件不可访问:${extractErrorMessage(error)}`,
 								}),
 						});
 						if (verifyError) throw new Error(verifyError.message);
@@ -94,14 +94,14 @@ export function createFfmpegService() {
 							await CommandServiceLive.execute(asShellCommand(command));
 						if (commandError) {
 							throw new Error(
-								`FFmpeg compression failed: ${commandError.message}`,
+								`FFmpeg 压缩失败:${commandError.message}`,
 							);
 						}
 
 						// Check if FFmpeg command was successful
 						if (result.code !== 0) {
 							throw new Error(
-								`FFmpeg compression failed with exit code ${result.code}: ${result.stderr}`,
+								`FFmpeg 压缩失败,退出码 ${result.code}:${result.stderr}`,
 							);
 						}
 
@@ -109,7 +109,7 @@ export function createFfmpegService() {
 						const outputExists = await exists(outputPath);
 						if (!outputExists) {
 							throw new Error(
-								'FFmpeg compression completed but output file was not created',
+								'FFmpeg 压缩已完成,但未创建输出文件',
 							);
 						}
 
@@ -118,7 +118,7 @@ export function createFfmpegService() {
 							await FsServiceLive.pathToBlob(outputPath);
 						if (readError) {
 							throw new Error(
-								`Failed to read compressed audio file: ${readError.message}`,
+								`读取压缩后的音频文件失败:${readError.message}`,
 							);
 						}
 
@@ -136,7 +136,7 @@ export function createFfmpegService() {
 				},
 				catch: (error) =>
 					FfmpegServiceErr({
-						message: `Audio compression failed: ${extractErrorMessage(error)}`,
+						message: `音频压缩失败:${extractErrorMessage(error)}`,
 					}),
 			});
 		},

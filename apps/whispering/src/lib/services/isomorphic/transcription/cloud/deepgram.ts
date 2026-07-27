@@ -9,30 +9,30 @@ export const DEEPGRAM_TRANSCRIPTION_MODELS = [
 	{
 		name: 'nova-3',
 		description:
-			"Deepgram's most advanced speech-to-text model with superior accuracy and speed. Best for high-quality transcription needs.",
+			'Deepgram 最先进的语音转文本模型,具备卓越的准确度和速度。最适合高精度转录需求。',
 		cost: '$0.0043/minute',
 	},
 	{
 		name: 'nova-2',
-		description: "Deepgram's previous best speech-to-text model.",
+		description: 'Deepgram 此前最佳的语音转文本模型。',
 		cost: '$0.0043/minute',
 	},
 	{
 		name: 'nova',
 		description:
-			'Deepgram Nova model with excellent accuracy and performance. Good balance of speed and quality.',
+			'Deepgram Nova 模型,具备出色的准确度和性能。速度与质量的良好平衡。',
 		cost: '$0.0043/minute',
 	},
 	{
 		name: 'enhanced',
 		description:
-			'Enhanced general-purpose model with good accuracy for most use cases. Cost-effective option.',
+			'增强型通用模型,对大多数用例具备良好的准确度。高性价比之选。',
 		cost: '$0.0025/minute',
 	},
 	{
 		name: 'base',
 		description:
-			'Base model for standard transcription needs. Most cost-effective option with reasonable accuracy.',
+			'满足标准转录需求的基础模型。最具性价比,准确度合理。',
 		cost: '$0.0020/minute',
 	},
 ] as const satisfies {
@@ -76,12 +76,12 @@ export function createDeepgramTranscriptionService({
 			// Pre-validation: Check API key
 			if (!options.apiKey) {
 				return WhisperingErr({
-					title: '🔑 API Key Required',
+					title: '🔑 需要API密钥',
 					description:
-						'Please enter your Deepgram API key in settings to use Deepgram transcription.',
+						'请在设置中输入您的 Deepgram API 密钥以使用 Deepgram 转录。',
 					action: {
 						type: 'link',
-						label: 'Add API key',
+						label: '添加 API 密钥',
 						href: '/settings/transcription',
 					},
 				});
@@ -91,8 +91,8 @@ export function createDeepgramTranscriptionService({
 			const blobSizeInMb = audioBlob.size / (1024 * 1024);
 			if (blobSizeInMb > MAX_FILE_SIZE_MB) {
 				return WhisperingErr({
-					title: `The file size (${blobSizeInMb}MB) is too large`,
-					description: `Please upload a file smaller than ${MAX_FILE_SIZE_MB}MB.`,
+					title: `文件大小 (${blobSizeInMb}MB) 过大`,
+					description: `请上传小于 ${MAX_FILE_SIZE_MB}MB 的文件。`,
 				});
 			}
 
@@ -129,9 +129,9 @@ export function createDeepgramTranscriptionService({
 				switch (postError.name) {
 					case 'ConnectionError': {
 						return WhisperingErr({
-							title: '🌐 Connection Issue',
+							title: '🌐 连接问题',
 							description:
-								'Unable to connect to Deepgram service. Please check your internet connection.',
+								'无法连接到 Deepgram 服务。请检查您的网络连接。',
 							action: { type: 'more-details', error: postError },
 						});
 					}
@@ -144,22 +144,22 @@ export function createDeepgramTranscriptionService({
 
 						if (status === 400) {
 							return WhisperingErr({
-								title: '❌ Bad Request',
+								title: '❌ 请求无效',
 								description:
 									message ||
-									'Invalid request parameters. Please check your audio file and settings.',
+									'请求参数无效。请检查您的音频文件和设置。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 401) {
 							return WhisperingErr({
-								title: '🔑 Authentication Failed',
+								title: '🔑 认证失败',
 								description:
-									'Your Deepgram API key is invalid or expired. Please update your API key in settings.',
+									'您的 Deepgram API 密钥无效或已过期。请在设置中更新您的 API 密钥。',
 								action: {
 									type: 'link',
-									label: 'Update API key',
+									label: '更新 API 密钥',
 									href: '/settings/transcription',
 								},
 							});
@@ -167,71 +167,71 @@ export function createDeepgramTranscriptionService({
 
 						if (status === 403) {
 							return WhisperingErr({
-								title: '⛔ Access Denied',
+								title: '⛔ 访问被拒绝',
 								description:
 									message ||
-									'Your account does not have access to this feature or model.',
+									'您的账户无权访问此功能或模型。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 413) {
 							return WhisperingErr({
-								title: '📦 Audio File Too Large',
+								title: '📦 音频文件过大',
 								description:
-									'Your audio file exceeds the maximum size limit. Try splitting it into smaller segments.',
+									'您的音频文件超过了最大大小限制。请尝试将其分割成更小的片段。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 415) {
 							return WhisperingErr({
-								title: '🎵 Unsupported Format',
+								title: '🎵 不支持的格式',
 								description:
-									"This audio format isn't supported. Please convert your file to a supported format.",
+									'不支持此音频格式。请将您的文件转换为支持的格式。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 429) {
 							return WhisperingErr({
-								title: '⏱️ Rate Limit Reached',
+								title: '⏱️ 已达请求频率限制',
 								description:
-									'Too many requests. Please wait before trying again.',
+									'请求过于频繁。请稍后再试。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status && status >= 500) {
 							return WhisperingErr({
-								title: '🔧 Service Unavailable',
-								description: `The Deepgram service is temporarily unavailable (Error ${status}). Please try again later.`,
+								title: '🔧 服务不可用',
+								description: `Deepgram 服务暂时不可用(错误 ${status})。请稍后重试。`,
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						return WhisperingErr({
-							title: '❌ Transcription Failed',
+							title: '❌ 转录失败',
 							description:
 								message ||
-								'An unexpected error occurred during transcription. Please try again.',
+								'转录过程中发生了意外错误。请重试。',
 							action: { type: 'more-details', error: postError },
 						});
 					}
 
 					case 'ParseError':
 						return WhisperingErr({
-							title: '🔍 Response Error',
+							title: '🔍 响应错误',
 							description:
-								'Received an unexpected response from Deepgram service. Please try again.',
+								'从 Deepgram 服务收到了意外的响应。请重试。',
 							action: { type: 'more-details', error: postError },
 						});
 
 					default:
 						return WhisperingErr({
-							title: '❓ Unexpected Error',
+							title: '❓ 意外错误',
 							description:
-								'An unexpected error occurred during transcription. Please try again.',
+								'转录过程中发生了意外错误。请重试。',
 							action: { type: 'more-details', error: postError },
 						});
 				}
@@ -244,9 +244,9 @@ export function createDeepgramTranscriptionService({
 
 			if (!transcript) {
 				return WhisperingErr({
-					title: '📝 No Transcription Found',
+					title: '📝 未找到转录文本',
 					description:
-						'No speech was detected in the audio file. Please check your audio and try again.',
+						'在音频文件中未检测到语音。请检查您的音频后重试。',
 				});
 			}
 

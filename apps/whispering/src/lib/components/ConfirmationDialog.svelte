@@ -209,7 +209,7 @@
 			{#if confirmationDialog.options?.input}
 				<Input
 					bind:value={confirmationDialog.inputText}
-					placeholder={`Type "${confirmationDialog.options.input.confirmationText}" to confirm`}
+					placeholder={`输入 "${confirmationDialog.options.input.confirmationText}" 以确认`}
 				/>
 			{/if}
 
@@ -219,7 +219,7 @@
 					onclick={confirmationDialog.cancel}
 					disabled={confirmationDialog.isPending}
 				>
-					{confirmationDialog.options?.cancel?.text ?? 'Cancel'}
+					{confirmationDialog.options?.cancel?.text ?? '取消'}
 				</AlertDialog.Cancel>
 				<AlertDialog.Action
 					type="submit"
@@ -233,7 +233,7 @@
 					{#if confirmationDialog.isPending}
 						<Spinner class="size-4" />
 					{/if}
-					{confirmationDialog.options?.confirm?.text ?? 'Confirm'}
+					{confirmationDialog.options?.confirm?.text ?? '确认'}
 				</AlertDialog.Action>
 			</AlertDialog.Footer>
 		</form>

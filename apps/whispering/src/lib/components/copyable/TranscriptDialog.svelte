@@ -49,7 +49,7 @@
 
 <TextPreviewDialog
 	id={viewTransition.recording(recordingId).transcript}
-	title="Transcript"
+	title="转录文本"
 	label="transcript"
 	text={transcribedText}
 	{rows}

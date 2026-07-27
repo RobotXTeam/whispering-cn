@@ -30,7 +30,7 @@ async function hasExistingAudioPermission(): Promise<boolean> {
 			},
 			catch: (error) =>
 				DeviceStreamServiceErr({
-					message: `We need permission to see your microphones. Check your browser settings and try again. ${extractErrorMessage(error)}`,
+					message: `我们需要权限才能访问您的麦克风。请检查浏览器设置后重试。${extractErrorMessage(error)}`,
 				}),
 		});
 		if (!error) return permissionStatus.state === 'granted';
@@ -68,7 +68,7 @@ export async function enumerateDevices(): Promise<
 		},
 		catch: (error) =>
 			DeviceStreamServiceErr({
-				message: `We need permission to see your microphones. Check your browser settings and try again. ${extractErrorMessage(error)}`,
+				message: `我们需要权限才能访问您的麦克风。请检查浏览器设置后重试。${extractErrorMessage(error)}`,
 			}),
 	});
 }
@@ -99,7 +99,7 @@ async function getStreamForDeviceIdentifier(
 		},
 		catch: (error) =>
 			DeviceStreamServiceErr({
-				message: `Unable to connect to the selected microphone. This could be because the device is already in use by another application, has been disconnected, or lacks proper permissions. Please check that your microphone is connected, not being used elsewhere, and that you have granted microphone permissions. ${extractErrorMessage(error)}`,
+				message: `无法连接到所选麦克风。这可能是因为该设备已被其他应用占用、已断开连接,或缺少适当权限。请检查您的麦克风是否已连接、未被其他应用使用,并且已授予麦克风权限。 ${extractErrorMessage(error)}`,
 			}),
 	});
 }
@@ -120,15 +120,15 @@ export async function getRecordingStream({
 	if (!selectedDeviceId) {
 		// No device selected
 		sendStatus({
-			title: '🔍 No Device Selected',
+			title: '🔍 未选择设备',
 			description:
-				"No worries! We'll find the best microphone for you automatically...",
+				"别担心!我们会自动为您寻找最合适的麦克风……",
 		});
 	} else {
 		sendStatus({
-			title: '🎯 Connecting Device',
+			title: '🎯 正在连接设备',
 			description:
-				'Almost there! Just need your permission to use the microphone...',
+				'马上就好!只需要您授权使用麦克风……',
 		});
 
 		const { data: preferredStream, error: getPreferredStreamError } =
@@ -143,9 +143,9 @@ export async function getRecordingStream({
 
 		// We reach here if the preferred device failed, so we'll fall back to the first available device
 		sendStatus({
-			title: '⚠️ Finding a New Microphone',
+			title: '⚠️ 正在寻找新麦克风',
 			description:
-				"That microphone isn't working. Let's try finding another one...",
+				"那个麦克风不起作用。让我们试试找另一个……",
 		});
 	}
 
@@ -161,7 +161,7 @@ export async function getRecordingStream({
 		if (enumerateDevicesError)
 			return DeviceStreamServiceErr({
 				message:
-					'Error enumerating recording devices and acquiring first available stream. Please make sure you have given permission to access your audio devices',
+					'枚举录音设备并获取第一个可用流时出错。请确认您已授予访问音频设备的权限',
 			});
 
 		for (const device of devices) {
@@ -174,7 +174,7 @@ export async function getRecordingStream({
 		}
 
 		return DeviceStreamServiceErr({
-			message: 'Unable to connect to any available microphone',
+			message: '无法连接到任何可用的麦克风',
 		});
 	};
 
@@ -183,8 +183,8 @@ export async function getRecordingStream({
 		await getFirstAvailableStream();
 	if (getFallbackStreamError) {
 		const errorMessage = selectedDeviceId
-			? "We couldn't connect to any microphones. Make sure they're plugged in and try again!"
-			: "Hmm... We couldn't find any microphones to use. Check your connections and try again!";
+			? "我们无法连接到任何麦克风。请确认已插好并重试!"
+			: "嗯……我们找不到可用的麦克风。请检查连接后重试!";
 		return DeviceStreamServiceErr({
 			message: errorMessage,
 		});

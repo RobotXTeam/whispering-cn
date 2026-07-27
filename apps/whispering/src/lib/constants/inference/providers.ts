@@ -11,7 +11,7 @@ export const INFERENCE_PROVIDERS = [
 	{ id: 'Anthropic', label: 'Anthropic' },
 	{ id: 'Google', label: 'Google' },
 	{ id: 'OpenRouter', label: 'OpenRouter' },
-	{ id: 'Custom', label: 'Custom (OpenAI-compatible)' },
+	{ id: 'Custom', label: '自定义（OpenAI 兼容）' },
 ] as const;
 
 /** Union type of all valid inference provider IDs */

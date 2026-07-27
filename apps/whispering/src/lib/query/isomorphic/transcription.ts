@@ -31,8 +31,8 @@ export const transcription = {
 
 			if (getAudioBlobError) {
 				return WhisperingErr({
-					title: '⚠️ Failed to fetch audio',
-					description: `Unable to load audio for recording: ${getAudioBlobError.message}`,
+					title: '⚠️ 获取音频失败',
+					description: `无法加载录音的音频：${getAudioBlobError.message}`,
 				});
 			}
 
@@ -44,8 +44,8 @@ export const transcription = {
 			if (setRecordingTranscribingError) {
 				notify.warning.execute({
 					title:
-						'⚠️ Unable to set recording transcription status to transcribing',
-					description: 'Continuing with the transcription process...',
+						'⚠️ 无法将录音的转录状态设置为转录中',
+					description: '继续进行转录流程…',
 					action: {
 						type: 'more-details',
 						error: setRecordingTranscribingError,
@@ -62,9 +62,9 @@ export const transcription = {
 					});
 				if (setRecordingTranscribingError) {
 					notify.warning.execute({
-						title: '⚠️ Unable to update recording after transcription',
+						title: '⚠️ 转录后无法更新录音',
 						description:
-							"Transcription failed but unable to update recording's transcription status in database",
+							'转录失败，但无法在数据库中更新录音的转录状态',
 						action: {
 							type: 'more-details',
 							error: setRecordingTranscribingError,
@@ -82,9 +82,9 @@ export const transcription = {
 				});
 			if (setRecordingTranscribedTextError) {
 				notify.warning.execute({
-					title: '⚠️ Unable to update recording after transcription',
+					title: '⚠️ 转录后无法更新录音',
 					description:
-						"Transcription completed but unable to update recording's transcribed text and status in database",
+						'转录已完成，但无法在数据库中更新录音的转录文本和状态',
 					action: {
 						type: 'more-details',
 						error: setRecordingTranscribedTextError,
@@ -106,8 +106,8 @@ export const transcription = {
 
 					if (getAudioBlobError) {
 						return WhisperingErr({
-							title: '⚠️ Failed to fetch audio',
-							description: `Unable to load audio for recording: ${getAudioBlobError.message}`,
+							title: '⚠️ 获取音频失败',
+							description: `无法加载录音的音频：${getAudioBlobError.message}`,
 						});
 					}
 
@@ -145,8 +145,8 @@ async function transcribeBlob(
 		if (compressionError) {
 			// Notify user of compression failure but continue with original blob
 			notify.warning.execute({
-				title: 'Audio compression failed',
-				description: `${compressionError.message}. Using original audio for transcription.`,
+				title: '音频压缩失败',
+				description: `${compressionError.message}。使用原始音频进行转录。`,
 			});
 			rpc.analytics.logEvent.execute({
 				type: 'compression_failed',
@@ -160,8 +160,8 @@ async function transcribeBlob(
 				(1 - compressedBlob.size / blob.size) * 100,
 			);
 			notify.info.execute({
-				title: 'Audio compressed',
-				description: `Reduced file size by ${compressionRatio}%`,
+				title: '音频已压缩',
+				description: `文件大小减少了 ${compressionRatio}%`,
 			});
 			rpc.analytics.logEvent.execute({
 				type: 'compression_completed',
@@ -278,8 +278,8 @@ async function transcribeBlob(
 				}
 				default:
 					return WhisperingErr({
-						title: '⚠️ No transcription service selected',
-						description: 'Please select a transcription service in settings.',
+						title: '⚠️ 未选择转录服务商',
+						description: '请在设置中选择一个转录服务商。',
 					});
 			}
 		})();

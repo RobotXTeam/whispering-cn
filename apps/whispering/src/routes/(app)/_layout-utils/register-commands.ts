@@ -34,7 +34,7 @@ export async function syncLocalShortcutsWithSettings() {
 	const { errs } = partitionResults(results);
 	if (errs.length > 0) {
 		rpc.notify.error.execute({
-			title: 'Error registering local commands',
+			title: '注册本地命令时出错',
 			description: errs.map((err) => err.error.message).join('\n'),
 			action: { type: 'more-details', error: errs },
 		});
@@ -66,7 +66,7 @@ export async function syncGlobalShortcutsWithSettings() {
 	const { errs } = partitionResults(results);
 	if (errs.length > 0) {
 		rpc.notify.error.execute({
-			title: 'Error registering global commands',
+			title: '注册全局命令时出错',
 			description: errs.map((err) => err.error.message).join('\n'),
 			action: { type: 'more-details', error: errs },
 		});
@@ -88,12 +88,12 @@ export function resetLocalShortcutsToDefaultIfDuplicates(): boolean {
 				// If duplicates found, reset all local shortcuts to defaults
 				settings.resetLocalShortcuts();
 				rpc.notify.success.execute({
-					title: 'Shortcuts reset',
+					title: '快捷键已重置',
 					description:
-						'Duplicate local shortcuts detected. All local shortcuts have been reset to defaults.',
+						'检测到重复的应用内快捷键。所有应用内快捷键已重置为默认值。',
 					action: {
 						type: 'link',
-						label: 'Configure shortcuts',
+						label: '配置快捷键',
 						href: '/settings/shortcuts/local',
 					},
 				});
@@ -121,12 +121,12 @@ export function resetGlobalShortcutsToDefaultIfDuplicates(): boolean {
 				// If duplicates found, reset all global shortcuts to defaults
 				settings.resetGlobalShortcuts();
 				rpc.notify.success.execute({
-					title: 'Shortcuts reset',
+					title: '快捷键已重置',
 					description:
-						'Duplicate global shortcuts detected. All global shortcuts have been reset to defaults.',
+						'检测到重复的全局快捷键。所有全局快捷键已重置为默认值。',
 					action: {
 						type: 'link',
-						label: 'Configure shortcuts',
+						label: '配置快捷键',
 						href: '/settings/shortcuts/global',
 					},
 				});

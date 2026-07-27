@@ -18,9 +18,9 @@
 
 	function promptUserConfirmLeave() {
 		confirmationDialog.open({
-			title: 'Unsaved changes',
-			description: 'You have unsaved changes. Are you sure you want to leave?',
-			confirm: { text: 'Leave' },
+			title: '有未保存的更改',
+			description: '您有未保存的更改。确定要离开吗?',
+			confirm: { text: '离开' },
 			onConfirm: () => {
 				isDialogOpen = false;
 			},
@@ -33,7 +33,7 @@
 		{#snippet child({ props })}
 			<Button {...props}>
 				<PlusIcon class="size-4" />
-				Create Transformation
+				创建转换
 			</Button>
 		{/snippet}
 	</Dialog.Trigger>
@@ -54,7 +54,7 @@
 		}}
 	>
 		<Dialog.Header>
-			<Dialog.Title>Create Transformation</Dialog.Title>
+			<Dialog.Title>创建转换</Dialog.Title>
 			<Separator />
 		</Dialog.Header>
 
@@ -62,7 +62,7 @@
 
 		<Dialog.Footer>
 			<Button variant="outline" onclick={() => (isDialogOpen = false)}>
-				Cancel
+				取消
 			</Button>
 			<Button
 				type="submit"
@@ -72,21 +72,21 @@
 							isDialogOpen = false;
 							transformation = generateDefaultTransformation();
 							rpc.notify.success.execute({
-								title: 'Created transformation!',
+								title: '已创建转换!',
 								description:
-									'Your transformation has been created successfully.',
+									'您的转换已成功创建。',
 							});
 						},
 						onError: (error) => {
 							rpc.notify.error.execute({
-								title: 'Failed to create transformation!',
-								description: 'Your transformation could not be created.',
+								title: '创建转换失败!',
+								description: '无法创建您的转换。',
 								action: { type: 'more-details', error },
 							});
 						},
 					})}
 			>
-				Create
+				创建
 			</Button>
 		</Dialog.Footer>
 	</Dialog.Content>

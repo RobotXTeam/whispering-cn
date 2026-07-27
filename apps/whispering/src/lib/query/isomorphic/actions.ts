@@ -58,8 +58,8 @@ const startManualRecording = defineMutation({
 		const toastId = nanoid();
 		notify.loading.execute({
 			id: toastId,
-			title: '🎙️ Preparing to record...',
-			description: 'Setting up your recording environment...',
+			title: '🎙️ 准备录音…',
+			description: '正在设置录音环境…',
 		});
 
 		const { data: deviceAcquisitionOutcome, error: startRecordingError } =
@@ -77,8 +77,8 @@ const startManualRecording = defineMutation({
 			case 'success': {
 				notify.success.execute({
 					id: toastId,
-					title: '🎙️ Whispering is recording...',
-					description: 'Speak now and stop recording when done',
+					title: '🎙️ Whispering 正在录音…',
+					description: '现在开始说话，完成后停止录音',
 				});
 				break;
 			}
@@ -92,12 +92,12 @@ const startManualRecording = defineMutation({
 					case 'no-device-selected': {
 						notify.info.execute({
 							id: toastId,
-							title: '🎙️ Switched to available microphone',
+							title: '🎙️ 已切换到可用麦克风',
 							description:
-								'No microphone was selected, so we automatically connected to an available one. You can update your selection in settings.',
+								'未选择麦克风，因此我们自动连接到了一个可用麦克风。你可以在设置中更新选择。',
 							action: {
 								type: 'link',
-								label: 'Open Settings',
+								label: '打开设置',
 								href: '/settings/recording',
 							},
 						});
@@ -106,12 +106,12 @@ const startManualRecording = defineMutation({
 					case 'preferred-device-unavailable': {
 						notify.info.execute({
 							id: toastId,
-							title: '🎙️ Switched to different microphone',
+							title: '🎙️ 已切换到其他麦克风',
 							description:
-								"Your previously selected microphone wasn't found, so we automatically connected to an available one.",
+								'未找到你之前选择的麦克风，因此我们自动连接到了一个可用麦克风。',
 							action: {
 								type: 'link',
-								label: 'Open Settings',
+								label: '打开设置',
 								href: '/settings/recording',
 							},
 						});
@@ -141,8 +141,8 @@ const stopManualRecording = defineMutation({
 		const toastId = nanoid();
 		notify.loading.execute({
 			id: toastId,
-			title: '⏸️ Stopping recording...',
-			description: 'Finalizing your audio capture...',
+			title: '⏸️ 正在停止录音…',
+			description: '正在完成音频采集…',
 		});
 
 		const { data, error: stopRecordingError } =
@@ -161,8 +161,8 @@ const stopManualRecording = defineMutation({
 
 		notify.success.execute({
 			id: toastId,
-			title: '🎙️ Recording stopped',
-			description: 'Your recording has been saved',
+			title: '🎙️ 录音已停止',
+			description: '你的录音已保存',
 		});
 		console.info('Recording stopped');
 		sound.playSoundIfEnabled.execute('manual-stop');
@@ -185,8 +185,8 @@ const stopManualRecording = defineMutation({
 			blob,
 			recordingId,
 			toastId,
-			completionTitle: '✨ Recording Complete!',
-			completionDescription: 'Recording saved and session closed successfully',
+			completionTitle: '✨ 录音完成！',
+			completionDescription: '录音已保存，会话已成功关闭',
 		});
 
 		return Ok(undefined);
@@ -203,23 +203,23 @@ const startVadRecording = defineMutation({
 		console.info('Starting voice activated capture');
 		notify.loading.execute({
 			id: toastId,
-			title: '🎙️ Starting voice activated capture',
-			description: 'Your voice activated capture is starting...',
+			title: '🎙️ 正在启动语音活动采集',
+			description: '语音活动采集正在启动…',
 		});
 		const { data: deviceAcquisitionOutcome, error: startActiveListeningError } =
 			await vadRecorder.startActiveListening({
 				onSpeechStart: () => {
 					notify.success.execute({
-						title: '🎙️ Speech started',
-						description: 'Recording started. Speak clearly and loudly.',
+						title: '🎙️ 已检测到说话',
+						description: '录音已开始。请清晰、大声地说话。',
 					});
 				},
 				onSpeechEnd: async (blob) => {
 					const toastId = nanoid();
 					notify.success.execute({
 						id: toastId,
-						title: '🎙️ Voice activated speech captured',
-						description: 'Your voice activated speech has been captured.',
+						title: '🎙️ 语音活动片段已采集',
+						description: '你的语音活动片段已采集。',
 					});
 					console.info('Voice activated speech captured');
 					sound.playSoundIfEnabled.execute('vad-capture');
@@ -234,9 +234,9 @@ const startVadRecording = defineMutation({
 					await processRecordingPipeline({
 						blob,
 						toastId,
-						completionTitle: '✨ Voice activated capture complete!',
+						completionTitle: '✨ 语音活动采集完成！',
 						completionDescription:
-							'Voice activated capture complete! Ready for another take',
+							'语音活动采集完成！可以开始下一段',
 					});
 				},
 			});
@@ -250,8 +250,8 @@ const startVadRecording = defineMutation({
 			case 'success': {
 				notify.success.execute({
 					id: toastId,
-					title: '🎙️ Voice activated capture started',
-					description: 'Your voice activated capture has been started.',
+					title: '🎙️ 语音活动采集已启动',
+					description: '你的语音活动采集已启动。',
 				});
 				break;
 			}
@@ -264,12 +264,12 @@ const startVadRecording = defineMutation({
 					case 'no-device-selected': {
 						notify.info.execute({
 							id: toastId,
-							title: '🎙️ VAD started with available microphone',
+							title: '🎙️ 语音活动检测已使用可用麦克风启动',
 							description:
-								'No microphone was selected for VAD, so we automatically connected to an available one. You can update your selection in settings.',
+								'未为语音活动检测选择麦克风，因此我们自动连接到了一个可用麦克风。你可以在设置中更新选择。',
 							action: {
 								type: 'link',
-								label: 'Open Settings',
+								label: '打开设置',
 								href: '/settings/recording',
 							},
 						});
@@ -278,12 +278,12 @@ const startVadRecording = defineMutation({
 					case 'preferred-device-unavailable': {
 						notify.info.execute({
 							id: toastId,
-							title: '🎙️ VAD switched to different microphone',
+							title: '🎙️ 语音活动检测已切换到其他麦克风',
 							description:
-								"Your previously selected VAD microphone wasn't found, so we automatically connected to an available one.",
+								'未找到你之前为语音活动检测选择的麦克风，因此我们自动连接到了一个可用麦克风。',
 							action: {
 								type: 'link',
-								label: 'Open Settings',
+								label: '打开设置',
 								href: '/settings/recording',
 							},
 						});
@@ -305,8 +305,8 @@ const stopVadRecording = defineMutation({
 		console.info('Stopping voice activated capture');
 		notify.loading.execute({
 			id: toastId,
-			title: '⏸️ Stopping voice activated capture...',
-			description: 'Finalizing your voice activated capture...',
+			title: '⏸️ 正在停止语音活动采集…',
+			description: '正在完成语音活动采集…',
 		});
 		const { error: stopVadError } = await vadRecorder.stopActiveListening();
 		if (stopVadError) {
@@ -315,8 +315,8 @@ const stopVadRecording = defineMutation({
 		}
 		notify.success.execute({
 			id: toastId,
-			title: '🎙️ Voice activated capture stopped',
-			description: 'Your voice activated capture has been stopped.',
+			title: '🎙️ 语音活动采集已停止',
+			description: '你的语音活动采集已停止。',
 		});
 		sound.playSoundIfEnabled.execute('vad-stop');
 		return Ok(undefined);
@@ -362,8 +362,8 @@ export const commands = {
 			const toastId = nanoid();
 			notify.loading.execute({
 				id: toastId,
-				title: '⏸️ Canceling recording...',
-				description: 'Cleaning up recording session...',
+				title: '⏸️ 正在取消录音…',
+				description: '正在清理录音会话…',
 			});
 			const { data: cancelRecordingResult, error: cancelRecordingError } =
 				await recorder.cancelRecording.execute({ toastId });
@@ -379,8 +379,8 @@ export const commands = {
 				case 'no-recording': {
 					notify.info.execute({
 						id: toastId,
-						title: 'No active recording',
-						description: 'There is no recording in progress to cancel.',
+						title: '没有进行中的录音',
+						description: '没有正在进行的录音可取消。',
 					});
 					break;
 				}
@@ -390,8 +390,8 @@ export const commands = {
 					manualRecordingStartTime = null;
 					notify.success.execute({
 						id: toastId,
-						title: '✅ All Done!',
-						description: 'Recording cancelled successfully',
+						title: '✅ 完成！',
+						description: '录音已成功取消',
 					});
 					sound.playSoundIfEnabled.execute('manual-cancel');
 					console.info('Recording cancelled');
@@ -437,14 +437,14 @@ export const commands = {
 
 			if (validFiles.length === 0) {
 				return DbServiceErr({
-					message: 'No valid audio or video files found.',
+					message: '未找到有效的音频或视频文件。',
 				});
 			}
 
 			if (invalidFiles.length > 0) {
 				notify.warning.execute({
-					title: '⚠️ Some files were skipped',
-					description: `${invalidFiles.length} file(s) were not audio or video files`,
+					title: '⚠️ 已跳过部分文件',
+					description: `${invalidFiles.length} 个文件不是音频或视频文件`,
 				});
 			}
 
@@ -465,7 +465,7 @@ export const commands = {
 					await processRecordingPipeline({
 						blob: audioBlob,
 						toastId,
-						completionTitle: '📁 File uploaded successfully!',
+						completionTitle: '📁 文件上传成功！',
 						completionDescription: file.name,
 					});
 				}),
@@ -497,11 +497,11 @@ export const commands = {
 
 			if (!transformationId) {
 				return WhisperingErr({
-					title: '⚠️ No transformation selected',
-					description: 'Please select a transformation in settings first.',
+					title: '⚠️ 未选择转换',
+					description: '请先在设置中选择一个转换。',
 					action: {
 						type: 'link',
-						label: 'Select a transformation',
+						label: '选择一个转换',
 						href: '/transformations',
 					},
 				});
@@ -513,7 +513,7 @@ export const commands = {
 
 			if (getTransformationError) {
 				return WhisperingErr({
-					title: '❌ Failed to get transformation',
+					title: '❌ 获取转换失败',
 					serviceError: getTransformationError,
 				});
 			}
@@ -521,12 +521,12 @@ export const commands = {
 			if (!transformation) {
 				settings.updateKey('transformations.selectedTransformationId', null);
 				return WhisperingErr({
-					title: '⚠️ Transformation not found',
+					title: '⚠️ 未找到转换',
 					description:
-						'The selected transformation no longer exists. Please select a different one.',
+						'所选转换已不存在。请选择其他转换。',
 					action: {
 						type: 'link',
-						label: 'Select a transformation',
+						label: '选择其他转换',
 						href: '/transformations',
 					},
 				});
@@ -538,15 +538,15 @@ export const commands = {
 
 			if (readClipboardError) {
 				return WhisperingErr({
-					title: '❌ Failed to read clipboard',
+					title: '❌ 读取剪贴板失败',
 					serviceError: readClipboardError,
 				});
 			}
 
 			if (!clipboardText?.trim()) {
 				return WhisperingErr({
-					title: '📋 Empty clipboard',
-					description: 'Please copy some text before running a transformation.',
+					title: '📋 剪贴板为空',
+					description: '请在运行转换前复制一些文本。',
 				});
 			}
 
@@ -554,8 +554,8 @@ export const commands = {
 			const toastId = nanoid();
 			notify.loading.execute({
 				id: toastId,
-				title: '🔄 Running transformation...',
-				description: 'Transforming your clipboard text...',
+				title: '🔄 正在运行转换…',
+				description: '正在转换你的剪贴板文本…',
 			});
 
 			const { data: output, error: transformError } =
@@ -636,7 +636,7 @@ async function processRecordingPipeline({
 		notify.error.execute({
 			id: toastId,
 			title:
-				'❌ Your recording was captured but could not be saved to the database.',
+				'❌ 你的录音已采集但无法保存到数据库。',
 			description: createRecordingError.message,
 			action: { type: 'more-details', error: createRecordingError },
 		});
@@ -652,8 +652,8 @@ async function processRecordingPipeline({
 	const transcribeToastId = nanoid();
 	notify.loading.execute({
 		id: transcribeToastId,
-		title: '📋 Transcribing...',
-		description: 'Your recording is being transcribed...',
+		title: '📋 正在转录…',
+		description: '你的录音正在转录…',
 	});
 
 	const { data: transcribedText, error: transcribeError } =
@@ -666,8 +666,8 @@ async function processRecordingPipeline({
 		}
 		notify.error.execute({
 			id: transcribeToastId,
-			title: '❌ Failed to transcribe recording',
-			description: 'Your recording could not be transcribed.',
+			title: '❌ 转录录音失败',
+			description: '你的录音无法转录。',
 			action: { type: 'more-details', error: transcribeError },
 		});
 		return;
@@ -693,7 +693,7 @@ async function processRecordingPipeline({
 
 	if (getTransformationError) {
 		notify.error.execute({
-			title: '❌ Failed to get transformation',
+			title: '❌ 获取转换失败',
 			description: getTransformationError.message,
 			action: {
 				type: 'more-details',
@@ -706,12 +706,12 @@ async function processRecordingPipeline({
 	if (transformationNoLongerExists) {
 		settings.updateKey('transformations.selectedTransformationId', null);
 		notify.warning.execute({
-			title: '⚠️ No matching transformation found',
+			title: '⚠️ 未找到匹配的转换',
 			description:
-				'No matching transformation found. Please select a different transformation.',
+				'未找到匹配的转换。请选择其他转换。',
 			action: {
 				type: 'link',
-				label: 'Select a different transformation',
+				label: '选择其他转换',
 				href: '/transformations',
 			},
 		});
@@ -721,9 +721,9 @@ async function processRecordingPipeline({
 	const transformToastId = nanoid();
 	notify.loading.execute({
 		id: transformToastId,
-		title: '🔄 Running transformation...',
+		title: '🔄 正在运行转换…',
 		description:
-			'Applying your selected transformation to the transcribed text...',
+			'正在将所选转换应用到转录文本…',
 	});
 	const { data: transformationRun, error: transformError } =
 		await transformer.transformRecording.execute({
@@ -738,7 +738,7 @@ async function processRecordingPipeline({
 	if (transformationRun.status === 'failed') {
 		notify.error.execute({
 			id: transformToastId,
-			title: '⚠️ Transformation error',
+			title: '⚠️ 转换错误',
 			description: transformationRun.error,
 			action: { type: 'more-details', error: transformationRun.error },
 		});

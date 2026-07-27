@@ -168,7 +168,7 @@ export const Settings = type({
 
 	'transcription.selectedTranscriptionService': type
 		.enumerated(...TRANSCRIPTION_SERVICE_IDS)
-		.default('moonshine'),
+		.default('whispercpp'), // [self-build] default to whisper.cpp (multilingual, supports Chinese; moonshine is English-only)
 	// Shared settings in transcription
 	'transcription.outputLanguage': type
 		.enumerated(...SUPPORTED_LANGUAGES)
@@ -201,7 +201,9 @@ export const Settings = type({
 	'transcription.speaches.modelId': type('string').default(
 		'Systran/faster-distil-whisper-small.en',
 	),
-	'transcription.whispercpp.modelPath': "string = ''",
+	'transcription.whispercpp.modelPath': type('string').default(
+		'/home/steven/.local/share/com.bradenwong.whispering/models/whisper/ggml-small.bin',
+	), // [self-build] default to pre-staged ggml-small.bin (good Chinese recognition)
 	'transcription.parakeet.modelPath': "string = ''",
 	'transcription.moonshine.modelPath': "string = ''",
 
@@ -296,7 +298,7 @@ export function getDefaultSettings(): Settings {
 	const result = Settings({});
 	if (result instanceof type.errors) {
 		// This should never happen since all fields have defaults
-		throw new Error(`Failed to get default settings: ${result.summary}`);
+		throw new Error(`获取默认设置失败:${result.summary}`);
 	}
 	return result;
 }

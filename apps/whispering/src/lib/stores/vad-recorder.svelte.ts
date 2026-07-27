@@ -50,7 +50,7 @@ function createVadRecorder() {
 				const { data, error } = await enumerateDevices();
 				if (error) {
 					return WhisperingErr({
-						title: '❌ Failed to enumerate devices',
+						title: '❌ 枚举设备失败',
 						serviceError: error,
 					});
 				}
@@ -76,8 +76,8 @@ function createVadRecorder() {
 			// Prevent starting if already active
 			if (_maybeVad) {
 				return WhisperingErr({
-					title: '⚠️ VAD already active',
-					description: 'Stop the current session before starting a new one.',
+					title: '⚠️ VAD 已在运行',
+					description: '请先停止当前会话,再开始新的。',
 				});
 			}
 
@@ -97,7 +97,7 @@ function createVadRecorder() {
 
 			if (streamError) {
 				return WhisperingErr({
-					title: '❌ Failed to get recording stream',
+					title: '❌ 获取录音流失败',
 					serviceError: streamError,
 				});
 			}
@@ -132,9 +132,9 @@ function createVadRecorder() {
 					}),
 				catch: (error) =>
 					WhisperingErr({
-						title: '❌ Failed to initialize VAD',
+						title: '❌ 初始化 VAD 失败',
 						description:
-							'Voice activity detection could not be started. Your microphone may be in use by another application.',
+							'语音活动检测无法启动。您的麦克风可能正被其他应用程序占用。',
 						action: { type: 'more-details', error },
 					}),
 			});
@@ -151,8 +151,8 @@ function createVadRecorder() {
 				try: () => newVad.start(),
 				catch: (error) =>
 					WhisperingErr({
-						title: '❌ Failed to start VAD',
-						description: `Failed to start Voice Activity Detector. ${extractErrorMessage(error)}`,
+						title: '❌ 启动 VAD 失败',
+						description: `启动语音活动检测器失败。${extractErrorMessage(error)}`,
 						action: { type: 'more-details', error },
 					}),
 			});
@@ -186,8 +186,8 @@ function createVadRecorder() {
 				try: () => vadInstance.destroy(),
 				catch: (error) =>
 					WhisperingErr({
-						title: '❌ Failed to stop VAD',
-						description: `Failed to stop Voice Activity Detector. ${extractErrorMessage(error)}`,
+						title: '❌ 停止 VAD 失败',
+						description: `停止语音活动检测器失败。${extractErrorMessage(error)}`,
 						action: { type: 'more-details', error },
 					}),
 			});

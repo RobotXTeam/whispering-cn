@@ -14,7 +14,7 @@
 
 	let {
 		id = 'transcription-service',
-		label = 'Transcription Service',
+		label = '转录服务',
 		selected = $bindable(),
 		class: className,
 		disabled = false,
@@ -77,14 +77,14 @@
 					{@render renderServiceIcon(selectedService)}
 					<span>{selectedService.name}</span>
 				{:else}
-					<span>Select a transcription service</span>
+					<span>选择转录服务</span>
 				{/if}
 			</div>
 		</Select.Trigger>
 		<Select.Content class="max-h-[400px]">
 			{#if localServices.length > 0}
 				<Select.Group>
-					<Select.GroupHeading>Local (Offline)</Select.GroupHeading>
+					<Select.GroupHeading>本地（离线）</Select.GroupHeading>
 					{#each localServices as service}
 						<Select.Item value={service.id} label={service.name}>
 							<div class="flex items-start gap-3 py-1">
@@ -94,7 +94,7 @@
 								<div class="flex-1 min-w-0">
 									<div class="flex items-center gap-2">
 										<span class="font-medium">{service.name}</span>
-										<Badge variant="secondary" class="text-xs">Local</Badge>
+										<Badge variant="secondary" class="text-xs">本地</Badge>
 									</div>
 									{#if service.description}
 										<div class="text-xs text-muted-foreground mt-1">
@@ -113,7 +113,7 @@
 					<Select.Separator />
 				{/if}
 				<Select.Group>
-					<Select.GroupHeading>Cloud (API)</Select.GroupHeading>
+					<Select.GroupHeading>云端（API）</Select.GroupHeading>
 					{#each cloudServices as service}
 						<Select.Item value={service.id} label={service.name}>
 							<div class="flex items-start gap-3 py-1">
@@ -132,9 +132,7 @@
 									{/if}
 									{#if service.location === 'cloud' && service.models.length > 0}
 										<div class="text-xs text-muted-foreground mt-1">
-											{service.models.length} model{service.models.length > 1
-												? 's'
-												: ''} available
+											{service.models.length} 个模型可用
 										</div>
 									{/if}
 								</div>
@@ -149,7 +147,7 @@
 					<Select.Separator />
 				{/if}
 				<Select.Group>
-					<Select.GroupHeading>Self-Hosted</Select.GroupHeading>
+					<Select.GroupHeading>自托管</Select.GroupHeading>
 					{#each selfHostedServices as service}
 						<Select.Item value={service.id} label={service.name}>
 							<div class="flex items-start gap-3 py-1">
@@ -159,7 +157,7 @@
 								<div class="flex-1 min-w-0">
 									<div class="flex items-center gap-2">
 										<span class="font-medium">{service.name}</span>
-										<Badge variant="outline" class="text-xs">Self-Hosted</Badge>
+										<Badge variant="outline" class="text-xs">自托管</Badge>
 									</div>
 									{#if service.description}
 										<div class="text-xs text-muted-foreground mt-1">

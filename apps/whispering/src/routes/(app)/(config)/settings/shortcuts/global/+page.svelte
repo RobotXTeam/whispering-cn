@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>Global Shortcuts - Whispering</title>
+	<title>全局快捷键 - Whispering</title>
 </svelte:head>
 
 {#if window.__TAURI_INTERNALS__}
@@ -22,14 +22,12 @@
 			<header class="space-y-1">
 				<div class="flex items-center gap-2">
 					<h2 class="text-xl font-semibold tracking-tight sm:text-2xl">
-						Global Shortcuts
+						全局快捷键
 					</h2>
 					<ShortcutFormatHelp type="global" />
 				</div>
 				<p class="text-sm text-muted-foreground">
-					Set system-wide keyboard shortcuts that work even when Whispering is
-					not in focus. These shortcuts will trigger from anywhere on your
-					system.
+					设置系统级键盘快捷键，即使 Whispering 未聚焦也能生效。这些快捷键可从系统任何位置触发。
 				</p>
 			</header>
 			<Button
@@ -39,14 +37,14 @@
 					await desktopRpc.globalShortcuts.unregisterAll.execute();
 					settings.resetGlobalShortcuts();
 					rpc.notify.success.execute({
-						title: 'Shortcuts reset',
-						description: 'All global shortcuts have been reset to defaults.',
+						title: '快捷键已重置',
+						description: '所有全局快捷键已重置为默认值。',
 					});
 				}}
 				class="shrink-0"
 			>
 				<RotateCcw class="size-4" />
-				Reset to defaults
+				重置为默认值
 			</Button>
 		</div>
 
@@ -58,14 +56,12 @@
 	<div class="rounded-lg border bg-card text-card-foreground shadow-sm">
 		<div class="flex flex-col items-center justify-center p-8 text-center">
 			<Layers2Icon class="mb-4 size-10 text-muted-foreground" />
-			<h3 class="mb-2 text-xl font-medium">Global Shortcuts</h3>
+			<h3 class="mb-2 text-xl font-medium">全局快捷键</h3>
 			<p class="mb-6 max-w-md text-sm text-muted-foreground">
-				Global shortcuts allow you to use Whispering from any application on
-				your computer. This feature is only available in the desktop app or
-				browser extension.
+				全局快捷键让你可以从电脑上的任何应用使用 Whispering。此功能仅在桌面应用或浏览器扩展中可用。
 			</p>
 			<Link href="/desktop-app" class={buttonVariants()}>
-				Enable Global Shortcuts
+				启用全局快捷键
 			</Link>
 		</div>
 	</div>

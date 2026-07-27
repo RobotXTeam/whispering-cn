@@ -23,7 +23,7 @@ export function createPermissionsService() {
 					},
 					catch: (error) =>
 						PermissionsServiceErr({
-							message: `Failed to check accessibility permissions: ${extractErrorMessage(error)}`,
+							message: `检查无障碍权限失败:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -40,7 +40,7 @@ export function createPermissionsService() {
 					},
 					catch: (error) =>
 						PermissionsServiceErr({
-							message: `Failed to request accessibility permissions: ${extractErrorMessage(error)}`,
+							message: `请求无障碍权限失败:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -59,7 +59,7 @@ export function createPermissionsService() {
 					},
 					catch: (error) =>
 						PermissionsServiceErr({
-							message: `Failed to check microphone permissions: ${extractErrorMessage(error)}`,
+							message: `检查麦克风权限失败:${extractErrorMessage(error)}`,
 						}),
 				});
 			},
@@ -76,7 +76,7 @@ export function createPermissionsService() {
 					},
 					catch: (error) =>
 						PermissionsServiceErr({
-							message: `Failed to request microphone permissions: ${extractErrorMessage(error)}`,
+							message: `请求麦克风权限失败:${extractErrorMessage(error)}`,
 						}),
 				});
 			},

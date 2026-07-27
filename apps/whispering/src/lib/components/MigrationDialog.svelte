@@ -333,7 +333,7 @@
 			}> {
 				const startTime = performance.now();
 				onProgress(
-					`Starting to seed IndexedDB with ${recordingCount} recordings, ${transformationCount} transformations, and ${runCount} runs...`,
+					`开始用 ${recordingCount} 条录音记录、${transformationCount} 个转换和 ${runCount} 次运行填充 IndexedDB...`,
 				);
 
 				// Use the DbService interface
@@ -342,13 +342,13 @@
 				const baseTimestamp = new Date();
 
 				// Generate recordings
-				onProgress(`Generating ${recordingCount} mock recordings...`);
+				onProgress(`生成 ${recordingCount} 条模拟录音记录...`);
 				const recordings: RecordingStoredInIndexedDB[] = [];
 				for (let i = 0; i < recordingCount; i++) {
 					recordings.push(_generateMockRecording({ index: i, baseTimestamp }));
 
 					if ((i + 1) % 1000 === 0) {
-						onProgress(`Generated ${i + 1}/${recordingCount} recordings`);
+						onProgress(`已生成 ${i + 1}/${recordingCount} 条录音记录`);
 					}
 				}
 
@@ -366,40 +366,40 @@
 				});
 
 				// Bulk insert recordings
-				onProgress('Inserting recordings into IndexedDB...');
+				onProgress('正在将录音记录插入 IndexedDB...');
 				const { error: recordingsError } =
 					await db.recordings.create(recordingParams);
 				if (recordingsError) {
 					throw new Error(
-						`Failed to insert recordings: ${recordingsError.message}`,
+						`插入录音记录失败:${recordingsError.message}`,
 					);
 				}
-				onProgress(`✓ Inserted ${recordings.length} recordings`);
+				onProgress(`✓ 已插入 ${recordings.length} 条录音记录`);
 
 				const recordingIds = recordings.map((r) => r.id);
 
 				// Generate transformations
-				onProgress(`Generating ${transformationCount} mock transformations...`);
+				onProgress(`生成 ${transformationCount} 个模拟转换...`);
 				const transformations: Transformation[] = [];
 				for (let i = 0; i < transformationCount; i++) {
 					transformations.push(_generateMockTransformation({ index: i }));
 				}
 
 				// Bulk insert transformations
-				onProgress('Inserting transformations into IndexedDB...');
+				onProgress('正在将转换插入 IndexedDB...');
 				const { error: transformationsError } =
 					await db.transformations.create(transformations);
 				if (transformationsError) {
 					throw new Error(
-						`Failed to insert transformations: ${transformationsError.message}`,
+						`插入转换失败:${transformationsError.message}`,
 					);
 				}
-				onProgress(`✓ Inserted ${transformations.length} transformations`);
+				onProgress(`✓ 已插入 ${transformations.length} 个转换`);
 
 				const transformationIds = transformations.map((t) => t.id);
 
 				// Generate transformation runs
-				onProgress(`Generating ${runCount} mock transformation runs...`);
+				onProgress(`生成 ${runCount} 次模拟转换运行...`);
 				const runs: TransformationRun[] = [];
 				for (let i = 0; i < runCount; i++) {
 					runs.push(
@@ -411,27 +411,27 @@
 					);
 
 					if ((i + 1) % 100 === 0) {
-						onProgress(`Generated ${i + 1}/${runCount} runs`);
+						onProgress(`已生成 ${i + 1}/${runCount} 次运行`);
 					}
 				}
 
 				// Bulk insert runs
-				onProgress('Inserting transformation runs into IndexedDB...');
+				onProgress('正在将转换运行插入 IndexedDB...');
 				const { error: runsError } = await db.runs.create(runs);
 				if (runsError) {
 					throw new Error(
-						`Failed to insert transformation runs: ${runsError.message}`,
+						`插入转换运行失败:${runsError.message}`,
 					);
 				}
-				onProgress(`✓ Inserted ${runs.length} transformation runs`);
+				onProgress(`✓ 已插入 ${runs.length} 次转换运行`);
 
 				const endTime = performance.now();
 				const duration = ((endTime - startTime) / 1000).toFixed(2);
 
-				onProgress(`✓ Seeding complete in ${duration}s!`);
-				onProgress(`  - ${recordings.length} recordings`);
-				onProgress(`  - ${transformations.length} transformations`);
-				onProgress(`  - ${runs.length} transformation runs`);
+				onProgress(`✓ 填充完成,用时 ${duration}s!`);
+				onProgress(`  - ${recordings.length} 条录音记录`);
+				onProgress(`  - ${transformations.length} 个转换`);
+				onProgress(`  - ${runs.length} 次转换运行`);
 
 				return {
 					recordings: recordings.length,
@@ -448,7 +448,7 @@
 			}: {
 				onProgress: (message: string) => void;
 			}): Promise<void> {
-				onProgress('Clearing IndexedDB...');
+				onProgress('正在清空 IndexedDB...');
 
 				const db = createDbServiceWeb({ DownloadService: DownloadServiceLive });
 
@@ -463,26 +463,26 @@
 				// Check for errors
 				if (recordingsResult.error) {
 					throw new Error(
-						`Failed to clear recordings: ${recordingsResult.error.message}`,
+						`清空录音记录失败:${recordingsResult.error.message}`,
 					);
 				}
-				onProgress('✓ Cleared recordings');
+				onProgress('✓ 已清空录音记录');
 
 				if (transformationsResult.error) {
 					throw new Error(
-						`Failed to clear transformations: ${transformationsResult.error.message}`,
+						`清空转换失败:${transformationsResult.error.message}`,
 					);
 				}
-				onProgress('✓ Cleared transformations');
+				onProgress('✓ 已清空转换');
 
 				if (runsResult.error) {
 					throw new Error(
-						`Failed to clear transformation runs: ${runsResult.error.message}`,
+						`清空转换运行失败:${runsResult.error.message}`,
 					);
 				}
-				onProgress('✓ Cleared transformation runs');
+				onProgress('✓ 已清空转换运行');
 
-				onProgress('✓ IndexedDB cleared successfully');
+				onProgress('✓ IndexedDB 已成功清空');
 			},
 		};
 	}
@@ -526,7 +526,7 @@
 
 			return tryAsync({
 				try: async () => {
-					onProgress('[Migration] Starting recordings migration (IDB → FS)...');
+					onProgress('[Migration] 开始录音记录迁移(IDB → FS)...');
 
 					// Get all recordings from source
 					const { data: recordings, error: getError } =
@@ -537,7 +537,7 @@
 					}
 
 					if (!recordings || recordings.length === 0) {
-						onProgress('[Migration] No recordings to migrate');
+						onProgress('[Migration] 没有录音记录需要迁移');
 						return {
 							total: 0,
 							succeeded: 0,
@@ -552,8 +552,8 @@
 					let failed = 0;
 					let skipped = 0;
 
-					onProgress(`[Migration] Found ${total} recordings in IndexedDB`);
-					onProgress(`[Migration] Processing in batches of ${BATCH_SIZE}...`);
+					onProgress(`[Migration] 在 IndexedDB 中找到 ${total} 条录音记录`);
+					onProgress(`[Migration] 分批处理,每批 ${BATCH_SIZE} 条...`);
 
 					// Process in batches
 					for (let i = 0; i < recordings.length; i += BATCH_SIZE) {
@@ -562,7 +562,7 @@
 						const totalBatches = Math.ceil(recordings.length / BATCH_SIZE);
 
 						onProgress(
-							`[Migration] Processing batch ${batchNumber}/${totalBatches} (${batch.length} items)...`,
+							`[Migration] 正在处理第 ${batchNumber}/${totalBatches} 批(共 ${batch.length} 项)...`,
 						);
 
 						for (const recording of batch) {
@@ -580,11 +580,11 @@
 
 								if (deleteError) {
 									onProgress(
-										`[Migration] ⚠️  Warning: Failed to delete skipped recording ${recording.id} from IndexedDB`,
+										`[Migration] ⚠️  警告:无法从 IndexedDB 删除跳过的录音记录 ${recording.id}`,
 									);
 								} else {
 									onProgress(
-										`[Migration] ✓ Deleted skipped recording ${recording.id} from IndexedDB`,
+										`[Migration] ✓ 已从 IndexedDB 删除跳过的录音记录 ${recording.id}`,
 									);
 								}
 
@@ -597,7 +597,7 @@
 
 							if (audioError || !audio) {
 								onProgress(
-									`[Migration] ⚠️  Failed to get audio for recording ${recording.id}`,
+									`[Migration] ⚠️  无法获取录音记录 ${recording.id} 的音频`,
 								);
 								failed++;
 								continue;
@@ -612,7 +612,7 @@
 
 							if (createError) {
 								onProgress(
-									`[Migration] ⚠️  Failed to create recording ${recording.id} in file system`,
+									`[Migration] ⚠️  无法在文件系统中创建录音记录 ${recording.id}`,
 								);
 								failed++;
 								continue;
@@ -624,11 +624,11 @@
 
 							if (deleteError) {
 								onProgress(
-									`[Migration] ⚠️  Warning: Failed to delete recording ${recording.id} from IndexedDB after migration`,
+									`[Migration] ⚠️  警告:迁移后无法从 IndexedDB 删除录音记录 ${recording.id}`,
 								);
 							} else {
 								onProgress(
-									`[Migration] ✓ Deleted recording ${recording.id} from IndexedDB`,
+									`[Migration] ✓ 已从 IndexedDB 删除录音记录 ${recording.id}`,
 								);
 							}
 
@@ -639,7 +639,7 @@
 						// Log batch completion
 						const processed = Math.min(i + BATCH_SIZE, recordings.length);
 						onProgress(
-							`[Migration] Progress: ${processed}/${total} processed (${succeeded} succeeded, ${failed} failed, ${skipped} skipped)`,
+							`[Migration] 进度:已处理 ${processed}/${total}(成功 ${succeeded},失败 ${failed},跳过 ${skipped})`,
 						);
 					}
 
@@ -648,12 +648,12 @@
 
 					onProgress('[Migration] ==========================================');
 					onProgress(
-						`[Migration] Recordings migration complete in ${duration.toFixed(2)}s`,
+						`[Migration] 录音记录迁移完成,用时 ${duration.toFixed(2)}s`,
 					);
 					onProgress(
-						`[Migration] Total: ${total} | Succeeded: ${succeeded} | Failed: ${failed} | Skipped: ${skipped}`,
+						`[Migration] 总数:${total} | 成功:${succeeded} | 失败:${failed} | 跳过:${skipped}`,
 					);
-					onProgress(`[Migration] Success rate: ${successRate}%`);
+					onProgress(`[Migration] 成功率:${successRate}%`);
 					onProgress('[Migration] ==========================================');
 
 					return {
@@ -666,10 +666,10 @@
 				},
 				catch: (error) => {
 					onProgress(
-						`[Migration] ❌ Error: ${error instanceof Error ? error.message : String(error)}`,
+						`[Migration] ❌ 错误:${error instanceof Error ? error.message : String(error)}`,
 					);
 					throw DbServiceErr({
-						message: 'Failed to migrate recordings',
+						message: '录音记录迁移失败',
 					});
 				},
 			});
@@ -693,7 +693,7 @@
 			return tryAsync({
 				try: async () => {
 					onProgress(
-						'[Migration] Starting transformations migration (IDB → FS)...',
+						'[Migration] 开始转换迁移(IDB → FS)...',
 					);
 
 					// Get all transformations from source
@@ -705,7 +705,7 @@
 					}
 
 					if (!transformations || transformations.length === 0) {
-						onProgress('[Migration] No transformations to migrate');
+						onProgress('[Migration] 没有转换需要迁移');
 						return {
 							total: 0,
 							succeeded: 0,
@@ -720,8 +720,8 @@
 					let failed = 0;
 					let skipped = 0;
 
-					onProgress(`[Migration] Found ${total} transformations in IndexedDB`);
-					onProgress(`[Migration] Processing in batches of ${BATCH_SIZE}...`);
+					onProgress(`[Migration] 在 IndexedDB 中找到 ${total} 个转换`);
+					onProgress(`[Migration] 分批处理,每批 ${BATCH_SIZE} 条...`);
 
 					// Process in batches
 					for (let i = 0; i < transformations.length; i += BATCH_SIZE) {
@@ -730,7 +730,7 @@
 						const totalBatches = Math.ceil(transformations.length / BATCH_SIZE);
 
 						onProgress(
-							`[Migration] Processing batch ${batchNumber}/${totalBatches} (${batch.length} items)...`,
+							`[Migration] 正在处理第 ${batchNumber}/${totalBatches} 批(共 ${batch.length} 项)...`,
 						);
 
 						for (const transformation of batch) {
@@ -747,11 +747,11 @@
 
 								if (deleteError) {
 									onProgress(
-										`[Migration] ⚠️  Warning: Failed to delete skipped transformation ${transformation.id} from IndexedDB`,
+										`[Migration] ⚠️  警告:无法从 IndexedDB 删除跳过的转换 ${transformation.id}`,
 									);
 								} else {
 									onProgress(
-										`[Migration] ✓ Deleted skipped transformation ${transformation.id} from IndexedDB`,
+										`[Migration] ✓ 已从 IndexedDB 删除跳过的转换 ${transformation.id}`,
 									);
 								}
 
@@ -764,7 +764,7 @@
 
 							if (createError) {
 								onProgress(
-									`[Migration] ⚠️  Failed to create transformation ${transformation.id} in file system`,
+									`[Migration] ⚠️  无法在文件系统中创建转换 ${transformation.id}`,
 								);
 								failed++;
 								continue;
@@ -776,11 +776,11 @@
 
 							if (deleteError) {
 								onProgress(
-									`[Migration] ⚠️  Warning: Failed to delete transformation ${transformation.id} from IndexedDB after migration`,
+									`[Migration] ⚠️  警告:迁移后无法从 IndexedDB 删除转换 ${transformation.id}`,
 								);
 							} else {
 								onProgress(
-									`[Migration] ✓ Deleted transformation ${transformation.id} from IndexedDB`,
+									`[Migration] ✓ 已从 IndexedDB 删除转换 ${transformation.id}`,
 								);
 							}
 
@@ -791,7 +791,7 @@
 						// Log batch completion
 						const processed = Math.min(i + BATCH_SIZE, transformations.length);
 						onProgress(
-							`[Migration] Progress: ${processed}/${total} processed (${succeeded} succeeded, ${failed} failed, ${skipped} skipped)`,
+							`[Migration] 进度:已处理 ${processed}/${total}(成功 ${succeeded},失败 ${failed},跳过 ${skipped})`,
 						);
 					}
 
@@ -800,12 +800,12 @@
 
 					onProgress('[Migration] ==========================================');
 					onProgress(
-						`[Migration] Transformations migration complete in ${duration.toFixed(2)}s`,
+						`[Migration] 转换迁移完成,用时 ${duration.toFixed(2)}s`,
 					);
 					onProgress(
-						`[Migration] Total: ${total} | Succeeded: ${succeeded} | Failed: ${failed} | Skipped: ${skipped}`,
+						`[Migration] 总数:${total} | 成功:${succeeded} | 失败:${failed} | 跳过:${skipped}`,
 					);
-					onProgress(`[Migration] Success rate: ${successRate}%`);
+					onProgress(`[Migration] 成功率:${successRate}%`);
 					onProgress('[Migration] ==========================================');
 
 					return {
@@ -818,10 +818,10 @@
 				},
 				catch: (error) => {
 					onProgress(
-						`[Migration] ❌ Error: ${error instanceof Error ? error.message : String(error)}`,
+						`[Migration] ❌ 错误:${error instanceof Error ? error.message : String(error)}`,
 					);
 					throw DbServiceErr({
-						message: 'Failed to migrate transformations',
+						message: '转换迁移失败',
 					});
 				},
 			});
@@ -845,7 +845,7 @@
 			return tryAsync({
 				try: async () => {
 					onProgress(
-						'[Migration] Starting transformation runs migration (IDB → FS)...',
+						'[Migration] 开始转换运行迁移(IDB → FS)...',
 					);
 
 					// Get all runs from source
@@ -856,7 +856,7 @@
 					}
 
 					if (!runs || runs.length === 0) {
-						onProgress('[Migration] No transformation runs to migrate');
+						onProgress('[Migration] 没有转换运行需要迁移');
 						return {
 							total: 0,
 							succeeded: 0,
@@ -872,9 +872,9 @@
 					let skipped = 0;
 
 					onProgress(
-						`[Migration] Found ${total} transformation runs in IndexedDB`,
+						`[Migration] 在 IndexedDB 中找到 ${total} 次转换运行`,
 					);
-					onProgress(`[Migration] Processing in batches of ${BATCH_SIZE}...`);
+					onProgress(`[Migration] 分批处理,每批 ${BATCH_SIZE} 条...`);
 
 					// Process in batches
 					for (let i = 0; i < runs.length; i += BATCH_SIZE) {
@@ -883,7 +883,7 @@
 						const totalBatches = Math.ceil(runs.length / BATCH_SIZE);
 
 						onProgress(
-							`[Migration] Processing batch ${batchNumber}/${totalBatches} (${batch.length} items)...`,
+							`[Migration] 正在处理第 ${batchNumber}/${totalBatches} 批(共 ${batch.length} 项)...`,
 						);
 
 						for (const run of batch) {
@@ -900,11 +900,11 @@
 
 								if (deleteError) {
 									onProgress(
-										`[Migration] ⚠️  Warning: Failed to delete skipped transformation run ${run.id} from IndexedDB`,
+										`[Migration] ⚠️  警告:无法从 IndexedDB 删除跳过的转换运行 ${run.id}`,
 									);
 								} else {
 									onProgress(
-										`[Migration] ✓ Deleted skipped transformation run ${run.id} from IndexedDB`,
+										`[Migration] ✓ 已从 IndexedDB 删除跳过的转换运行 ${run.id}`,
 									);
 								}
 
@@ -917,7 +917,7 @@
 
 							if (createError) {
 								onProgress(
-									`[Migration] ⚠️  Failed to create transformation run ${run.id} in file system`,
+									`[Migration] ⚠️  无法在文件系统中创建转换运行 ${run.id}`,
 								);
 								failed++;
 								continue;
@@ -928,11 +928,11 @@
 
 							if (deleteError) {
 								onProgress(
-									`[Migration] ⚠️  Warning: Failed to delete transformation run ${run.id} from IndexedDB after migration`,
+									`[Migration] ⚠️  警告:迁移后无法从 IndexedDB 删除转换运行 ${run.id}`,
 								);
 							} else {
 								onProgress(
-									`[Migration] ✓ Deleted transformation run ${run.id} from IndexedDB`,
+									`[Migration] ✓ 已从 IndexedDB 删除转换运行 ${run.id}`,
 								);
 							}
 
@@ -943,7 +943,7 @@
 						// Log batch completion
 						const processed = Math.min(i + BATCH_SIZE, runs.length);
 						onProgress(
-							`[Migration] Progress: ${processed}/${total} processed (${succeeded} succeeded, ${failed} failed, ${skipped} skipped)`,
+							`[Migration] 进度:已处理 ${processed}/${total}(成功 ${succeeded},失败 ${failed},跳过 ${skipped})`,
 						);
 					}
 
@@ -952,12 +952,12 @@
 
 					onProgress('[Migration] ==========================================');
 					onProgress(
-						`[Migration] Transformation runs migration complete in ${duration.toFixed(2)}s`,
+						`[Migration] 转换运行迁移完成,用时 ${duration.toFixed(2)}s`,
 					);
 					onProgress(
-						`[Migration] Total: ${total} | Succeeded: ${succeeded} | Failed: ${failed} | Skipped: ${skipped}`,
+						`[Migration] 总数:${total} | 成功:${succeeded} | 失败:${failed} | 跳过:${skipped}`,
 					);
-					onProgress(`[Migration] Success rate: ${successRate}%`);
+					onProgress(`[Migration] 成功率:${successRate}%`);
 					onProgress('[Migration] ==========================================');
 
 					return {
@@ -970,10 +970,10 @@
 				},
 				catch: (error) => {
 					onProgress(
-						`[Migration] ❌ Error: ${error instanceof Error ? error.message : String(error)}`,
+						`[Migration] ❌ 错误:${error instanceof Error ? error.message : String(error)}`,
 					);
 					throw DbServiceErr({
-						message: 'Failed to migrate transformation runs',
+						message: '转换运行迁移失败',
 					});
 				},
 			});
@@ -1035,7 +1035,7 @@
 				},
 				catch: (error) => {
 					throw DbServiceErr({
-						message: 'Failed to get migration counts',
+						message: '获取迁移计数失败',
 					});
 				},
 			});
@@ -1050,7 +1050,7 @@
 		}
 
 		async function refreshCounts() {
-			_addLog('[Counts] Loading item counts from both systems...');
+			_addLog('[Counts] 正在从两个系统加载项目计数...');
 
 			const { data, error } = await _getMigrationCounts(
 				indexedDb,
@@ -1058,16 +1058,16 @@
 			);
 
 			if (error) {
-				_addLog(`[Counts] ❌ Error: ${error.message}`);
+				_addLog(`[Counts] ❌ 错误:${error.message}`);
 				return;
 			}
 
 			counts = data;
 			_addLog(
-				`[Counts] IndexedDB: ${data.indexedDb.recordings} recordings, ${data.indexedDb.transformations} transformations, ${data.indexedDb.runs} runs`,
+				`[Counts] IndexedDB:${data.indexedDb.recordings} 条录音记录,${data.indexedDb.transformations} 个转换,${data.indexedDb.runs} 次运行`,
 			);
 			_addLog(
-				`[Counts] File System: ${data.fileSystem.recordings} recordings, ${data.fileSystem.transformations} transformations, ${data.fileSystem.runs} runs`,
+				`[Counts] 文件系统:${data.fileSystem.recordings} 条录音记录,${data.fileSystem.transformations} 个转换,${data.fileSystem.runs} 次运行`,
 			);
 		}
 
@@ -1121,8 +1121,8 @@
 				transformationsResult = null;
 				runsResult = null;
 
-				_addLog('[Migration] Starting migration process...');
-				_addLog('[Migration] Direction: IndexedDB → File System');
+				_addLog('[Migration] 开始迁移流程...');
+				_addLog('[Migration] 方向:IndexedDB → 文件系统');
 
 				// Migrate recordings
 				const recordingsMigration = await _migrateRecordings({
@@ -1132,7 +1132,7 @@
 				});
 				if (recordingsMigration.error) {
 					_addLog(
-						`[Migration] ❌ Recordings migration failed: ${recordingsMigration.error.message}`,
+						`[Migration] ❌ 录音记录迁移失败:${recordingsMigration.error.message}`,
 					);
 				} else {
 					recordingsResult = recordingsMigration.data;
@@ -1146,7 +1146,7 @@
 				});
 				if (transformationsMigration.error) {
 					_addLog(
-						`[Migration] ❌ Transformations migration failed: ${transformationsMigration.error.message}`,
+						`[Migration] ❌ 转换迁移失败:${transformationsMigration.error.message}`,
 					);
 				} else {
 					transformationsResult = transformationsMigration.data;
@@ -1160,7 +1160,7 @@
 				});
 				if (runsMigration.error) {
 					_addLog(
-						`[Migration] ❌ Runs migration failed: ${runsMigration.error.message}`,
+						`[Migration] ❌ 运行迁移失败:${runsMigration.error.message}`,
 					);
 				} else {
 					runsResult = runsMigration.data;
@@ -1168,7 +1168,7 @@
 
 				await refreshCounts();
 				isRunning = false;
-				_addLog('[Migration] Migration process complete!');
+				_addLog('[Migration] 迁移流程完成!');
 			},
 			get isSeeding() {
 				return isSeeding;
@@ -1178,7 +1178,7 @@
 
 				isSeeding = true;
 				_clearLogs();
-				_addLog('[Seed] Starting mock data seeding...');
+				_addLog('[Seed] 开始填充模拟数据...');
 
 				await tryAsync({
 					try: async () => {
@@ -1190,14 +1190,14 @@
 						});
 
 						_addLog(
-							`[Seed] ✅ Seeded ${result.recordings} recordings, ${result.transformations} transformations, ${result.runs} runs`,
+							`[Seed] ✅ 已填充 ${result.recordings} 条录音记录、${result.transformations} 个转换、${result.runs} 次运行`,
 						);
 
 						await refreshCounts();
 					},
 					catch: (error) => {
 						_addLog(
-							`[Seed] ❌ Error: ${error instanceof Error ? error.message : String(error)}`,
+							`[Seed] ❌ 错误:${error instanceof Error ? error.message : String(error)}`,
 						);
 						return Ok(undefined);
 					},
@@ -1213,18 +1213,18 @@
 
 				isClearing = true;
 				_clearLogs();
-				_addLog('[Clear] Clearing IndexedDB...');
+				_addLog('[Clear] 正在清空 IndexedDB...');
 
 				await tryAsync({
 					try: async () => {
 						await testData.clearIndexedDB({ onProgress: _addLog });
 
-						_addLog('[Clear] ✅ IndexedDB cleared');
+						_addLog('[Clear] ✅ IndexedDB 已清空');
 						await refreshCounts();
 					},
 					catch: (error) => {
 						_addLog(
-							`[Clear] ❌ Error: ${error instanceof Error ? error.message : String(error)}`,
+							`[Clear] ❌ 错误:${error instanceof Error ? error.message : String(error)}`,
 						);
 						return Ok(undefined);
 					},
@@ -1274,10 +1274,9 @@
 	{/if}
 	<Dialog.Content class="max-h-[90vh] max-w-3xl overflow-y-auto">
 		<Dialog.Header>
-			<Dialog.Title>Database Migration Manager</Dialog.Title>
+			<Dialog.Title>数据库迁移管理器</Dialog.Title>
 			<Dialog.Description>
-				Migrate your data from IndexedDB to File System storage. This enables
-				faster performance and better data portability.
+				将数据从 IndexedDB 迁移至文件系统存储。这能带来更快的性能和更好的数据可移植性。
 			</Dialog.Description>
 		</Dialog.Header>
 
@@ -1285,30 +1284,30 @@
 			<!-- Counts Display -->
 			{#if migrationDialog.counts}
 				<div class="rounded-lg border p-4">
-					<h3 class="mb-3 text-sm font-semibold">Current Item Counts</h3>
+					<h3 class="mb-3 text-sm font-semibold">当前项目数量</h3>
 					<div class="grid grid-cols-2 gap-4 text-sm">
 						<div>
 							<p class="font-medium">IndexedDB:</p>
 							<ul class="ml-4 list-disc text-muted-foreground">
 								<li>
-									{migrationDialog.counts.indexedDb.recordings} recordings
+									{migrationDialog.counts.indexedDb.recordings} 条录音记录
 								</li>
 								<li>
-									{migrationDialog.counts.indexedDb.transformations} transformations
+									{migrationDialog.counts.indexedDb.transformations} 个转换
 								</li>
-								<li>{migrationDialog.counts.indexedDb.runs} runs</li>
+								<li>{migrationDialog.counts.indexedDb.runs} 次运行</li>
 							</ul>
 						</div>
 						<div>
-							<p class="font-medium">File System:</p>
+							<p class="font-medium">文件系统:</p>
 							<ul class="ml-4 list-disc text-muted-foreground">
 								<li>
-									{migrationDialog.counts.fileSystem.recordings} recordings
+									{migrationDialog.counts.fileSystem.recordings} 条录音记录
 								</li>
 								<li>
-									{migrationDialog.counts.fileSystem.transformations} transformations
+									{migrationDialog.counts.fileSystem.transformations} 个转换
 								</li>
-								<li>{migrationDialog.counts.fileSystem.runs} runs</li>
+								<li>{migrationDialog.counts.fileSystem.runs} 次运行</li>
 							</ul>
 						</div>
 					</div>
@@ -1321,14 +1320,14 @@
 					disabled={migrationDialog.isRunning}
 					class="w-full"
 				>
-					{migrationDialog.isRunning ? 'Migrating...' : 'Start Migration'}
+					{migrationDialog.isRunning ? '迁移中...' : '开始迁移'}
 				</Button>
 			{/if}
 
 			<!-- Logs Section -->
 			{#if migrationDialog.logs.length > 0}
 				<div class="space-y-2">
-					<h3 class="text-sm font-semibold">Migration Logs</h3>
+					<h3 class="text-sm font-semibold">迁移日志</h3>
 					<div
 						bind:this={logsContainer}
 						class="max-h-64 overflow-y-auto rounded-lg border bg-muted p-3 font-mono text-xs"
@@ -1343,35 +1342,35 @@
 			<!-- Results Section -->
 			{#if migrationDialog.recordingsResult || migrationDialog.transformationsResult || migrationDialog.runsResult}
 				<div class="rounded-lg border p-4">
-					<h3 class="mb-3 text-sm font-semibold">Migration Results</h3>
+					<h3 class="mb-3 text-sm font-semibold">迁移结果</h3>
 					<div class="space-y-2 text-sm">
 						{#if migrationDialog.recordingsResult}
 							{@const r = migrationDialog.recordingsResult}
 							<div>
-								<p class="font-medium">Recordings:</p>
+								<p class="font-medium">录音记录:</p>
 								<p class="text-muted-foreground">
-									Total: {r.total} | Succeeded: {r.succeeded} | Failed: {r.failed}
-									| Skipped: {r.skipped} | Duration: {r.duration.toFixed(2)}s
+									总数:{r.total} | 成功:{r.succeeded} | 失败:{r.failed}
+									| 跳过:{r.skipped} | 用时:{r.duration.toFixed(2)}s
 								</p>
 							</div>
 						{/if}
 						{#if migrationDialog.transformationsResult}
 							{@const t = migrationDialog.transformationsResult}
 							<div>
-								<p class="font-medium">Transformations:</p>
+								<p class="font-medium">转换:</p>
 								<p class="text-muted-foreground">
-									Total: {t.total} | Succeeded: {t.succeeded} | Failed: {t.failed}
-									| Skipped: {t.skipped} | Duration: {t.duration.toFixed(2)}s
+									总数:{t.total} | 成功:{t.succeeded} | 失败:{t.failed}
+									| 跳过:{t.skipped} | 用时:{t.duration.toFixed(2)}s
 								</p>
 							</div>
 						{/if}
 						{#if migrationDialog.runsResult}
 							{@const r = migrationDialog.runsResult}
 							<div>
-								<p class="font-medium">Transformation Runs:</p>
+								<p class="font-medium">转换运行:</p>
 								<p class="text-muted-foreground">
-									Total: {r.total} | Succeeded: {r.succeeded} | Failed: {r.failed}
-									| Skipped: {r.skipped} | Duration: {r.duration.toFixed(2)}s
+									总数:{r.total} | 成功:{r.succeeded} | 失败:{r.failed}
+									| 跳过:{r.skipped} | 用时:{r.duration.toFixed(2)}s
 								</p>
 							</div>
 						{/if}
@@ -1387,7 +1386,7 @@
 					<h3
 						class="mb-3 text-sm font-semibold text-yellow-900 dark:text-yellow-100"
 					>
-						Dev Tools (Testing Only)
+						Dev Tools (仅用于测试)
 					</h3>
 					<div class="flex gap-2">
 						<Button
@@ -1397,8 +1396,8 @@
 							size="sm"
 						>
 							{migrationDialog.isSeeding
-								? 'Seeding...'
-								: `Seed ${MOCK_RECORDING_COUNT} Recordings`}
+								? '填充中...'
+								: `填充 ${MOCK_RECORDING_COUNT} 条录音记录`}
 						</Button>
 						<Button
 							onclick={migrationDialog.clearIndexedDB}
@@ -1406,7 +1405,7 @@
 							variant="outline"
 							size="sm"
 						>
-							{migrationDialog.isClearing ? 'Clearing...' : 'Clear IndexedDB'}
+							{migrationDialog.isClearing ? '清空中...' : '清空 IndexedDB'}
 						</Button>
 					</div>
 				</div>
@@ -1415,7 +1414,7 @@
 
 		<Dialog.Footer>
 			<Button onclick={() => (migrationDialog.isOpen = false)} variant="outline"
-				>Close</Button
+				>关闭</Button
 			>
 		</Dialog.Footer>
 	</Dialog.Content>

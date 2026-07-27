@@ -37,13 +37,13 @@
 
 {#if getDevicesQuery.isPending}
 	<Field.Field>
-		<Field.Label for="manual-recording-device">Recording Device</Field.Label>
+		<Field.Label for="manual-recording-device">录音设备</Field.Label>
 		<Select.Root type="single" disabled>
 			<Select.Trigger id="manual-recording-device" class="w-full">
-				Loading devices...
+				加载设备中...
 			</Select.Trigger>
 			<Select.Content>
-				<Select.Item value="" label="Loading devices..." />
+				<Select.Item value="" label="加载设备中..." />
 			</Select.Content>
 		</Select.Root>
 	</Field.Field>
@@ -53,7 +53,7 @@
 	</p>
 {:else}
 	<Field.Field>
-		<Field.Label for="manual-recording-device">Recording Device</Field.Label>
+		<Field.Label for="manual-recording-device">录音设备</Field.Label>
 		<Select.Root
 			type="single"
 			bind:value={
@@ -62,7 +62,7 @@
 			}
 		>
 			<Select.Trigger id="manual-recording-device" class="w-full">
-				{selectedLabel ?? 'Select a device'}
+				{selectedLabel ?? '选择设备'}
 			</Select.Trigger>
 			<Select.Content>
 				{#each items as item}

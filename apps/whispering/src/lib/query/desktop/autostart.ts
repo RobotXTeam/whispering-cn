@@ -20,7 +20,7 @@ export const autostart = {
 			const { data, error } = await desktopServices.autostart.isEnabled();
 			if (error) {
 				return WhisperingErr({
-					title: '❌ Failed to check autostart status',
+					title: '❌ 检查自启动状态失败',
 					serviceError: error,
 				});
 			}
@@ -35,7 +35,7 @@ export const autostart = {
 			const { data, error } = await desktopServices.autostart.enable();
 			if (error) {
 				return WhisperingErr({
-					title: '❌ Failed to enable autostart',
+					title: '❌ 启用自启动失败',
 					serviceError: error,
 				});
 			}
@@ -50,7 +50,7 @@ export const autostart = {
 			const { data, error } = await desktopServices.autostart.disable();
 			if (error) {
 				return WhisperingErr({
-					title: '❌ Failed to disable autostart',
+					title: '❌ 禁用自启动失败',
 					serviceError: error,
 				});
 			}

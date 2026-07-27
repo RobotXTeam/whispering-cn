@@ -99,3 +99,9 @@ incremental = true # Compile your binary in smaller steps.
 # opt-level = "s" # Prioritizes small binary size. Use `3` if you prefer speed.
 panic = "abort" # Higher performance by disabling panic handlers.
 strip = true # Ensures debug symbols are removed.
+
+# Pin transcribe-rs to the vendored 0.2.1 (apps/whispering/src-tauri/vendor/transcribe-rs).
+# On Linux its whisper-rs dep does not enable the `vulkan` feature, so the build
+# needs no `glslc` on Ubuntu 22.04 (CPU backend transcribes fine; Vulkan is GPU-only).
+[patch.crates-io]
+transcribe-rs = { path = "vendor/transcribe-rs" }

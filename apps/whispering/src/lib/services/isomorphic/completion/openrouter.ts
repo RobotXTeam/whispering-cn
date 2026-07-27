@@ -9,9 +9,9 @@ export const OpenRouterCompletionServiceLive =
 			'X-Title': 'Whispering',
 		},
 		statusMessageOverrides: {
-			402: 'Insufficient credits in your OpenRouter account. Please add credits to continue.',
-			502: 'The model provider is temporarily unavailable. OpenRouter will automatically retry with fallback models if configured.',
-			503: 'OpenRouter is temporarily unavailable. Please try again in a few minutes.',
+			402: '您的 OpenRouter 账户额度不足。请充值后继续使用。',
+			502: '模型服务商暂时不可用。如果已配置,OpenRouter 会自动尝试使用备用模型重试。',
+			503: 'OpenRouter 暂时不可用。请稍后重试。',
 		},
 	});
 

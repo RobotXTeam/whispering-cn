@@ -29,22 +29,22 @@
 {:else if latestTransformationRunByRecordingIdQuery.error}
 	<TextPreviewDialog
 		{id}
-		title="Query Error"
-		label="query error"
+		title="查询错误"
+		label="查询错误"
 		text={latestTransformationRunByRecordingIdQuery.error.message}
 	/>
 {:else if latestTransformationRunByRecordingIdQuery.data?.status === 'failed'}
 	<TextPreviewDialog
 		{id}
-		title="Transformation Error"
-		label="transformation error"
+		title="转换错误"
+		label="转换错误"
 		text={latestTransformationRunByRecordingIdQuery.data.error}
 	/>
 {:else if latestTransformationRunByRecordingIdQuery.data?.status === 'completed'}
 	<TextPreviewDialog
 		{id}
-		title="Transformation Output"
-		label="transformation output"
+		title="转换输出"
+		label="转换输出"
 		text={latestTransformationRunByRecordingIdQuery.data.output}
 	/>
 {/if}

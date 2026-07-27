@@ -22,14 +22,14 @@ export function createCopyFn(contentDescription: string): CopyFn {
 		const { error } = await rpc.text.copyToClipboard.execute({ text });
 		if (error) {
 			await rpc.notify.error.execute({
-				title: `Error copying ${contentDescription} to clipboard`,
+				title: `复制 ${contentDescription} 到剪贴板时出错`,
 				description: error.message,
 				action: { type: 'more-details', error },
 			});
 			throw error;
 		}
 		await rpc.notify.success.execute({
-			title: `Copied ${contentDescription} to clipboard!`,
+			title: `已将 ${contentDescription} 复制到剪贴板!`,
 			description: text,
 		});
 	};

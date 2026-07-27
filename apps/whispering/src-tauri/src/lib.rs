@@ -1,5 +1,5 @@
 use log::{info, warn};
-use tauri::Manager;
+use tauri::{Emitter, Manager};
 use tauri_plugin_aptabase::EventTracker;
 use tauri_plugin_log::{Target, TargetKind};
 
@@ -25,6 +25,28 @@ use command::{execute_command, spawn_command};
 
 pub mod markdown_reader;
 use markdown_reader::{bulk_delete_files, count_markdown_files, read_markdown_files};
+
+/// Command ids mirroring the frontend `commands` registry (`src/lib/commands.ts`).
+///
+/// Bridge for Wayland global hotkeys: `tauri-plugin-global-shortcut` only has an
+/// X11 backend (XGrabKey), so on GNOME Wayland its shortcuts never fire. GNOME's
+/// own custom-keybinding system (gsettings) instead invokes `whispering <id>` as a
+/// second process; `tauri-plugin-single-instance` forwards the args here via D-Bus,
+/// and we re-emit the id as a `whispering://command` event the frontend listens for.
+///
+/// `pushToTalk` is intentionally excluded: it needs a Pressed/Released state pair
+/// that a one-shot CLI invocation cannot express.
+const COMMAND_IDS: &[&str] = &[
+    "toggleManualRecording",
+    "startManualRecording",
+    "stopManualRecording",
+    "cancelManualRecording",
+    "startVadRecording",
+    "stopVadRecording",
+    "toggleVadRecording",
+    "openTransformationPicker",
+    "runTransformationOnClipboard",
+];
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 #[tokio::main]
@@ -140,7 +162,19 @@ pub async fn run() {
                 tauri_plugin_autostart::MacosLauncher::LaunchAgent,
                 None,
             ))
-            .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| {
+            .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
+                // Wayland global-hotkey bridge: when a second instance is
+                // launched with a known command id (e.g. GNOME ran
+                // `whispering toggleManualRecording`), forward it to the
+                // frontend as a `whispering://command` event and return.
+                if let Some(id) = args
+                    .iter()
+                    .skip(1)
+                    .find(|a| COMMAND_IDS.contains(&a.as_str()))
+                {
+                    let _ = app.emit("whispering://command", id.clone());
+                    return;
+                }
                 let _ = app
                     .get_webview_window("main")
                     .expect("no main window")

@@ -17,13 +17,13 @@ export function createDownloadServiceDesktop(): DownloadService {
 					}),
 				catch: (error) =>
 					DownloadServiceErr({
-						message: `There was an error saving the recording using the Tauri Filesystem API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用 Tauri 文件系统 API 保存录音时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			});
 			if (saveError) return Err(saveError);
 			if (path === null) {
 				return DownloadServiceErr({
-					message: 'Please specify a path to save the recording.',
+					message: '请指定保存录音的路径。',
 				});
 			}
 			const { error: writeError } = await tryAsync({
@@ -33,7 +33,7 @@ export function createDownloadServiceDesktop(): DownloadService {
 				},
 				catch: (error) =>
 					DownloadServiceErr({
-						message: `There was an error saving the recording using the Tauri Filesystem API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用 Tauri 文件系统 API 保存录音时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			});
 			if (writeError) return Err(writeError);

@@ -91,19 +91,19 @@
 					const selected = await open({
 						directory: true,
 						multiple: false,
-						title: `Select ${title} Directory`,
+						title: `选择${title}目录`,
 					});
 
 					if (selected) {
 						// Validate that it's a directory with expected files
 						const entries = await readDir(selected);
 						if (!entries || entries.length === 0) {
-							toast.error('Selected directory appears to be empty');
+							toast.error('所选目录为空');
 							return;
 						}
 
 						value = selected;
-						toast.success('Model directory selected');
+						toast.success('已选择模型目录');
 					}
 				} else {
 					// File selection for single-file models
@@ -111,7 +111,7 @@
 						fileExtensions.length > 0
 							? [
 									{
-										name: `${title} Files`,
+										name: `${title} 文件`,
 										extensions: fileExtensions,
 									},
 								]
@@ -120,17 +120,17 @@
 					const selected = await open({
 						multiple: false,
 						filters,
-						title: `Select ${title} File`,
+						title: `选择${title}文件`,
 					});
 
 					if (selected) {
 						value = selected;
-						toast.success('Model file selected');
+						toast.success('已选择模型文件');
 					}
 				}
 			},
 			catch: (error) => {
-				toast.error('Failed to select model', {
+				toast.error('选择模型失败', {
 					description: extractErrorMessage(error),
 				});
 				return Ok(undefined);
@@ -143,7 +143,7 @@
 	 */
 	function clearModel() {
 		value = '';
-		toast.success('Model path cleared');
+		toast.success('模型路径已清除');
 	}
 </script>
 
@@ -155,8 +155,8 @@
 	<Card.Content class="space-y-6">
 		<Tabs.Root value="prebuilt" class="w-full">
 			<Tabs.List class="grid w-full grid-cols-2">
-				<Tabs.Trigger value="prebuilt">Pre-built Models</Tabs.Trigger>
-				<Tabs.Trigger value="manual">Manual Selection</Tabs.Trigger>
+				<Tabs.Trigger value="prebuilt">预置模型</Tabs.Trigger>
+				<Tabs.Trigger value="manual">手动选择</Tabs.Trigger>
 			</Tabs.List>
 
 			<!-- Pre-built Models Tab -->
@@ -182,12 +182,11 @@
 				<div>
 					<p class="text-sm font-medium mb-2">
 						{#if manualInstructions}
-							<span class="text-muted-foreground">Step 2:</span> Select the
-							model
-							{fileSelectionMode === 'directory' ? 'directory' : 'file'}
+							<span class="text-muted-foreground">第 2 步:</span> 选择模型
+							{fileSelectionMode === 'directory' ? '目录' : '文件'}
 						{:else}
-							Select the model
-							{fileSelectionMode === 'directory' ? 'directory' : 'file'}
+							选择模型
+							{fileSelectionMode === 'directory' ? '目录' : '文件'}
 						{/if}
 					</p>
 					<div class="flex items-center gap-2">
@@ -195,7 +194,7 @@
 							type="text"
 							{value}
 							readonly
-							placeholder="No model selected"
+							placeholder="未选择模型"
 							class="flex-1"
 						/>
 						{#if value}
@@ -203,7 +202,7 @@
 								variant="outline"
 								size="icon"
 								onclick={clearModel}
-								title="Clear model path"
+								title="清除模型路径"
 							>
 								<X class="size-4" />
 							</Button>
@@ -213,8 +212,8 @@
 							size="icon"
 							onclick={selectModel}
 							title={fileSelectionMode === 'directory'
-								? 'Browse for model directory'
-								: 'Browse for model file'}
+								? '浏览模型目录'
+								: '浏览模型文件'}
 						>
 							{#if fileSelectionMode === 'directory'}
 								<FolderOpen class="size-4" />
@@ -230,7 +229,7 @@
 							{#await modelName then name}
 								{#if name}
 									<p class="text-sm text-muted-foreground">
-										<span class="font-medium">Selected:</span>
+										<span class="font-medium">已选择:</span>
 										{name}
 									</p>
 								{/if}
@@ -238,10 +237,10 @@
 
 							{#if isPrebuiltModel && prebuiltModelInfo}
 								<p class="text-sm text-muted-foreground">
-									<span class="font-medium">Size:</span>
+									<span class="font-medium">大小:</span>
 									{prebuiltModelInfo.size}
 									{#if fileSelectionMode === 'directory'}
-										(directory with model files)
+										(含模型文件的目录)
 									{/if}
 								</p>
 							{/if}

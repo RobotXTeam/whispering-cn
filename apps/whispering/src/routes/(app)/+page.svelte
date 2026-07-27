@@ -119,8 +119,8 @@
 
 					if (validPaths.length === 0) {
 						rpc.notify.warning.execute({
-							title: '⚠️ No valid files',
-							description: 'Please drop audio or video files',
+							title: '⚠️ 没有有效文件',
+							description: '请拖入音频或视频文件',
 						});
 						return;
 					}
@@ -133,7 +133,7 @@
 
 					if (error) {
 						rpc.notify.error.execute({
-							title: '❌ Failed to read files',
+							title: '❌ 读取文件失败',
 							description: error.message,
 						});
 						return;
@@ -146,7 +146,7 @@
 			);
 		} catch (error) {
 			rpc.notify.error.execute({
-				title: '❌ Failed to set up drag drop listener',
+				title: '❌ 设置拖放监听器失败',
 				description: `${error}`,
 			});
 		}
@@ -173,7 +173,7 @@
 			Whispering
 		</h1>
 		<p class="text-muted-foreground text-center">
-			Press shortcut → speak → get text. Free and open source ❤️
+			按下快捷键 → 说话 → 获取文本。免费开源 ❤️
 		</p>
 	</div>
 
@@ -191,7 +191,7 @@
 		{#each availableModes as option}
 			<ToggleGroup.Item
 				value={option.value}
-				aria-label={`Switch to ${option.label.toLowerCase()} mode`}
+				aria-label={`切换到 ${option.label.toLowerCase()} 模式`}
 			>
 				{option.icon}
 				{option.label}
@@ -204,8 +204,8 @@
 		<div class="relative">
 			<Button
 				tooltip={getRecorderStateQuery.data === 'IDLE'
-					? 'Start recording'
-					: 'Stop recording'}
+					? '开始录音'
+					: '停止录音'}
 				onclick={() => commandCallbacks.toggleManualRecording()}
 				variant="ghost"
 				class="shrink-0 size-32 sm:size-36 lg:size-40 xl:size-44 transform items-center justify-center overflow-hidden duration-300 ease-in-out"
@@ -221,7 +221,7 @@
 			{#if getRecorderStateQuery.data === 'RECORDING'}
 				<div class="absolute -right-12 bottom-4 flex items-center">
 					<Button
-						tooltip="Cancel recording"
+						tooltip="取消录音"
 						onclick={() => commandCallbacks.cancelManualRecording()}
 						variant="ghost"
 						size="icon"
@@ -244,8 +244,8 @@
 		<div class="relative">
 			<Button
 				tooltip={vadRecorder.state === 'IDLE'
-					? 'Start voice activated session'
-					: 'Stop voice activated session'}
+					? '开始语音活动会话'
+					: '停止语音活动会话'}
 				onclick={() => commandCallbacks.toggleVadRecording()}
 				variant="ghost"
 				class="shrink-0 size-32 sm:size-36 lg:size-40 xl:size-44 transform items-center justify-center overflow-hidden duration-300 ease-in-out"
@@ -280,7 +280,7 @@
 				}}
 				onFileRejected={({ file, reason }) => {
 					rpc.notify.error.execute({
-						title: '❌ File rejected',
+						title: '❌ 文件被拒绝',
 						description: `${file.name}: ${reason}`,
 					});
 				}}
@@ -326,9 +326,9 @@
 	<div class="xs:flex hidden flex-col items-center gap-3">
 		{#if settings.value['recording.mode'] === 'manual'}
 			<p class="text-foreground/75 text-center text-sm">
-				Click the microphone or press
+				点击麦克风或按下
 				{' '}<Link
-					tooltip="Go to local shortcut in settings"
+					tooltip="转到设置中的应用内快捷键"
 					href="/settings/shortcuts/local"
 				>
 					<Kbd.Root
@@ -337,13 +337,13 @@
 						)}</Kbd.Root
 					>
 				</Link>{' '}
-				to start recording here.
+				在此处开始录音。
 			</p>
 			{#if window.__TAURI_INTERNALS__}
 				<p class="text-foreground/75 text-sm">
-					Press
+					按下
 					{' '}<Link
-						tooltip="Go to global shortcut in settings"
+						tooltip="转到设置中的全局快捷键"
 						href="/settings/shortcuts/global"
 					>
 						<Kbd.Root
@@ -352,14 +352,14 @@
 							)}</Kbd.Root
 						>
 					</Link>{' '}
-					to start recording anywhere.
+					在任意位置开始录音。
 				</p>
 			{/if}
 		{:else if settings.value['recording.mode'] === 'vad'}
 			<p class="text-foreground/75 text-center text-sm">
-				Click the microphone or press
+				点击麦克风或按下
 				{' '}<Link
-					tooltip="Go to local shortcut in settings"
+					tooltip="转到设置中的应用内快捷键"
 					href="/settings/shortcuts/local"
 				>
 					<Kbd.Root
@@ -368,17 +368,17 @@
 						)}</Kbd.Root
 					>
 				</Link>{' '}
-				to start a voice activated session.
+				开始语音活动会话。
 			</p>
 		{:else if settings.value['recording.mode'] === 'upload'}
 			<p class="text-foreground/75 text-center text-sm">
-				Drag files here or click to browse.
+				将文件拖到此处或点击浏览。
 			</p>
 			{#if window.__TAURI_INTERNALS__}
 				<p class="text-foreground/75 text-sm">
-					Press
+					按下
 					{' '}<Link
-						tooltip="Go to global shortcut in settings"
+						tooltip="转到设置中的全局快捷键"
 						href="/settings/shortcuts/global"
 					>
 						<Kbd.Root
@@ -387,20 +387,20 @@
 							)}</Kbd.Root
 						>
 					</Link>{' '}
-					to start recording instead.
+					改为开始录音。
 				</p>
 			{/if}
 		{/if}
 		<p class="text-muted-foreground text-center text-sm font-light">
 			{#if !window.__TAURI_INTERNALS__}
-				Tired of switching tabs?
+				厌倦了切换标签页?
 				<Link
-					tooltip="Get Whispering for desktop"
+					tooltip="获取桌面版 Whispering"
 					href="https://epicenter.so/whispering"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Get the native desktop app
+					获取原生桌面应用
 				</Link>
 			{/if}
 		</p>

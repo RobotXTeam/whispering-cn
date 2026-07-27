@@ -24,8 +24,8 @@
 	const pressedKeys = createPressedKeys({
 		onUnsupportedKey: (key) => {
 			rpc.notify.warning.execute({
-				title: 'Unsupported key',
-				description: `The key "${key}" is not supported. Please try a different key.`,
+				title: '不支持的按键',
+				description: `按键"${key}"不支持。请尝试其他按键。`,
 			});
 		},
 	});
@@ -39,7 +39,7 @@
 		/>
 		<Input
 			type="search"
-			placeholder="Search commands..."
+			placeholder="搜索命令..."
 			class="pl-10"
 			bind:value={searchQuery}
 		/>
@@ -50,8 +50,8 @@
 		<Table.Root>
 			<Table.Header>
 				<Table.Row>
-					<Table.Head class="min-w-[150px]">Command</Table.Head>
-					<Table.Head class="text-right min-w-[200px]">Shortcut</Table.Head>
+					<Table.Head class="min-w-[150px]">命令</Table.Head>
+					<Table.Head class="text-right min-w-[200px]">快捷键</Table.Head>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
@@ -67,16 +67,16 @@
 								<LocalKeyboardShortcutRecorder
 									{command}
 									placeholder={defaultShortcut
-										? `Default: ${defaultShortcut}`
-										: 'Set shortcut'}
+										? `默认:${defaultShortcut}`
+										: '设置快捷键'}
 									{pressedKeys}
 								/>
 							{:else}
 								<GlobalKeyboardShortcutRecorder
 									{command}
 									placeholder={defaultShortcut
-										? `Default: ${defaultShortcut}`
-										: 'Set shortcut'}
+										? `默认:${defaultShortcut}`
+										: '设置快捷键'}
 									{pressedKeys}
 								/>
 							{/if}

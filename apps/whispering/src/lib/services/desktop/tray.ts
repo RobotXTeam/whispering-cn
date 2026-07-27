@@ -26,7 +26,7 @@ export function createTrayIconDesktopService() {
 				},
 				catch: (error) =>
 					SetTrayIconServiceErr({
-						message: `Failed to set tray icon: ${extractErrorMessage(error)}`,
+						message: `设置托盘图标失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};
@@ -41,20 +41,20 @@ async function initTray() {
 			// Window Controls Section
 			await MenuItem.new({
 				id: 'show',
-				text: 'Show Window',
+				text: '显示窗口',
 				action: () => getCurrentWindow().show(),
 			}),
 
 			await MenuItem.new({
 				id: 'hide',
-				text: 'Hide Window',
+				text: '隐藏窗口',
 				action: () => getCurrentWindow().hide(),
 			}),
 
 			// Settings Section
 			await MenuItem.new({
 				id: 'settings',
-				text: 'Settings',
+				text: '设置',
 				action: () => {
 					goto('/settings');
 					return getCurrentWindow().show();
@@ -64,7 +64,7 @@ async function initTray() {
 			// Quit Section
 			await MenuItem.new({
 				id: 'quit',
-				text: 'Quit',
+				text: '退出',
 				action: () => void exit(0),
 			}),
 		],

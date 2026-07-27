@@ -33,7 +33,7 @@
 		const selected = await open({
 			directory: true,
 			multiple: false,
-			title: 'Select Recording Output Folder',
+			title: '选择录音输出文件夹',
 		});
 
 		if (selected) settings.updateKey('recording.cpal.outputFolder', selected);
@@ -50,14 +50,14 @@
 					settings.value['recording.cpal.outputFolder'] ??
 					defaultRecordingsFolder;
 				if (!folderPath) {
-					throw new Error('No output folder configured');
+					throw new Error('未配置输出文件夹');
 				}
 				await openPath(folderPath);
 			},
 			catch: (error) => {
 				rpc.notify.error.execute({
-					title: 'Failed to open folder',
-					description: error instanceof Error ? error.message : 'Unknown error',
+					title: '打开文件夹失败',
+					description: error instanceof Error ? error.message : '未知错误',
 				});
 				return Ok(undefined);
 			},
@@ -67,13 +67,13 @@
 
 <div class="flex items-center gap-2">
 	{#if displayPath === null}
-		<Input type="text" placeholder="Loading..." disabled class="flex-1" />
+		<Input type="text" placeholder="加载中..." disabled class="flex-1" />
 	{:else}
 		<Input type="text" value={displayPath} readonly class="flex-1" />
 	{/if}
 
 	<Button
-		tooltip="Select output folder"
+		tooltip="选择输出文件夹"
 		variant="outline"
 		size="icon"
 		onclick={selectOutputFolder}
@@ -82,7 +82,7 @@
 	</Button>
 
 	<Button
-		tooltip="Open output folder"
+		tooltip="打开输出文件夹"
 		variant="outline"
 		size="icon"
 		onclick={openOutputFolder}
@@ -93,7 +93,7 @@
 
 	{#if settings.value['recording.cpal.outputFolder']}
 		<Button
-			tooltip="Reset to default folder"
+			tooltip="重置为默认文件夹"
 			variant="outline"
 			size="icon"
 			onclick={() => {

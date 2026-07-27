@@ -64,8 +64,8 @@
 			},
 			catch: (error) => {
 				rpc.notify.error.execute({
-					title: 'Failed to open folder',
-					description: error instanceof Error ? error.message : 'Unknown error',
+					title: '打开文件夹失败',
+					description: error instanceof Error ? error.message : '未知错误',
 				});
 				return Ok(undefined);
 			},

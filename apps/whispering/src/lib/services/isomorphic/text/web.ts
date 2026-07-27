@@ -13,7 +13,7 @@ export function createTextServiceWeb(): TextService {
 				},
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error reading from the clipboard using the browser Clipboard API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用浏览器剪贴板 API 从剪贴板读取时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -22,7 +22,7 @@ export function createTextServiceWeb(): TextService {
 				try: () => navigator.clipboard.writeText(text),
 				catch: (error) =>
 					TextServiceErr({
-						message: `There was an error copying to the clipboard using the browser Clipboard API. Please try again. ${extractErrorMessage(error)}`,
+						message: `使用浏览器剪贴板 API 复制到剪贴板时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			});
 
@@ -40,14 +40,14 @@ export function createTextServiceWeb(): TextService {
 			await navigator.clipboard.writeText(text);
 			return TextServiceErr({
 				message:
-					'Text copied to clipboard. Automatic paste is not supported in web browsers for security reasons. Please paste manually using Cmd/Ctrl+V.',
+					'文本已复制到剪贴板。出于安全原因,网页浏览器不支持自动粘贴。请使用 Cmd/Ctrl+V 手动粘贴。',
 			});
 		},
 
 		simulateEnterKeystroke: async () =>
 			TextServiceErr({
 				message:
-					'Simulating keystrokes is not supported in web browsers for security reasons.',
+					'出于安全原因,网页浏览器不支持模拟按键。',
 			}),
 	};
 }

@@ -11,26 +11,26 @@
 	<!-- Page Header -->
 	<div class="space-y-2">
 		<div class="flex items-center gap-3">
-			<h3 class="text-xl font-semibold tracking-tight">Analytics</h3>
+			<h3 class="text-xl font-semibold tracking-tight">分析</h3>
 			{#if settings.value['analytics.enabled']}
 				<Badge
 					variant="outline"
 					class="text-xs text-green-700 dark:text-green-400 border-green-200 dark:border-green-400/30"
 				>
-					Enabled
+					已启用
 				</Badge>
 			{:else}
 				<Badge
 					variant="outline"
 					class="text-xs text-warning dark:text-warning border-warning dark:border-warning/30"
 				>
-					Disabled
+					已禁用
 				</Badge>
 			{/if}
 		</div>
 		<p class="text-sm text-muted-foreground max-w-2xl">
-			Help us understand which features are used most. We use anonymized event
-			logging to improve Whispering.
+			帮助我们了解哪些功能被使用最多。我们使用匿名事件
+			日志来改进 Whispering。
 		</p>
 	</div>
 
@@ -43,11 +43,11 @@
 						for="analytics-toggle"
 						class="text-base font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 					>
-						Share anonymized events
+						分享匿名事件
 					</Label>
 					<p class="text-sm text-muted-foreground leading-relaxed">
-						We log simple events like "recording started" or "transcription
-						completed". No personal data is attached to any of these events.
+						我们记录简单事件,如"录音已开始"或"转录
+						已完成"。这些事件不会附加任何个人数据。
 					</p>
 				</div>
 				<Switch
@@ -80,22 +80,22 @@
 					class="text-sm font-medium text-green-700 dark:text-green-400 flex items-center gap-2"
 				>
 					<div class="w-2 h-2 bg-green-500 rounded-full"></div>
-					Events we log
+					我们记录的事件
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<ul class="text-sm text-muted-foreground space-y-1.5 leading-relaxed">
 					<li class="flex items-start gap-2">
 						<span class="text-green-500 mt-1">•</span>
-						<span>Button clicks (which features you use)</span>
+						<span>按钮点击(你使用的功能)</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500 mt-1">•</span>
-						<span>Completion times (how long things take)</span>
+						<span>完成时长(事情花费多久)</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-green-500 mt-1">•</span>
-						<span>Error messages (when something fails)</span>
+						<span>错误信息(当某些操作失败时)</span>
 					</li>
 				</ul>
 			</Card.Content>
@@ -107,22 +107,22 @@
 					class="text-sm font-medium text-warning dark:text-warning flex items-center gap-2"
 				>
 					<div class="w-2 h-2 bg-warning rounded-full"></div>
-					Never collected
+					从不收集
 				</Card.Title>
 			</Card.Header>
 			<Card.Content>
 				<ul class="text-sm text-muted-foreground space-y-1.5 leading-relaxed">
 					<li class="flex items-start gap-2">
 						<span class="text-warning mt-1">•</span>
-						<span>Your actual transcriptions or recordings</span>
+						<span>你的实际转录文本或录音</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-warning mt-1">•</span>
-						<span>Device IDs or user identifiers</span>
+						<span>设备 ID 或用户标识符</span>
 					</li>
 					<li class="flex items-start gap-2">
 						<span class="text-warning mt-1">•</span>
-						<span>API keys or any personal data</span>
+						<span>API 密钥或任何个人数据</span>
 					</li>
 				</ul>
 			</Card.Content>
@@ -132,10 +132,10 @@
 	<!-- Transparency Section -->
 	<Card.Root class="bg-muted/30 border-dashed">
 		<Card.Header>
-			<Card.Title class="text-base font-medium">Full Transparency</Card.Title>
+			<Card.Title class="text-base font-medium">完全透明</Card.Title>
 			<Card.Description>
-				All analytics code is open source and auditable. See exactly what data
-				is collected and when.
+				所有分析代码都是开源且可审计的。准确查看收集了
+				什么数据,以及何时收集。
 			</Card.Description>
 		</Card.Header>
 		<Card.Content class="space-y-3">
@@ -152,7 +152,7 @@
 					>
 					<span
 						class="underline underline-offset-4 decoration-transparent group-hover:decoration-current transition-colors"
-						>View event definitions</span
+						>查看事件定义</span
 					>
 				</a>
 				<a
@@ -167,7 +167,7 @@
 					>
 					<span
 						class="underline underline-offset-4 decoration-transparent group-hover:decoration-current transition-colors"
-						>See where events are logged</span
+						>查看事件记录位置</span
 					>
 				</a>
 				<a
@@ -182,7 +182,7 @@
 					>
 					<span
 						class="underline underline-offset-4 decoration-transparent group-hover:decoration-current transition-colors"
-						>Learn about Aptabase</span
+						>了解 Aptabase</span
 					>
 				</a>
 			</div>
@@ -194,16 +194,16 @@
 		{#if settings.value['analytics.enabled']}
 			<div class="flex items-center gap-2 text-green-700 dark:text-green-400">
 				<div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-				<span class="font-medium">Analytics active</span>
+				<span class="font-medium">分析已启用</span>
 				<span class="text-muted-foreground"
-					>• Changes take effect immediately</span
+					>• 更改立即生效</span
 				>
 			</div>
 		{:else}
 			<div class="flex items-center gap-2 text-warning dark:text-warning">
 				<div class="w-2 h-2 bg-warning rounded-full"></div>
-				<span class="font-medium">Analytics disabled</span>
-				<span class="text-muted-foreground">• No data is being collected</span>
+				<span class="font-medium">分析已禁用</span>
+				<span class="text-muted-foreground">• 没有收集任何数据</span>
 			</div>
 		{/if}
 	</div>

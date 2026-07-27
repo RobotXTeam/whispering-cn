@@ -12,7 +12,7 @@ export function createTextServiceExtension(): TextService {
 				},
 				catch: (error) =>
 					TextServiceErr({
-						message: `Unable to read from clipboard: ${extractErrorMessage(error)}`,
+						message: `无法从剪贴板读取:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -21,7 +21,7 @@ export function createTextServiceExtension(): TextService {
 				try: () => navigator.clipboard.writeText(text),
 				catch: (error) =>
 					TextServiceErr({
-						message: `Unable to copy to clipboard: ${extractErrorMessage(error)}`,
+						message: `无法复制到剪贴板:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -34,14 +34,14 @@ export function createTextServiceExtension(): TextService {
 				},
 				catch: (error) =>
 					TextServiceErr({
-						message: `Unable to write text at cursor position: ${extractErrorMessage(error)}`,
+						message: `无法在光标位置写入文本:${extractErrorMessage(error)}`,
 					}),
 			}),
 
 		simulateEnterKeystroke: async () =>
 			TextServiceErr({
 				message:
-					'Simulating keystrokes is not supported in browser extensions for security reasons.',
+					'出于安全原因,浏览器扩展不支持模拟按键。',
 			}),
 	};
 }

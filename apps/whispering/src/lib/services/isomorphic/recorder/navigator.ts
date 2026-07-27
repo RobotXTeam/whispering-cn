@@ -58,13 +58,13 @@ export function createNavigatorRecorderService(): RecorderService {
 			if (activeRecording) {
 				return RecorderServiceErr({
 					message:
-						'A recording is already in progress. Please stop the current recording before starting a new one.',
+						'已有录音正在进行。请先停止当前录音,再开始新的。',
 				});
 			}
 
 			sendStatus({
-				title: '🎙️ Starting Recording',
-				description: 'Setting up your microphone...',
+				title: '🎙️ 开始录音',
+				description: '正在设置麦克风...',
 			});
 
 			// Get the recording stream
@@ -85,7 +85,7 @@ export function createNavigatorRecorderService(): RecorderService {
 					}),
 				catch: (error) =>
 					RecorderServiceErr({
-						message: `Failed to initialize the audio recorder. This could be due to unsupported audio settings, microphone conflicts, or browser limitations. Please check your microphone is working and try adjusting your audio settings. ${extractErrorMessage(error)}`,
+						message: `初始化音频录制器失败。这可能是由于不支持的音频设置、麦克风冲突或浏览器限制造成的。请检查麦克风是否正常工作,并尝试调整音频设置。 ${extractErrorMessage(error)}`,
 					}),
 			});
 
@@ -126,7 +126,7 @@ export function createNavigatorRecorderService(): RecorderService {
 			if (!activeRecording) {
 				return RecorderServiceErr({
 					message:
-						'Cannot stop recording because no active recording session was found. Make sure you have started recording before attempting to stop it.',
+						'无法停止录音,因为没有找到活动的录音会话。请确保在尝试停止之前已开始录音。',
 				});
 			}
 
@@ -134,8 +134,8 @@ export function createNavigatorRecorderService(): RecorderService {
 			activeRecording = null; // Clear immediately to prevent race conditions
 
 			sendStatus({
-				title: '⏸️ Finishing Recording',
-				description: 'Saving your audio...',
+				title: '⏸️ 完成录音',
+				description: '正在保存音频...',
 			});
 
 			// Stop the recorder and wait for the final data
@@ -152,7 +152,7 @@ export function createNavigatorRecorderService(): RecorderService {
 					}),
 				catch: (error) =>
 					RecorderServiceErr({
-						message: `Failed to properly stop and save the recording. This might be due to corrupted audio data, insufficient storage space, or a browser issue. Your recording data may be lost. ${extractErrorMessage(error)}`,
+						message: `无法正确停止并保存录音。这可能是由于音频数据损坏、存储空间不足或浏览器问题造成的。您的录音数据可能丢失。 ${extractErrorMessage(error)}`,
 					}),
 			});
 
@@ -162,8 +162,8 @@ export function createNavigatorRecorderService(): RecorderService {
 			if (stopError) return Err(stopError);
 
 			sendStatus({
-				title: '✅ Recording Saved',
-				description: 'Your recording is ready for transcription!',
+				title: '✅ 录音已保存',
+				description: '录音已就绪,可以转录!',
 			});
 			return Ok(blob);
 		},
@@ -179,8 +179,8 @@ export function createNavigatorRecorderService(): RecorderService {
 			activeRecording = null; // Clear immediately
 
 			sendStatus({
-				title: '🛑 Cancelling',
-				description: 'Discarding your recording...',
+				title: '🛑 取消中',
+				description: '正在丢弃录音...',
 			});
 
 			// Stop the recorder
@@ -190,8 +190,8 @@ export function createNavigatorRecorderService(): RecorderService {
 			cleanupRecordingStream(recording.stream);
 
 			sendStatus({
-				title: '✨ Cancelled',
-				description: 'Recording discarded successfully!',
+				title: '✨ 已取消',
+				description: '录音已成功丢弃!',
 			});
 
 			return Ok({ status: 'cancelled' });

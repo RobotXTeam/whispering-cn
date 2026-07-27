@@ -51,13 +51,13 @@ export const transformer = {
 
 				if (transformationRunError)
 					return WhisperingErr({
-						title: '⚠️ Transformation failed',
+						title: '⚠️ 转换失败',
 						serviceError: transformationRunError,
 					});
 
 				if (transformationRun.status === 'failed') {
 					return WhisperingErr({
-						title: '⚠️ Transformation failed',
+						title: '⚠️ 转换失败',
 						description: transformationRun.error,
 						action: { type: 'more-details', error: transformationRun.error },
 					});
@@ -65,8 +65,8 @@ export const transformer = {
 
 				if (!transformationRun.output) {
 					return WhisperingErr({
-						title: '⚠️ Transformation produced no output',
-						description: 'The transformation completed but produced no output.',
+						title: '⚠️ 转换未产生输出',
+						description: '转换已完成但未产生输出。',
 					});
 				}
 
@@ -104,10 +104,10 @@ export const transformer = {
 				await services.db.recordings.getById(recordingId);
 			if (getRecordingError || !recording) {
 				return WhisperingErr({
-					title: '⚠️ Recording not found',
+					title: '⚠️ 未找到录音',
 					description:
 						getRecordingError?.message ??
-						'Could not find the selected recording.',
+						'找不到所选录音。',
 				});
 			}
 
@@ -120,7 +120,7 @@ export const transformer = {
 
 			if (transformationRunError)
 				return WhisperingErr({
-					title: '⚠️ Transformation failed',
+					title: '⚠️ 转换失败',
 					serviceError: transformationRunError,
 				});
 
@@ -157,7 +157,7 @@ async function handleStep({
 					const regex = new RegExp(findText, 'g');
 					return Ok(input.replace(regex, replaceText));
 				} catch (error) {
-					return Err(`Invalid regex pattern: ${extractErrorMessage(error)}`);
+					return Err(`无效的正则表达式模式：${extractErrorMessage(error)}`);
 				}
 			}
 
@@ -291,12 +291,12 @@ async function handleStep({
 				}
 
 				default:
-					return Err(`Unsupported provider: ${provider}`);
+					return Err(`不支持的服务商：${provider}`);
 			}
 		}
 
 		default:
-			return Err(`Unsupported step type: ${step.type}`);
+			return Err(`不支持的步骤类型：${step.type}`);
 	}
 }
 
@@ -316,14 +316,14 @@ async function runTransformation({
 > {
 	if (!input.trim()) {
 		return TransformServiceErr({
-			message: 'Empty input. Please enter some text to transform',
+			message: '输入为空。请输入一些要转换的文本',
 		});
 	}
 
 	if (transformation.steps.length === 0) {
 		return TransformServiceErr({
 			message:
-				'No steps configured. Please add at least one transformation step',
+				'未配置步骤。请至少添加一个转换步骤',
 		});
 	}
 
@@ -343,7 +343,7 @@ async function runTransformation({
 
 	if (createTransformationRunError)
 		return TransformServiceErr({
-			message: 'Unable to start transformation run',
+			message: '无法启动转换运行',
 		});
 
 	let currentInput = input;
@@ -359,7 +359,7 @@ async function runTransformation({
 
 		if (addTransformationStepRunError)
 			return TransformServiceErr({
-				message: 'Unable to initialize transformation step',
+				message: '无法初始化转换步骤',
 			});
 
 		const handleStepResult = await handleStep({
@@ -378,7 +378,7 @@ async function runTransformation({
 			);
 			if (markTransformationRunAndRunStepAsFailedError)
 				return TransformServiceErr({
-					message: 'Unable to save failed transformation step result',
+					message: '无法保存失败的转换步骤结果',
 				});
 			return Ok(markedFailedTransformationRun);
 		}
@@ -394,7 +394,7 @@ async function runTransformation({
 
 		if (markTransformationRunStepAsCompletedError)
 			return TransformServiceErr({
-				message: 'Unable to save completed transformation step result',
+				message: '无法保存已完成的转换步骤结果',
 			});
 
 		currentInput = handleStepOutput;
@@ -407,7 +407,7 @@ async function runTransformation({
 
 	if (markTransformationRunAsCompletedError)
 		return TransformServiceErr({
-			message: 'Unable to save completed transformation run',
+			message: '无法保存已完成的转换运行',
 		});
 	return Ok(markedCompletedTransformationRun);
 }

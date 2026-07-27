@@ -44,7 +44,7 @@ type DesktopPlatform = 'macos' | 'windows' | 'linux';
  */
 function getDesktopPlatform(platform: OsType): DesktopPlatform {
 	if (platform === 'ios' || platform === 'android') {
-		throw new Error(`FFmpeg recording is not supported on ${platform}`);
+		throw new Error(`FFmpeg 录音不支持 ${platform} 平台`);
 	}
 	return platform;
 }
@@ -255,7 +255,7 @@ export function createFfmpegRecorderService(): RecorderService {
 			await CommandServiceLive.execute(command);
 		if (executeError) {
 			return RecorderServiceErr({
-				message: 'Failed to enumerate recording devices',
+				message: '枚举录音设备失败',
 			});
 		}
 
@@ -266,7 +266,7 @@ export function createFfmpegRecorderService(): RecorderService {
 
 		if (devices.length === 0) {
 			return RecorderServiceErr({
-				message: 'No recording devices found',
+				message: '未找到录音设备',
 			});
 		}
 
@@ -310,16 +310,16 @@ export function createFfmpegRecorderService(): RecorderService {
 				if (!fallbackDeviceId) {
 					return RecorderServiceErr({
 						message: selectedDeviceId
-							? "We couldn't find the selected microphone. Make sure it's connected and try again!"
-							: "We couldn't find any microphones. Make sure they're connected and try again!",
+							? '找不到所选的麦克风。请确保其已连接后重试!'
+							: '找不到任何麦克风。请确保其已连接后重试!',
 					});
 				}
 
 				if (!selectedDeviceId) {
 					sendStatus({
-						title: '🔍 No Device Selected',
+						title: '🔍 未选择设备',
 						description:
-							"No worries! We'll find the best microphone for you automatically...",
+							'别担心!我们会自动为您找到最合适的麦克风……',
 					});
 					return Ok({
 						outcome: 'fallback',
@@ -334,9 +334,9 @@ export function createFfmpegRecorderService(): RecorderService {
 					return Ok({ outcome: 'success', deviceId: selectedDeviceId });
 
 				sendStatus({
-					title: '⚠️ Finding a New Microphone',
+					title: '⚠️ 寻找新麦克风',
 					description:
-						"That microphone isn't available. Let's try finding another one...",
+						'该麦克风不可用。让我们尝试找另一个……',
 				});
 
 				return Ok({
@@ -370,8 +370,8 @@ export function createFfmpegRecorderService(): RecorderService {
 			});
 
 			sendStatus({
-				title: '🎤 Setting Up',
-				description: 'Initializing FFmpeg recording session...',
+				title: '🎤 正在准备',
+				description: '正在初始化 FFmpeg 录音会话……',
 			});
 
 			// Use command service to spawn FFmpeg process
@@ -382,7 +382,7 @@ export function createFfmpegRecorderService(): RecorderService {
 			if (startError) {
 				// The spawn function already caught the FFmpeg error and extracted the message
 				return RecorderServiceErr({
-					message: 'Failed to start recording',
+					message: '启动录音失败',
 				});
 			}
 
@@ -393,8 +393,8 @@ export function createFfmpegRecorderService(): RecorderService {
 			};
 
 			sendStatus({
-				title: '🎙️ Recording',
-				description: 'FFmpeg is now recording audio...',
+				title: '🎙️ 正在录音',
+				description: 'FFmpeg 正在录音……',
 			});
 
 			return Ok(deviceOutcome);
@@ -407,13 +407,13 @@ export function createFfmpegRecorderService(): RecorderService {
 			const session = sessionState.value;
 			if (!child || !session) {
 				return RecorderServiceErr({
-					message: 'No active recording to stop',
+					message: '没有可停止的活动录音',
 				});
 			}
 
 			sendStatus({
-				title: '⏹️ Stopping',
-				description: 'Stopping FFmpeg recording...',
+				title: '⏹️ 正在停止',
+				description: '正在停止 FFmpeg 录音……',
 			});
 
 			// Send SIGINT for graceful shutdown
@@ -435,15 +435,15 @@ export function createFfmpegRecorderService(): RecorderService {
 				},
 				catch: (error) =>
 					RecorderServiceErr({
-						message: `Failed to stop FFmpeg process: ${extractErrorMessage(error)}`,
+						message: `停止 FFmpeg 进程失败:${extractErrorMessage(error)}`,
 					}),
 			});
 
 			if (killError) {
 				sendStatus({
-					title: '❌ Error Stopping Recording',
+					title: '❌ 停止录音出错',
 					description:
-						"We couldn't stop the recording properly. Attempting to recover your audio...",
+						'我们无法正确停止录音。正在尝试恢复您的音频……',
 				});
 			}
 
@@ -493,8 +493,8 @@ export function createFfmpegRecorderService(): RecorderService {
 
 			// Read the recorded file
 			sendStatus({
-				title: '📁 Reading Recording',
-				description: 'Loading your recording from disk...',
+				title: '📁 正在读取录音',
+				description: '正在从磁盘加载您的录音……',
 			});
 
 			const { data: blob, error: readError } =
@@ -502,14 +502,14 @@ export function createFfmpegRecorderService(): RecorderService {
 
 			if (readError) {
 				return RecorderServiceErr({
-					message: 'Unable to read recording file',
+					message: '无法读取录音文件',
 				});
 			}
 
 			// Validate the blob has actual content
 			if (!blob || blob.size === 0) {
 				return RecorderServiceErr({
-					message: 'Recording file is empty',
+					message: '录音文件为空',
 				});
 			}
 
@@ -525,8 +525,8 @@ export function createFfmpegRecorderService(): RecorderService {
 			}
 
 			sendStatus({
-				title: '🛑 Cancelling',
-				description: 'Stopping FFmpeg recording and cleaning up...',
+				title: '🛑 正在取消',
+				description: '正在停止 FFmpeg 录音并清理……',
 			});
 
 			// Store the path before clearing the session
@@ -544,15 +544,15 @@ export function createFfmpegRecorderService(): RecorderService {
 					},
 					catch: (error) =>
 						RecorderServiceErr({
-							message: `Failed to delete recording file: ${extractErrorMessage(error)}`,
+							message: `删除录音文件失败:${extractErrorMessage(error)}`,
 						}),
 				});
 
 				if (removeError) {
 					sendStatus({
-						title: '❌ Error Deleting Recording File',
+						title: '❌ 删除录音文件出错',
 						description:
-							"We couldn't delete the recording file. Continuing with the cancellation process...",
+							'我们无法删除该录音文件。正在继续执行取消流程……',
 					});
 				}
 			}

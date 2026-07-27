@@ -28,10 +28,10 @@
 			<Resizable.Handle withHandle />
 			<Resizable.Pane>
 				{#if transformationRunsByTransformationIdQuery.isPending}
-					<div class="text-muted-foreground text-sm p-4">Loading runs...</div>
+					<div class="text-muted-foreground text-sm p-4">加载运行记录...</div>
 				{:else if transformationRunsByTransformationIdQuery.error}
 					<div class="text-destructive text-sm p-4">
-						Error loading transformation runs: {transformationRunsByTransformationIdQuery
+						加载转换运行记录出错: {transformationRunsByTransformationIdQuery
 							.error.message}
 					</div>
 				{:else if transformationRunsByTransformationIdQuery.data}

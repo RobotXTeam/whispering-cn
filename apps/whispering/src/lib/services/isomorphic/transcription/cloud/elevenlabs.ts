@@ -7,13 +7,13 @@ export const ELEVENLABS_TRANSCRIPTION_MODELS = [
 	{
 		name: 'scribe_v1',
 		description:
-			"World's most accurate transcription model with 96.7% accuracy for English. Supports 99 languages with word-level timestamps and speaker diarization.",
+			'全球最准确的转录模型,英语准确度达 96.7%。支持 99 种语言,提供词级时间戳和说话人分离。',
 		cost: '$0.40/hour',
 	},
 	{
 		name: 'scribe_v1_experimental',
 		description:
-			'Experimental version of Scribe with latest features and improvements. May include cutting-edge capabilities but with potential instability.',
+			'Scribe 的实验版本,包含最新功能与改进。可能包含前沿能力,但存在潜在不稳定性。',
 		cost: '$0.40/hour',
 	},
 ] as const;
@@ -34,12 +34,12 @@ export function createElevenLabsTranscriptionService() {
 		): Promise<Result<string, WhisperingError>> => {
 			if (!options.apiKey) {
 				return WhisperingErr({
-					title: '🔑 API Key Required',
+					title: '🔑 需要API密钥',
 					description:
-						'Please enter your ElevenLabs API key in settings to use speech-to-text transcription.',
+						'请在设置中输入您的 ElevenLabs API 密钥以使用语音转文本转录。',
 					action: {
 						type: 'link',
-						label: 'Add API key',
+						label: '添加 API 密钥',
 						href: '/settings/transcription',
 					},
 				});
@@ -56,8 +56,8 @@ export function createElevenLabsTranscriptionService() {
 
 				if (blobSizeInMb > MAX_FILE_SIZE_MB) {
 					return WhisperingErr({
-						title: '📁 File Size Too Large',
-						description: `Your audio file (${blobSizeInMb.toFixed(1)}MB) exceeds the ${MAX_FILE_SIZE_MB}MB limit. Please use a smaller file or compress the audio.`,
+						title: '📁 文件大小过大',
+						description: `您的音频文件 (${blobSizeInMb.toFixed(1)}MB) 超过了 ${MAX_FILE_SIZE_MB}MB 的限制。请使用更小的文件或压缩音频。`,
 					});
 				}
 
@@ -78,9 +78,9 @@ export function createElevenLabsTranscriptionService() {
 				return Ok(transcription.text.trim());
 			} catch (error) {
 				return WhisperingErr({
-					title: '🔧 Transcription Failed',
+					title: '🔧 转录失败',
 					description:
-						'Unable to complete the transcription using ElevenLabs. This may be due to a service issue or unsupported audio format. Please try again.',
+						'无法使用 ElevenLabs 完成转录。可能是服务问题或不支持的音频格式。请重试。',
 					action: { type: 'more-details', error },
 				});
 			}

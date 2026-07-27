@@ -14,11 +14,11 @@ export function registerOnboarding() {
 	// Check transcription service configuration
 	if (!selectedService) {
 		rpc.notify.info.execute({
-			title: 'Welcome to Whispering!',
-			description: 'Please select a transcription service to get started.',
+			title: '欢迎使用 Whispering!',
+			description: '请选择一个转录服务以开始使用。',
 			action: {
 				type: 'link',
-				label: 'Configure',
+				label: '配置',
 				href: '/settings/transcription',
 			},
 			persist: true,
@@ -36,11 +36,11 @@ export function registerOnboarding() {
 		)[selectedService.location];
 
 		rpc.notify.info.execute({
-			title: 'Welcome to Whispering!',
-			description: `Please configure your ${missingConfig} to get started.`,
+			title: '欢迎使用 Whispering!',
+			description: `请配置您的 ${missingConfig} 以开始使用。`,
 			action: {
 				type: 'link',
-				label: 'Configure',
+				label: '配置',
 				href: '/settings/transcription',
 			},
 			persist: true,

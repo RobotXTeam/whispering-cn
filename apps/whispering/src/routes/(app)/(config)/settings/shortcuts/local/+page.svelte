@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Local Shortcuts - Whispering</title>
+	<title>应用内快捷键 - Whispering</title>
 </svelte:head>
 
 <section>
@@ -19,13 +19,12 @@
 		<header class="space-y-1">
 			<div class="flex items-center gap-2">
 				<h2 class="text-xl font-semibold tracking-tight sm:text-2xl">
-					Local Shortcuts
+					应用内快捷键
 				</h2>
 				<ShortcutFormatHelp type="local" />
 			</div>
 			<p class="text-sm text-muted-foreground">
-				Set keyboard shortcuts that work when the app is in focus. These
-				shortcuts will only trigger when Whispering is the active application.
+				设置应用聚焦时生效的键盘快捷键。这些快捷键仅在 Whispering 为活动应用时触发。
 			</p>
 		</header>
 		<Button
@@ -34,14 +33,14 @@
 			onclick={() => {
 				settings.resetLocalShortcuts();
 				rpc.notify.success.execute({
-					title: 'Shortcuts reset',
-					description: 'All local shortcuts have been reset to defaults.',
+					title: '快捷键已重置',
+					description: '所有应用内快捷键已重置为默认值。',
 				});
 			}}
 			class="shrink-0"
 		>
 			<RotateCcw class="size-4" />
-			Reset to defaults
+			重置为默认值
 		</Button>
 	</div>
 

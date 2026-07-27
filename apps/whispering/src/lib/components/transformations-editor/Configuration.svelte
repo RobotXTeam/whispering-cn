@@ -80,10 +80,9 @@
 
 <div class="flex flex-col gap-6 overflow-y-auto h-full px-2">
 	<SectionHeader.Root>
-		<SectionHeader.Title>Configuration</SectionHeader.Title>
+		<SectionHeader.Title>配置</SectionHeader.Title>
 		<SectionHeader.Description>
-			Configure the title, description, and steps for how your transformation
-			will process your text
+			配置标题、描述和步骤,以决定您的转换如何处理文本
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 
@@ -91,7 +90,7 @@
 
 	<section class="space-y-4">
 		<Field.Field>
-			<Field.Label for="title">Title</Field.Label>
+			<Field.Label for="title">标题</Field.Label>
 			<Input
 				id="title"
 				value={transformation.title}
@@ -101,14 +100,14 @@
 						title: e.currentTarget.value,
 					};
 				}}
-				placeholder="e.g., Format Meeting Notes"
+				placeholder="例如:格式化会议笔记"
 			/>
 			<Field.Description>
-				A clear, concise name that describes what this transformation does
+				清晰简洁的名称,描述此转换的功能
 			</Field.Description>
 		</Field.Field>
 		<Field.Field>
-			<Field.Label for="description">Description</Field.Label>
+			<Field.Label for="description">描述</Field.Label>
 			<Textarea
 				id="description"
 				value={transformation.description}
@@ -118,11 +117,10 @@
 						description: e.currentTarget.value,
 					};
 				}}
-				placeholder="e.g., Converts meeting transcripts into bullet points and highlights action items"
+				placeholder="例如:将会议转录转换为要点并突出显示待办事项"
 			/>
 			<Field.Description>
-				Describe what this transformation does, its purpose, and how it will be
-				used
+				描述此转换的功能、目的及使用方式
 			</Field.Description>
 		</Field.Field>
 	</section>
@@ -130,14 +128,13 @@
 	<Separator />
 
 	<section class="space-y-6">
-		<h3 class="font-medium">Processing Steps</h3>
+		<h3 class="font-medium">处理步骤</h3>
 		{#if transformation.steps.length === 0}
 			<Alert.Root variant="warning">
-				<Alert.Title>Add your first processing step</Alert.Title>
+				<Alert.Title>添加您的第一个处理步骤</Alert.Title>
 				<Alert.Description>
-					Each step will process your transcribed text in sequence. Start by
-					adding a step below to define how your text should be transformed.
-				</Alert.Description>
+					每个步骤将按顺序处理您的转录文本。请从下方添加步骤来定义文本的转换方式。
+									</Alert.Description>
 			</Alert.Root>
 		{/if}
 
@@ -151,7 +148,7 @@
 						<div class="flex items-center justify-between">
 							<div class="flex items-center gap-3">
 								<Card.Title class="text-xl">
-									Step {index + 1}:
+									步骤 {index + 1}:
 								</Card.Title>
 								<Select.Root
 									type="single"
@@ -170,7 +167,7 @@
 									}
 								>
 									<Select.Trigger id="step-type" class="h-8">
-										{stepTypeLabel(step.type) ?? 'Select a step type'}
+										{stepTypeLabel(step.type) ?? '选择步骤类型'}
 									</Select.Trigger>
 									<Select.Content>
 										{#each TRANSFORMATION_STEP_TYPE_OPTIONS as item}
@@ -181,7 +178,7 @@
 							</div>
 							<div class="flex items-center gap-2">
 								<Button
-									tooltip="Duplicate step"
+									tooltip="复制步骤"
 									variant="ghost"
 									size="icon"
 									class="size-8"
@@ -190,7 +187,7 @@
 									<CopyIcon class="size-4" />
 								</Button>
 								<Button
-									tooltip="Delete step"
+									tooltip="删除步骤"
 									variant="ghost"
 									size="icon"
 									class="size-8"
@@ -214,7 +211,7 @@
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 									<Field.Field>
 										<Field.Label for="find_replace.findText"
-											>Find Text</Field.Label
+											>查找文本</Field.Label
 										>
 										<Input
 											id="find_replace.findText"
@@ -233,12 +230,12 @@
 													),
 												};
 											}}
-											placeholder="Text or pattern to search for in the transcript"
+											placeholder="要在转录中搜索的文本或模式"
 										/>
 									</Field.Field>
 									<Field.Field>
 										<Field.Label for="find_replace.replaceText"
-											>Replace Text</Field.Label
+											>替换文本</Field.Label
 										>
 										<Input
 											id="find_replace.replaceText"
@@ -257,14 +254,14 @@
 													),
 												};
 											}}
-											placeholder="Text to use as the replacement"
+											placeholder="用作替换的文本"
 										/>
 									</Field.Field>
 								</div>
 								<Accordion.Root type="single" class="w-full">
 									<Accordion.Item class="border-none" value="advanced">
 										<Accordion.Trigger class="text-sm">
-											Advanced Options
+											高级选项
 										</Accordion.Trigger>
 										<Accordion.Content>
 											<Field.Field orientation="horizontal">
@@ -287,11 +284,10 @@
 												/>
 												<Field.Content>
 													<Field.Label for="find_replace.useRegex"
-														>Use Regex</Field.Label
+														>使用正则表达式</Field.Label
 													>
 													<Field.Description>
-														Enable advanced pattern matching using regular
-														expressions (for power users)
+														使用正则表达式启用高级模式匹配(适用于高级用户)
 													</Field.Description>
 												</Field.Content>
 											</Field.Field>
@@ -304,7 +300,7 @@
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 									<Field.Field>
 										<Field.Label for="prompt_transform.inference.provider"
-											>Provider</Field.Label
+											>服务商</Field.Label
 										>
 										<Select.Root
 											type="single"
@@ -334,7 +330,7 @@
 											>
 												{providerLabel(
 													step['prompt_transform.inference.provider'],
-												) ?? 'Select a provider'}
+												) ?? '选择服务商'}
 											</Select.Trigger>
 											<Select.Content>
 												{#each INFERENCE_PROVIDER_OPTIONS as item}
@@ -348,7 +344,7 @@
 										<Field.Field>
 											<Field.Label
 												for="prompt_transform.inference.provider.OpenAI.model"
-												>Model</Field.Label
+												>模型</Field.Label
 											>
 											<Select.Root
 												type="single"
@@ -383,7 +379,7 @@
 														step[
 															'prompt_transform.inference.provider.OpenAI.model'
 														],
-													) ?? 'Select a model'}
+													) ?? '选择模型'}
 												</Select.Trigger>
 												<Select.Content>
 													{#each OPENAI_INFERENCE_MODEL_OPTIONS as item}
@@ -399,7 +395,7 @@
 										<Field.Field>
 											<Field.Label
 												for="prompt_transform.inference.provider.Groq.model"
-												>Model</Field.Label
+												>模型</Field.Label
 											>
 											<Select.Root
 												type="single"
@@ -434,7 +430,7 @@
 														step[
 															'prompt_transform.inference.provider.Groq.model'
 														],
-													) ?? 'Select a model'}
+													) ?? '选择模型'}
 												</Select.Trigger>
 												<Select.Content>
 													{#each GROQ_INFERENCE_MODEL_OPTIONS as item}
@@ -450,7 +446,7 @@
 										<Field.Field>
 											<Field.Label
 												for="prompt_transform.inference.provider.Anthropic.model"
-												>Model</Field.Label
+												>模型</Field.Label
 											>
 											<Select.Root
 												type="single"
@@ -485,7 +481,7 @@
 														step[
 															'prompt_transform.inference.provider.Anthropic.model'
 														],
-													) ?? 'Select a model'}
+													) ?? '选择模型'}
 												</Select.Trigger>
 												<Select.Content>
 													{#each ANTHROPIC_INFERENCE_MODEL_OPTIONS as item}
@@ -501,7 +497,7 @@
 										<Field.Field>
 											<Field.Label
 												for="prompt_transform.inference.provider.Google.model"
-												>Model</Field.Label
+												>模型</Field.Label
 											>
 											<Select.Root
 												type="single"
@@ -536,7 +532,7 @@
 														step[
 															'prompt_transform.inference.provider.Google.model'
 														],
-													) ?? 'Select a model'}
+													) ?? '选择模型'}
 												</Select.Trigger>
 												<Select.Content>
 													{#each GOOGLE_INFERENCE_MODEL_OPTIONS as item}
@@ -552,7 +548,7 @@
 										<Field.Field>
 											<Field.Label
 												for="prompt_transform.inference.provider.OpenRouter.model"
-												>Model</Field.Label
+												>模型</Field.Label
 											>
 											<Input
 												id="prompt_transform.inference.provider.OpenRouter.model"
@@ -573,7 +569,7 @@
 														),
 													};
 												}}
-												placeholder="Enter model name"
+												placeholder="输入模型名称"
 											/>
 										</Field.Field>
 									{:else if step['prompt_transform.inference.provider'] === 'Custom'}
@@ -581,7 +577,7 @@
 											<Field.Field>
 												<Field.Label
 													for="prompt_transform.inference.provider.Custom.baseUrl"
-													>API Base URL</Field.Label
+													>API 基础 URL</Field.Label
 												>
 												<Input
 													id="prompt_transform.inference.provider.Custom.baseUrl"
@@ -612,7 +608,7 @@
 											<Field.Field>
 												<Field.Label
 													for="prompt_transform.inference.provider.Custom.model"
-													>Model</Field.Label
+													>模型</Field.Label
 												>
 												<Input
 													id="prompt_transform.inference.provider.Custom.model"
@@ -648,7 +644,7 @@
 
 								<Field.Field>
 									<Field.Label for="prompt_transform.systemPromptTemplate"
-										>System Prompt Template</Field.Label
+										>系统提示词模板</Field.Label
 									>
 									<Textarea
 										id="prompt_transform.systemPromptTemplate"
@@ -672,7 +668,7 @@
 								</Field.Field>
 								<Field.Field>
 									<Field.Label for="prompt_transform.userPromptTemplate"
-										>User Prompt Template</Field.Label
+										>用户提示词模板</Field.Label
 									>
 									<Textarea
 										id="prompt_transform.userPromptTemplate"
@@ -705,7 +701,7 @@
 								<Accordion.Root type="single" class="w-full">
 									<Accordion.Item class="border-none" value="advanced">
 										<Accordion.Trigger class="text-sm">
-											Advanced Options
+											高级选项
 										</Accordion.Trigger>
 										<Accordion.Content>
 											{#if step['prompt_transform.inference.provider'] === 'OpenAI'}

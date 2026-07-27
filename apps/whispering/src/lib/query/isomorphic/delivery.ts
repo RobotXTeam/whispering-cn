@@ -50,11 +50,11 @@ export const delivery = {
 			const offerManualCopy = () =>
 				rpc.notify.success.execute({
 					id: toastId,
-					title: '📝 Recording transcribed!',
+					title: '📝 录音已转录！',
 					description: text,
 					action: {
 						type: 'button',
-						label: 'Copy to clipboard',
+						label: '复制到剪贴板',
 						onClick: async () => {
 							const { error } = await rpc.text.copyToClipboard.execute({
 								text,
@@ -62,7 +62,7 @@ export const delivery = {
 							if (error) {
 								// Report that manual copy attempt failed
 								rpc.notify.error.execute({
-									title: 'Error copying transcript to clipboard',
+									title: '将转录文本复制到剪贴板时出错',
 									description: error.message,
 									action: { type: 'more-details', error },
 								});
@@ -71,7 +71,7 @@ export const delivery = {
 							// Confirm manual copy succeeded
 							rpc.notify.success.execute({
 								id: toastId,
-								title: 'Copied transcript to clipboard!',
+								title: '已将转录文本复制到剪贴板！',
 								description: text,
 							});
 						},
@@ -81,7 +81,7 @@ export const delivery = {
 			// Warns that automatic copy failed
 			const warnAutoCopyFailed = (error: TextServiceError) => {
 				rpc.notify.warning.execute({
-					title: "Couldn't copy to clipboard",
+					title: '无法复制到剪贴板',
 					description: error.message,
 					action: { type: 'more-details', error },
 				});
@@ -93,7 +93,7 @@ export const delivery = {
 			) => {
 				if (error.name === 'TextServiceError') {
 					rpc.notify.warning.execute({
-						title: 'Unable to write to cursor automatically',
+						title: '无法自动写入到光标位置',
 						description: error.message,
 						action: { type: 'more-details', error },
 					});
@@ -112,11 +112,11 @@ export const delivery = {
 					rpc.notify.success.execute({
 						id: toastId,
 						title:
-							'📝 Recording transcribed, copied to clipboard, and written to cursor!',
+							'📝 录音已转录，已复制到剪贴板，并已写入到光标位置！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -124,11 +124,11 @@ export const delivery = {
 					// Only copy succeeded
 					rpc.notify.success.execute({
 						id: toastId,
-						title: '📝 Recording transcribed and copied to clipboard!',
+						title: '📝 录音已转录并已复制到剪贴板！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -136,11 +136,11 @@ export const delivery = {
 					// Only write succeeded
 					rpc.notify.success.execute({
 						id: toastId,
-						title: '📝 Recording transcribed and written to cursor!',
+						title: '📝 录音已转录并已写入到光标位置！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -177,7 +177,7 @@ export const delivery = {
 							await rpc.text.simulateEnterKeystroke.execute();
 						if (enterError) {
 							rpc.notify.warning.execute({
-								title: 'Unable to simulate Enter keystroke',
+								title: '无法模拟回车键按下',
 								description: enterError.message,
 								action: { type: 'more-details', error: enterError },
 							});
@@ -238,11 +238,11 @@ export const delivery = {
 			const offerManualCopy = () =>
 				rpc.notify.success.execute({
 					id: toastId,
-					title: '🔄 Transformation complete!',
+					title: '🔄 转换完成！',
 					description: text,
 					action: {
 						type: 'button',
-						label: 'Copy to clipboard',
+						label: '复制到剪贴板',
 						onClick: async () => {
 							const { error } = await rpc.text.copyToClipboard.execute({
 								text,
@@ -250,7 +250,7 @@ export const delivery = {
 							if (error) {
 								// Report that manual copy attempt failed
 								rpc.notify.error.execute({
-									title: 'Error copying transformed text to clipboard',
+									title: '将转换后的文本复制到剪贴板时出错',
 									description: error.message,
 									action: { type: 'more-details', error },
 								});
@@ -259,7 +259,7 @@ export const delivery = {
 							// Confirm manual copy succeeded
 							rpc.notify.success.execute({
 								id: toastId,
-								title: 'Copied transformed text to clipboard!',
+								title: '已将转换后的文本复制到剪贴板！',
 								description: text,
 							});
 						},
@@ -269,7 +269,7 @@ export const delivery = {
 			// Warns that automatic copy failed
 			const warnAutoCopyFailed = (error: TextServiceError) => {
 				rpc.notify.warning.execute({
-					title: "Couldn't copy to clipboard",
+					title: '无法复制到剪贴板',
 					description: error.message,
 					action: { type: 'more-details', error },
 				});
@@ -281,7 +281,7 @@ export const delivery = {
 			) => {
 				if (error.name === 'TextServiceError') {
 					rpc.notify.error.execute({
-						title: 'Error writing transformed text to cursor',
+						title: '将转换后的文本写入到光标位置时出错',
 						description: error.message,
 						action: { type: 'more-details', error },
 					});
@@ -300,11 +300,11 @@ export const delivery = {
 					rpc.notify.success.execute({
 						id: toastId,
 						title:
-							'🔄 Transformation complete, copied to clipboard, and written to cursor!',
+							'🔄 转换完成，已复制到剪贴板，并已写入到光标位置！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -312,11 +312,11 @@ export const delivery = {
 					// Only copy succeeded
 					rpc.notify.success.execute({
 						id: toastId,
-						title: '🔄 Transformation complete and copied to clipboard!',
+						title: '🔄 转换完成，已复制到剪贴板！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -324,11 +324,11 @@ export const delivery = {
 					// Only write succeeded
 					rpc.notify.success.execute({
 						id: toastId,
-						title: '🔄 Transformation complete and written to cursor!',
+						title: '🔄 转换完成，已写入到光标位置！',
 						description: text,
 						action: {
 							type: 'link',
-							label: 'Go to recordings',
+							label: '前往录音记录',
 							href: WHISPERING_RECORDINGS_PATHNAME,
 						},
 					});
@@ -365,7 +365,7 @@ export const delivery = {
 							await rpc.text.simulateEnterKeystroke.execute();
 						if (enterError) {
 							rpc.notify.warning.execute({
-								title: 'Unable to simulate Enter keystroke',
+								title: '无法模拟回车键按下',
 								description: enterError.message,
 								action: { type: 'more-details', error: enterError },
 							});

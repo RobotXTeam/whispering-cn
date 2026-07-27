@@ -6,11 +6,11 @@
 </script>
 
 <Field.Field>
-	<Field.Label for="anthropic-api-key">Anthropic API Key</Field.Label>
+	<Field.Label for="anthropic-api-key">Anthropic API 密钥</Field.Label>
 	<Input
 		id="anthropic-api-key"
 		type="password"
-		placeholder="Your Anthropic API Key"
+		placeholder="你的 Anthropic API 密钥"
 		autocomplete="off"
 		bind:value={
 			() => settings.value['apiKeys.anthropic'],
@@ -18,12 +18,12 @@
 		}
 	/>
 	<Field.Description>
-		You can find your Anthropic API key in your <Link
+		你可以在<Link
 			href="https://console.anthropic.com/settings/keys"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			Anthropic console
-		</Link>.
+			Anthropic 控制台
+		</Link>中找到你的 Anthropic API 密钥。
 	</Field.Description>
 </Field.Field>

@@ -27,7 +27,7 @@ export function createGoogleCompletionService(): CompletionService {
 				},
 				catch: (error) =>
 					CompletionServiceErr({
-						message: `Google API Error: ${extractErrorMessage(error)}`,
+						message: `Google API 错误:${extractErrorMessage(error)}`,
 					}),
 			});
 
@@ -35,7 +35,7 @@ export function createGoogleCompletionService(): CompletionService {
 
 			if (!completion) {
 				return CompletionServiceErr({
-					message: 'Google API returned an empty response',
+					message: 'Google API 返回了空响应',
 				});
 			}
 

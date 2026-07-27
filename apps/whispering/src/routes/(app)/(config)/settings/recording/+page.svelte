@@ -49,30 +49,30 @@
 			value: 'cpal',
 			label: 'CPAL',
 			description: IS_MACOS
-				? 'Native Rust audio method. Records uncompressed WAV, reliable with shortcuts. Works with all transcription methods.'
-				: 'Native Rust audio method. Records uncompressed WAV format. Works with all transcription methods.',
+				? '原生 Rust 音频方法。录制未压缩的 WAV，快捷键可靠。适用于所有转录方式。'
+				: '原生 Rust 音频方法。录制未压缩的 WAV 格式。适用于所有转录方式。',
 		},
 		{
 			value: 'ffmpeg',
 			label: 'FFmpeg',
 			description: {
 				macos:
-					'Supports all audio formats with advanced customization options. Reliable with keyboard shortcuts.',
+					'支持所有音频格式，提供高级自定义选项。键盘快捷键可靠。',
 				linux:
-					'Recommended for Linux. Supports all audio formats with advanced customization options. Helps bypass common audio issues.',
+					'Linux 推荐。支持所有音频格式，提供高级自定义选项。有助于绕过常见音频问题。',
 				windows:
-					'Supports all audio formats with advanced customization options.',
+					'支持所有音频格式，提供高级自定义选项。',
 				android:
-					'Supports all audio formats with advanced customization options.',
-				ios: 'Supports all audio formats with advanced customization options.',
+					'支持所有音频格式，提供高级自定义选项。',
+				ios: '支持所有音频格式，提供高级自定义选项。',
 			}[PLATFORM_TYPE],
 		},
 		{
 			value: 'navigator',
-			label: 'Browser API',
+			label: '浏览器 API',
 			description: IS_MACOS
-				? 'Web MediaRecorder API. Creates compressed files suitable for cloud transcription. Requires FFmpeg for local transcription (Whisper C++/Parakeet). May have delays with shortcuts when app is in background (macOS AppNap).'
-				: 'Web MediaRecorder API. Creates compressed files suitable for cloud transcription. Requires FFmpeg for local transcription (Whisper C++/Parakeet).',
+				? 'Web MediaRecorder API。创建适合云端转录的压缩文件。本地转录需要 FFmpeg(Whisper C++/Parakeet)。应用在后台时快捷键可能有延迟(macOS AppNap)。'
+				: 'Web MediaRecorder API。创建适合云端转录的压缩文件。本地转录需要 FFmpeg(Whisper C++/Parakeet)。',
 		},
 	];
 
@@ -93,18 +93,18 @@
 </script>
 
 <svelte:head>
-	<title>Recording Settings - Whispering</title>
+	<title>录音设置 - Whispering</title>
 </svelte:head>
 
 <Field.Set>
-	<Field.Legend>Recording</Field.Legend>
+	<Field.Legend>录音</Field.Legend>
 	<Field.Description>
-		Configure your Whispering recording preferences.
+		配置你的 Whispering 录音偏好。
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
 		<Field.Field>
-			<Field.Label for="recording-mode">Recording Mode</Field.Label>
+			<Field.Label for="recording-mode">录音模式</Field.Label>
 			<Select.Root
 				type="single"
 				bind:value={
@@ -115,7 +115,7 @@
 				}
 			>
 				<Select.Trigger id="recording-mode" class="w-full">
-					{recordingModeLabel ?? 'Select a recording mode'}
+					{recordingModeLabel ?? '选择录音模式'}
 				</Select.Trigger>
 				<Select.Content>
 					{#each RECORDING_MODE_OPTIONS as item}
@@ -124,7 +124,7 @@
 				</Select.Content>
 			</Select.Root>
 			<Field.Description>
-				Choose how you want to activate recording: {RECORDING_MODE_OPTIONS.map(
+				选择录音的激活方式： {RECORDING_MODE_OPTIONS.map(
 					(option) => option.label.toLowerCase(),
 				).join(', ')}
 			</Field.Description>
@@ -132,7 +132,7 @@
 
 		{#if window.__TAURI_INTERNALS__ && settings.value['recording.mode'] === 'manual'}
 			<Field.Field>
-				<Field.Label for="recording-method">Recording Method</Field.Label>
+				<Field.Label for="recording-method">录音方法</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -147,7 +147,7 @@
 					}
 				>
 					<Select.Trigger id="recording-method" class="w-full">
-						{recordingMethodLabel ?? 'Select a recording method'}
+						{recordingMethodLabel ?? '选择录音方法'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each RECORDING_METHOD_OPTIONS as item}
@@ -175,12 +175,12 @@
 				<Alert.Root class="border-warning/20 bg-warning/5">
 					<InfoIcon class="size-4 text-warning dark:text-warning" />
 					<Alert.Title class="text-warning dark:text-warning">
-						Global Shortcuts May Be Unreliable
+						全局快捷键可能不可靠
 					</Alert.Title>
 					<Alert.Description>
-						When using the navigator recorder, macOS App Nap may prevent the
-						browser recording logic from starting when not in focus. Consider
-						using the CPAL method for reliable global shortcut support.
+						使用 navigator 录音器时，macOS App Nap 可能会阻止
+						浏览器录音逻辑在未聚焦时启动。建议
+						使用 CPAL 方法以获得可靠的全局快捷键支持。
 					</Alert.Description>
 				</Alert.Root>
 			{/if}
@@ -189,16 +189,16 @@
 				<Alert.Root class="border-red-500/20 bg-red-500/5">
 					<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 					<Alert.Title class="text-red-600 dark:text-red-400">
-						FFmpeg Not Installed
+						未安装 FFmpeg
 					</Alert.Title>
 					<Alert.Description>
-						FFmpeg is required for the FFmpeg recording method. Please install
-						it to use this feature.
+						FFmpeg 录音方法需要 FFmpeg。请安装
+						以使用此功能。
 						<Link
 							href="/install-ffmpeg"
 							class="font-medium underline underline-offset-4 hover:text-red-700 dark:hover:text-red-300"
 						>
-							Install FFmpeg →
+							安装 FFmpeg →
 						</Link>
 					</Alert.Description>
 				</Alert.Root>
@@ -206,7 +206,7 @@
 				<Alert.Root class="border-blue-500/20 bg-blue-500/5">
 					<InfoIcon class="size-4 text-blue-600 dark:text-blue-400" />
 					<Alert.Title class="text-blue-600 dark:text-blue-400">
-						Enable Compression for Faster Uploads
+						启用压缩以加快上传
 					</Alert.Title>
 					<Alert.Description>
 						{COMPRESSION_RECOMMENDED_MESSAGE}
@@ -214,7 +214,7 @@
 							href="/settings/transcription"
 							class="font-medium underline underline-offset-4 hover:text-blue-700 dark:hover:text-blue-300"
 						>
-							Enable in Transcription Settings →
+							在转录设置中启用 →
 						</Link>
 					</Alert.Description>
 				</Alert.Root>
@@ -224,33 +224,33 @@
 				<Alert.Root class="border-red-500/20 bg-red-500/5">
 					<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 					<Alert.Title class="text-red-600 dark:text-red-400">
-						Local Transcription Requires FFmpeg or CPAL Recording
+						本地转录需要 FFmpeg 或 CPAL 录音
 					</Alert.Title>
 					<Alert.Description>
-						The Browser API recording method produces compressed audio that
-						requires FFmpeg for local transcription with {TRANSCRIPTION_SERVICE_ID_TO_LABEL[
+						浏览器 API 录音方法会产生压缩音频，
+						需要 FFmpeg 才能使用 {TRANSCRIPTION_SERVICE_ID_TO_LABEL[
 							settings.value['transcription.selectedTranscriptionService']
-						]}.
+						]} 进行本地转录。
 						<div class="mt-3 space-y-3">
 							<div class="flex items-center gap-2">
-								<span class="text-sm"><strong>Option 1:</strong></span>
+								<span class="text-sm"><strong>选项 1:</strong></span>
 								<Button
 									onclick={() => settings.updateKey('recording.method', 'cpal')}
 									variant="secondary"
 									size="sm"
 								>
-									Switch to CPAL Recording
+									切换到 CPAL 录音
 								</Button>
 							</div>
 							<div class="text-sm">
-								<strong>Option 2:</strong>
-								<Link href="/install-ffmpeg">Install FFmpeg</Link>
-								to keep using Browser API recording
+								<strong>选项 2:</strong>
+								<Link href="/install-ffmpeg">安装 FFmpeg</Link>
+								以继续使用浏览器 API 录音
 							</div>
 							<div class="text-sm">
-								<strong>Option 3:</strong>
-								Switch to a cloud transcription service (OpenAI, Groq, Deepgram, etc.)
-								which work with all recording methods
+								<strong>选项 3:</strong>
+								切换到云端转录服务商（OpenAI、Groq、Deepgram 等）
+								适用于所有录音方式
 							</div>
 						</div>
 					</Alert.Description>
@@ -272,19 +272,19 @@
 				<Alert.Root class="border-red-500/20 bg-red-500/5">
 					<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 					<Alert.Title class="text-red-600 dark:text-red-400">
-						VAD Mode Not Supported on Linux
+						Linux 不支持 VAD 模式
 					</Alert.Title>
 					<Alert.Description>
-						Voice Activated Detection (VAD) mode requires the browser's
-						Navigator API, which is not fully supported in Tauri on Linux.
-						Device enumeration and recording will fail. Please use Manual
-						recording mode instead.
+						语音活动检测(VAD)模式需要浏览器的
+						Navigator API，该 API 在 Linux 的 Tauri 中未完全支持。
+						设备枚举和录音会失败。请改用
+						手动录音模式。
 						<Link
 							href="https://github.com/EpicenterHQ/epicenter/issues/839"
 							target="_blank"
 							class="font-medium underline underline-offset-4 hover:text-red-700 dark:hover:text-red-300"
 						>
-							Learn more →
+							了解更多 →
 						</Link>
 					</Alert.Description>
 				</Alert.Root>
@@ -292,13 +292,13 @@
 				<Alert.Root class="border-blue-500/20 bg-blue-500/5">
 					<InfoIcon class="size-4 text-blue-600 dark:text-blue-400" />
 					<Alert.Title class="text-blue-600 dark:text-blue-400">
-						Voice Activated Detection Mode
+						语音活动检测模式
 					</Alert.Title>
 					<Alert.Description>
-						VAD mode uses the browser's Web Audio API for real-time voice
-						detection and records via the browser's MediaRecorder API. Audio is
-						encoded to uncompressed WAV format. VAD mode has its own recording
-						method and cannot use CPAL or FFmpeg.
+						VAD 模式使用浏览器的 Web Audio API 进行实时语音
+						检测，并通过浏览器的 MediaRecorder API 录音。音频
+						编码为未压缩的 WAV 格式。VAD 模式有自己的录音
+						方法，不能使用 CPAL 或 FFmpeg。
 					</Alert.Description>
 				</Alert.Root>
 			{/if}
@@ -316,7 +316,7 @@
 			{#if isUsingNavigatorMethod}
 				<!-- Browser method settings -->
 				<Field.Field>
-					<Field.Label for="bit-rate">Bitrate</Field.Label>
+					<Field.Label for="bit-rate">比特率</Field.Label>
 					<Select.Root
 						type="single"
 						bind:value={
@@ -331,7 +331,7 @@
 						}
 					>
 						<Select.Trigger id="bit-rate" class="w-full">
-							{bitrateLabel ?? 'Select a bitrate'}
+							{bitrateLabel ?? '选择比特率'}
 						</Select.Trigger>
 						<Select.Content>
 							{#each BITRATE_OPTIONS as item}
@@ -340,20 +340,20 @@
 						</Select.Content>
 					</Select.Root>
 					<Field.Description>
-						The bitrate of the recording. Higher values mean better quality but
-						larger file sizes.
+						录音的比特率。值越高质量越好，但
+						文件越大。
 					</Field.Description>
 				</Field.Field>
 			{:else if isUsingFfmpegMethod}
 				<!-- FFmpeg method settings -->
 				<div class="space-y-2">
 					<label for="output-folder" class="text-sm font-medium">
-						Recording Output Folder
+						录音输出文件夹
 					</label>
 					<DesktopOutputFolder></DesktopOutputFolder>
 					<p class="text-xs text-muted-foreground">
-						Choose where to save your recordings. Default location is secure and
-						managed by the app.
+						选择录音的保存位置。默认位置安全且由应用
+						管理。
 					</p>
 				</div>
 
@@ -374,7 +374,7 @@
 			{:else}
 				<!-- CPAL method settings -->
 				<Field.Field>
-					<Field.Label for="sample-rate">Sample Rate</Field.Label>
+					<Field.Label for="sample-rate">采样率</Field.Label>
 					<Select.Root
 						type="single"
 						bind:value={
@@ -386,7 +386,7 @@
 						}
 					>
 						<Select.Trigger id="sample-rate" class="w-full">
-							{sampleRateLabel ?? 'Select sample rate'}
+							{sampleRateLabel ?? '选择采样率'}
 						</Select.Trigger>
 						<Select.Content>
 							{#each SAMPLE_RATE_OPTIONS as item}
@@ -395,18 +395,18 @@
 						</Select.Content>
 					</Select.Root>
 					<Field.Description>
-						Higher sample rates provide better quality but create larger files
+						采样率越高质量越好，但文件越大
 					</Field.Description>
 				</Field.Field>
 
 				<div class="space-y-2">
 					<label for="output-folder" class="text-sm font-medium">
-						Recording Output Folder
+						录音输出文件夹
 					</label>
 					<DesktopOutputFolder></DesktopOutputFolder>
 					<p class="text-xs text-muted-foreground">
-						Choose where to save your recordings. Default location is secure and
-						managed by the app.
+						选择录音的保存位置。默认位置安全且由应用
+						管理。
 					</p>
 				</div>
 			{/if}

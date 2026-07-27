@@ -23,26 +23,26 @@
 		<EditTransformationModal {transformation} />
 
 		<Button
-			tooltip="Delete transformation"
+			tooltip="删除转换"
 			onclick={() => {
 				confirmationDialog.open({
-					title: 'Delete transformation',
-					description: 'Are you sure you want to delete this transformation?',
-					confirm: { text: 'Delete', variant: 'destructive' },
+					title: '删除转换',
+					description: '确定要删除此转换吗?',
+					confirm: { text: '删除', variant: 'destructive' },
 					onConfirm: async () => {
 						const { error } =
 							await rpc.db.transformations.delete.execute(transformation);
 						if (error) {
 							rpc.notify.error.execute({
-								title: 'Failed to delete transformation!',
-								description: 'Your transformation could not be deleted.',
+								title: '删除转换失败!',
+								description: '无法删除您的转换。',
 								action: { type: 'more-details', error },
 							});
 							throw error;
 						}
 						rpc.notify.success.execute({
-							title: 'Deleted transformation!',
-							description: 'Your transformation has been deleted successfully.',
+							title: '已删除转换!',
+							description: '您的转换已成功删除。',
 						});
 					},
 				});

@@ -65,7 +65,7 @@ export function createNotificationServiceWeb(): NotificationService {
 					// Check if browser supports notifications
 					const isNotificationsSupported = 'Notification' in window;
 					if (!isNotificationsSupported) {
-						throw new Error('Browser does not support notifications');
+						throw new Error('浏览器不支持通知');
 					}
 
 					// Check/request permission
@@ -75,7 +75,7 @@ export function createNotificationServiceWeb(): NotificationService {
 					}
 
 					if (permission !== 'granted') {
-						throw new Error('Notification permission denied');
+						throw new Error('通知权限被拒绝');
 					}
 
 					// Create notification
@@ -93,7 +93,7 @@ export function createNotificationServiceWeb(): NotificationService {
 				},
 				catch: (error) =>
 					NotificationServiceErr({
-						message: `Failed to send browser notification: ${extractErrorMessage(error)}`,
+						message: `发送浏览器通知失败:${extractErrorMessage(error)}`,
 					}),
 			});
 

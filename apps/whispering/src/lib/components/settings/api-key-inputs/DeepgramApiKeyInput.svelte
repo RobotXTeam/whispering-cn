@@ -6,11 +6,11 @@
 </script>
 
 <Field.Field>
-	<Field.Label for="deepgram-api-key">Deepgram API Key</Field.Label>
+	<Field.Label for="deepgram-api-key">Deepgram API 密钥</Field.Label>
 	<Input
 		id="deepgram-api-key"
 		type="password"
-		placeholder="Your Deepgram API Key"
+		placeholder="你的 Deepgram API 密钥"
 		autocomplete="off"
 		bind:value={
 			() => settings.value['apiKeys.deepgram'],
@@ -18,19 +18,19 @@
 		}
 	/>
 	<Field.Description>
-		You can find your API key in your <Link
+		你可以在你的 <Link
 			href="https://console.deepgram.com/project"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			Deepgram Console
-		</Link>. Make sure you have <Link
+			Deepgram 控制台
+		</Link> 中找到你的 API 密钥。确保你拥有 <Link
 			href="https://console.deepgram.com/billing"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			credits
+			额度
 		</Link>
-		available.
+		可用。
 	</Field.Description>
 </Field.Field>

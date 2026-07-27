@@ -47,7 +47,7 @@ export function createCommandServiceDesktop() {
 				catch: (error) => {
 					console.error('[TS] execute: error:', error);
 					return CommandServiceErr({
-						message: 'Failed to execute command',
+						message: '执行命令失败',
 					});
 				},
 			});
@@ -84,7 +84,7 @@ export function createCommandServiceDesktop() {
 				catch: (error) => {
 					console.error('[TS] spawn: error:', error);
 					return CommandServiceErr({
-						message: `Failed to spawn command: ${extractErrorMessage(error)}`,
+						message: `启动命令失败:${extractErrorMessage(error)}`,
 					});
 				},
 			});

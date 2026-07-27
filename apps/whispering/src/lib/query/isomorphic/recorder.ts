@@ -33,7 +33,7 @@ export const recorder = {
 			const { data, error } = await recorderService().enumerateDevices();
 			if (error) {
 				return WhisperingErr({
-					title: '❌ Failed to enumerate devices',
+					title: '❌ 枚举设备失败',
 					serviceError: error,
 				});
 			}
@@ -49,7 +49,7 @@ export const recorder = {
 				await recorderService().getRecorderState();
 			if (getStateError) {
 				return WhisperingErr({
-					title: '❌ Failed to get recorder state',
+					title: '❌ 获取录音器状态失败',
 					serviceError: getStateError,
 				});
 			}
@@ -118,7 +118,7 @@ export const recorder = {
 
 			if (startRecordingError) {
 				return WhisperingErr({
-					title: '❌ Failed to start recording',
+					title: '❌ 开始录音失败',
 					serviceError: startRecordingError,
 				});
 			}
@@ -140,7 +140,7 @@ export const recorder = {
 				// Reset recording ID on error
 				currentRecordingId = null;
 				return WhisperingErr({
-					title: '❌ Failed to stop recording',
+					title: '❌ 停止录音失败',
 					serviceError: stopRecordingError,
 				});
 			}
@@ -153,9 +153,9 @@ export const recorder = {
 
 			if (!recordingId) {
 				return WhisperingErr({
-					title: '❌ Missing recording ID',
+					title: '❌ 缺少录音 ID',
 					description:
-						'An internal error occurred: recording ID was not set when stopping the recording.',
+						'发生内部错误:停止录音时未设置录音 ID。',
 				});
 			}
 
@@ -179,7 +179,7 @@ export const recorder = {
 
 			if (cancelRecordingError) {
 				return WhisperingErr({
-					title: '❌ Failed to cancel recording',
+					title: '❌ 取消录音失败',
 					serviceError: cancelRecordingError,
 				});
 			}

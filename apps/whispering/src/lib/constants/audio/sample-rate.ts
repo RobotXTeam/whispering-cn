@@ -13,9 +13,9 @@ const SAMPLE_RATE_METADATA: Record<
 	SampleRate,
 	{ shortLabel: string; description: string }
 > = {
-	'16000': { shortLabel: '16 kHz', description: 'Optimized for speech' },
-	'44100': { shortLabel: '44.1 kHz', description: 'CD quality' },
-	'48000': { shortLabel: '48 kHz', description: 'Studio quality' },
+	'16000': { shortLabel: '16 kHz', description: '适合语音' },
+	'44100': { shortLabel: '44.1 kHz', description: 'CD 音质' },
+	'48000': { shortLabel: '48 kHz', description: '录音棚音质' },
 };
 
 /**

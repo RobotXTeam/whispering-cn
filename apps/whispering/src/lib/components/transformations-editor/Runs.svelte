@@ -36,9 +36,9 @@
 			<Empty.Media variant="icon">
 				<PlayIcon />
 			</Empty.Media>
-			<Empty.Title>No runs yet</Empty.Title>
+			<Empty.Title>暂无运行记录</Empty.Title>
 			<Empty.Description>
-				When you run a transformation, the results will appear here.
+				运行转换后,结果将显示在此处。
 			</Empty.Description>
 		</Empty.Header>
 	</Empty.Root>
@@ -50,39 +50,39 @@
 				size="sm"
 				onclick={() => {
 					confirmationDialog.open({
-						title: 'Clear all transformation runs?',
-						description: `This will permanently delete all ${runs.length} run${runs.length !== 1 ? 's' : ''} from this history. This action cannot be undone.`,
-						confirm: { text: 'Delete All', variant: 'destructive' },
+						title: '清除所有转换运行记录?',
+						description: `此操作将永久删除历史记录中的所有 ${runs.length} 条运行记录${runs.length !== 1 ? 's' : ''}。此操作无法撤销。`,
+						confirm: { text: '全部删除', variant: 'destructive' },
 						onConfirm: async () => {
 							const { error } = await rpc.db.runs.delete.execute(runs);
 							if (error) {
 								rpc.notify.error.execute({
-									title: 'Failed to delete runs',
+									title: '删除运行记录失败',
 									description: error.message,
 								});
 								throw error;
 							}
 							rpc.notify.success.execute({
-								title: `${runs.length} run${runs.length !== 1 ? 's' : ''} deleted successfully`,
-								description: 'All transformation runs have been deleted.',
+								title: `已删除 ${runs.length} 条运行记录${runs.length !== 1 ? 's' : ''}`,
+								description: '所有转换运行记录已删除。',
 							});
 						},
 					});
 				}}
 			>
 				<Trash2 class="size-4" />
-				Clear All Runs
+				清除所有运行记录
 			</Button>
 		</div>
 		<div class="h-full overflow-y-auto px-2">
 			<Table.Root>
 				<Table.Header>
 					<Table.Row>
-						<Table.Head>Expand</Table.Head>
-						<Table.Head>Status</Table.Head>
-						<Table.Head>Started</Table.Head>
-						<Table.Head>Completed</Table.Head>
-						<Table.Head class="text-right">Actions</Table.Head>
+						<Table.Head>展开</Table.Head>
+						<Table.Head>状态</Table.Head>
+						<Table.Head>开始时间</Table.Head>
+						<Table.Head>完成时间</Table.Head>
+						<Table.Head class="text-right">操作</Table.Head>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
@@ -117,25 +117,25 @@
 								<Button
 									variant="ghost"
 									size="icon"
-									tooltip="Delete run"
+									tooltip="删除运行记录"
 									onclick={() => {
 										confirmationDialog.open({
-											title: 'Delete transformation run?',
-											description: `This will permanently delete the run from ${formatDate(run.startedAt)}. This action cannot be undone.`,
+											title: '删除转换运行记录?',
+											description: `此操作将永久删除${formatDate(run.startedAt)}的运行记录。此操作无法撤销。`,
 											confirm: { text: 'Delete', variant: 'destructive' },
 											onConfirm: async () => {
 												const { error } = await rpc.db.runs.delete.execute(run);
 												if (error) {
 													rpc.notify.error.execute({
-														title: 'Failed to delete run',
+														title: '删除运行记录失败',
 														description: error.message,
 													});
 													throw error;
 												}
 												rpc.notify.success.execute({
-													title: 'Run deleted successfully',
+													title: '运行记录已删除',
 													description:
-														'Your transformation run has been deleted.',
+														'您的转换运行记录已删除。',
 												});
 											},
 										});
@@ -149,28 +149,28 @@
 						{#if expandedRunId === run.id}
 							<Table.Row>
 								<Table.Cell class="space-y-4 p-4" colspan={5}>
-									<Label class="text-sm font-medium">Input</Label>
+									<Label class="text-sm font-medium">输入</Label>
 									<CopyablePre variant="text" copyableText={run.input} />
 
 									{#if run.status === 'completed'}
-										<Label class="text-sm font-medium">Output</Label>
+										<Label class="text-sm font-medium">输出</Label>
 										<CopyablePre variant="text" copyableText={run.output} />
 									{:else if run.status === 'failed'}
-										<Label class="text-sm font-medium">Error</Label>
+										<Label class="text-sm font-medium">错误</Label>
 										<CopyablePre variant="error" copyableText={run.error} />
 									{/if}
 									{#if run.stepRuns.length > 0}
 										<div class="flex flex-col gap-2">
-											<Label class="text-sm font-medium">Steps</Label>
+											<Label class="text-sm font-medium">步骤</Label>
 											<Card.Root>
 												<Table.Root>
 													<Table.Header>
 														<Table.Row>
-															<Table.Head>Status</Table.Head>
-															<Table.Head>Started</Table.Head>
-															<Table.Head>Completed</Table.Head>
-															<Table.Head>Input</Table.Head>
-															<Table.Head>Output</Table.Head>
+															<Table.Head>状态</Table.Head>
+															<Table.Head>开始时间</Table.Head>
+															<Table.Head>完成时间</Table.Head>
+															<Table.Head>输入</Table.Head>
+															<Table.Head>输出</Table.Head>
 														</Table.Row>
 													</Table.Header>
 													<Table.Body>
@@ -193,8 +193,8 @@
 																	<TextPreviewDialog
 																		id={viewTransition.stepRun(stepRun.id)
 																			.input}
-																		title="Step Input"
-																		label="step input"
+																		title="步骤输入"
+																		label="步骤输入"
 																		text={stepRun.input}
 																	/>
 																</Table.Cell>
@@ -203,16 +203,16 @@
 																		<TextPreviewDialog
 																			id={viewTransition.stepRun(stepRun.id)
 																				.output}
-																			title="Step Output"
-																			label="step output"
+																			title="步骤输出"
+																			label="步骤输出"
 																			text={stepRun.output}
 																		/>
 																	{:else if stepRun.status === 'failed'}
 																		<TextPreviewDialog
 																			id={viewTransition.stepRun(stepRun.id)
 																				.error}
-																			title="Step Error"
-																			label="step error"
+																			title="步骤错误"
+																			label="步骤错误"
 																			text={stepRun.error}
 																		/>
 																	{/if}

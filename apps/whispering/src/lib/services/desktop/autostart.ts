@@ -24,7 +24,7 @@ export function createAutostartServiceDesktop() {
 				try: () => isEnabled(),
 				catch: (error) =>
 					AutostartServiceErr({
-						message: `Failed to check autostart status: ${extractErrorMessage(error)}`,
+						message: `检查自启动状态失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -34,7 +34,7 @@ export function createAutostartServiceDesktop() {
 				try: () => enable(),
 				catch: (error) =>
 					AutostartServiceErr({
-						message: `Failed to enable autostart: ${extractErrorMessage(error)}`,
+						message: `启用自启动失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -44,7 +44,7 @@ export function createAutostartServiceDesktop() {
 				try: () => disable(),
 				catch: (error) =>
 					AutostartServiceErr({
-						message: `Failed to disable autostart: ${extractErrorMessage(error)}`,
+						message: `禁用自启动失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

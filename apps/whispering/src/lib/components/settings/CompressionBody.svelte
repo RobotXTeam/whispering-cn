@@ -21,27 +21,27 @@
 	// Compression preset definitions (UI only - not stored in settings)
 	const COMPRESSION_PRESETS = {
 		recommended: {
-			label: 'Recommended',
+			label: '推荐',
 			icon: '🎯',
-			description: 'Best for speech with silence removal',
+			description: '最适合语音,带静音移除',
 			options: FFMPEG_DEFAULT_COMPRESSION_OPTIONS,
 		},
 		preserve: {
-			label: 'Preserve Audio',
+			label: '保留音频',
 			icon: '📼',
-			description: 'Compress but keep all audio',
+			description: '压缩但保留所有音频',
 			options: '-c:a libopus -b:a 32k -ar 16000 -ac 1 -compression_level 10',
 		},
 		smallest: {
-			label: 'Smallest',
+			label: '最小',
 			icon: '🗜️',
-			description: 'Maximum compression with silence removal',
+			description: '最大压缩,带静音移除',
 			options: FFMPEG_SMALLEST_COMPRESSION_OPTIONS,
 		},
 		compatible: {
 			label: 'MP3',
 			icon: '✅',
-			description: 'Universal compatibility',
+			description: '通用兼容性',
 			options: '-c:a libmp3lame -b:a 32k -ar 16000 -ac 1 -q:a 9',
 		},
 	} as const;
@@ -91,15 +91,15 @@
 					for="compression-enabled"
 					class={cn(!isFfmpegInstalled && 'text-muted-foreground')}
 				>
-					Compress audio before transcription
+					转录前压缩音频
 				</Field.Label>
 				{#if showRecommendedBadge}
-					<Badge variant="secondary" class="text-xs">Recommended</Badge>
+					<Badge variant="secondary" class="text-xs">推荐</Badge>
 				{/if}
 			</div>
 			<Field.Description>
-				Reduce file sizes and trim silence for faster uploads and lower API
-				costs
+				减小文件体积并裁剪静音,以加快上传速度并降低 API
+				成本
 			</Field.Description>
 		</Field.Content>
 	</Field.Field>
@@ -107,7 +107,7 @@
 	{#if settings.value['transcription.compressionEnabled']}
 		<!-- Preset Selection Badges -->
 		<div class="space-y-3">
-			<p class="text-base font-medium">Compression Presets</p>
+			<p class="text-base font-medium">压缩预设</p>
 			<div class="flex flex-wrap gap-2">
 				{#each Object.entries(COMPRESSION_PRESETS) as [presetKey, preset]}
 					<Button
@@ -134,13 +134,13 @@
 				{/each}
 			</div>
 			<p class="text-muted-foreground text-xs">
-				Choose a preset or customize FFmpeg options below
+				选择一个预设或在下方自定义 FFmpeg 选项
 			</p>
 		</div>
 
 		<!-- Custom Options Input -->
 		<Field.Field>
-			<Field.Label for="compression-options">Custom Options</Field.Label>
+			<Field.Label for="compression-options">自定义选项</Field.Label>
 			<div class="flex gap-2">
 				<Input
 					id="compression-options"
@@ -155,7 +155,7 @@
 				/>
 				{#if settings.value['transcription.compressionOptions'] !== FFMPEG_DEFAULT_COMPRESSION_OPTIONS}
 					<Button
-						tooltip="Reset to default"
+						tooltip="重置为默认"
 						variant="ghost"
 						size="icon"
 						class="h-9 w-9"
@@ -171,14 +171,14 @@
 				{/if}
 			</div>
 			<Field.Description>
-				FFmpeg compression options. Changes here will be reflected in real-time
-				during transcription.
+				FFmpeg 压缩选项。此处的更改将在转录期间
+				实时反映。
 			</Field.Description>
 		</Field.Field>
 
 		<!-- Command Preview -->
 		<div class="text-xs text-muted-foreground">
-			<p class="font-medium mb-1">Command Preview:</p>
+			<p class="font-medium mb-1">命令预览:</p>
 			<code class="bg-muted rounded px-2 py-1 text-xs break-all block">
 				ffmpeg -i input.wav {settings.value['transcription.compressionOptions']}
 				output.opus
@@ -190,12 +190,12 @@
 	{#if !isFfmpegInstalled && !isFfmpegCheckLoading}
 		<Alert.Root variant="warning">
 			<AlertTriangle class="size-4" />
-			<Alert.Title>FFmpeg Required</Alert.Title>
+			<Alert.Title>需要 FFmpeg</Alert.Title>
 			<Alert.Description>
-				Audio compression requires FFmpeg to be installed on your system. <Link
+				音频压缩需要你的系统安装 FFmpeg。<Link
 					href="/install-ffmpeg"
-					class="font-medium underline underline-offset-4">Install FFmpeg</Link
-				> to enable this feature.
+					class="font-medium underline underline-offset-4">安装 FFmpeg</Link
+				> 以启用此功能。
 			</Alert.Description>
 		</Alert.Root>
 	{/if}

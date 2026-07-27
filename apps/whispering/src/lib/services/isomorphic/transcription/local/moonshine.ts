@@ -61,7 +61,7 @@ export const MOONSHINE_MODELS = [
 	{
 		id: 'moonshine-tiny-en',
 		name: 'Moonshine Tiny (English)',
-		description: 'Fast and efficient English transcription (~28 MB)',
+		description: '快速高效的英文转录(~28 MB)',
 		size: '~30 MB',
 		sizeBytes: 30_166_481, // encoder + decoder + tokenizer
 		engine: 'moonshine',
@@ -88,7 +88,7 @@ export const MOONSHINE_MODELS = [
 	{
 		id: 'moonshine-base-en',
 		name: 'Moonshine Base (English)',
-		description: 'Higher accuracy English transcription (~65 MB)',
+		description: '更高准确率的英文转录(~65 MB)',
 		size: '~65 MB',
 		sizeBytes: 64_997_467, // encoder + decoder + tokenizer
 		engine: 'moonshine',
@@ -128,11 +128,11 @@ export function createMoonshineTranscriptionService() {
 			// Pre-validation
 			if (!modelPath) {
 				return WhisperingErr({
-					title: 'Model Directory Required',
-					description: 'Please select a Moonshine model directory in settings.',
+					title: '需要模型目录',
+					description: '请在设置中选择一个 Moonshine 模型目录。',
 					action: {
 						type: 'link',
-						label: 'Configure model',
+						label: '配置模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -146,11 +146,11 @@ export function createMoonshineTranscriptionService() {
 
 			if (!stats) {
 				return WhisperingErr({
-					title: 'Model Directory Not Found',
-					description: `The model directory "${modelPath}" does not exist.`,
+					title: '未找到模型目录',
+					description: `模型目录 "${modelPath}" 不存在。`,
 					action: {
 						type: 'link',
-						label: 'Select model',
+						label: '选择模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -158,12 +158,12 @@ export function createMoonshineTranscriptionService() {
 
 			if (!stats.isDirectory) {
 				return WhisperingErr({
-					title: 'Invalid Model Path',
+					title: '模型路径无效',
 					description:
-						'Moonshine models must be directories containing model files.',
+						'Moonshine 模型必须是包含模型文件的目录。',
 					action: {
 						type: 'link',
-						label: 'Select model directory',
+						label: '选择模型目录',
 						href: '/settings/transcription',
 					},
 				});
@@ -172,11 +172,11 @@ export function createMoonshineTranscriptionService() {
 			// Validate path ends with moonshine-{variant}-{lang}
 			if (!MOONSHINE_DIR_PATTERN.test(modelPath)) {
 				return WhisperingErr({
-					title: 'Invalid Model Directory Name',
-					description: `Model path must end with moonshine-{variant}-{lang} (e.g., "moonshine-tiny-en", "moonshine-base-en")`,
+					title: '模型目录名无效',
+					description: `模型路径必须以 moonshine-{variant}-{lang} 结尾(例如,"moonshine-tiny-en"、"moonshine-base-en")`,
 					action: {
 						type: 'link',
-						label: 'Select valid model',
+						label: '选择有效模型',
 						href: '/settings/transcription',
 					},
 				});
@@ -198,7 +198,7 @@ export function createMoonshineTranscriptionService() {
 					const result = MoonshineErrorType(unknownError);
 					if (result instanceof type.errors) {
 						return WhisperingErr({
-							title: 'Unexpected Moonshine Error',
+							title: 'Moonshine 意外错误',
 							description: extractErrorMessage(unknownError),
 							action: { type: 'more-details', error: unknownError },
 						});
@@ -208,7 +208,7 @@ export function createMoonshineTranscriptionService() {
 					switch (error.name) {
 						case 'ModelLoadError':
 							return WhisperingErr({
-								title: 'Model Loading Error',
+								title: '模型加载错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -218,19 +218,19 @@ export function createMoonshineTranscriptionService() {
 
 						case 'FfmpegNotFoundError':
 							return WhisperingErr({
-								title: 'FFmpeg Not Installed',
+								title: '未安装 FFmpeg',
 								description:
-									'Moonshine requires FFmpeg to convert audio formats. Please install FFmpeg or switch to CPAL recording at 16kHz.',
+									'Moonshine 需要 FFmpeg 来转换音频格式。请安装 FFmpeg 或切换到 16kHz 的 CPAL 录制。',
 								action: {
 									type: 'link',
-									label: 'Install FFmpeg',
+									label: '安装 FFmpeg',
 									href: '/install-ffmpeg',
 								},
 							});
 
 						case 'AudioReadError':
 							return WhisperingErr({
-								title: 'Audio Read Error',
+								title: '音频读取错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -240,7 +240,7 @@ export function createMoonshineTranscriptionService() {
 
 						case 'TranscriptionError':
 							return WhisperingErr({
-								title: 'Transcription Error',
+								title: '转录错误',
 								description: error.message,
 								action: {
 									type: 'more-details',
@@ -250,8 +250,8 @@ export function createMoonshineTranscriptionService() {
 
 						default:
 							return WhisperingErr({
-								title: 'Moonshine Error',
-								description: 'An unexpected error occurred.',
+								title: 'Moonshine 错误',
+								description: '发生了意外错误。',
 								action: {
 									type: 'more-details',
 									error: new Error(String(error)),

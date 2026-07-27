@@ -70,11 +70,11 @@ function convertActionToSonner(action: UnifiedNotificationOptions['action']) {
 
 		case 'more-details':
 			return {
-				label: 'More details',
+				label: '查看详情',
 				onClick: () =>
 					moreDetailsDialog.open({
-						title: 'More details',
-						description: 'The following is the raw error message.',
+						title: '查看详情',
+						description: '以下是原始错误信息。',
 						content: action.error,
 					}),
 			};

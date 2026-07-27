@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-	<title>Download Desktop App - Whispering</title>
+	<title>下载桌面应用 - Whispering</title>
 </svelte:head>
 
 <main
@@ -18,11 +18,10 @@
 	<div class="w-full">
 		<header class="text-center space-y-4 mb-8">
 			<h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-				Whispering Desktop
+				Whispering 桌面版
 			</h1>
 			<p class="text-muted-foreground text-lg lg:text-xl max-w-2xl mx-auto">
-				Experience the full power of Whispering with native performance and
-				system-wide integration.
+				体验 Whispering 的全部强大功能,获得原生性能与系统集成。
 			</p>
 		</header>
 
@@ -30,10 +29,9 @@
 			<Card class="p-6">
 				<div class="space-y-2">
 					<CommandIcon class="h-8 w-8 text-primary mb-2" />
-					<h3 class="text-lg font-semibold">Global Shortcuts</h3>
+					<h3 class="text-lg font-semibold">全局快捷键</h3>
 					<p class="text-sm text-muted-foreground">
-						Customizable global keyboard shortcuts for recording control from
-						anywhere on your system
+						可自定义的全局键盘快捷键,可在系统任意位置控制录音
 					</p>
 				</div>
 			</Card>
@@ -41,9 +39,9 @@
 			<Card class="p-6">
 				<div class="space-y-2">
 					<MicIcon class="h-8 w-8 text-primary mb-2" />
-					<h3 class="text-lg font-semibold">Native Performance</h3>
+					<h3 class="text-lg font-semibold">原生性能</h3>
 					<p class="text-sm text-muted-foreground">
-						Rust backend, more audio APIs, and optimized resource usage
+						Rust 后端、更多音频 API 以及优化的资源占用
 					</p>
 				</div>
 			</Card>
@@ -51,10 +49,9 @@
 			<Card class="p-6">
 				<div class="space-y-2">
 					<ZapIcon class="h-8 w-8 text-primary mb-2" />
-					<h3 class="text-lg font-semibold">System Integration</h3>
+					<h3 class="text-lg font-semibold">系统集成</h3>
 					<p class="text-sm text-muted-foreground">
-						System tray controls, direct text injection, auto-updates, and
-						window management
+						系统托盘控制、直接文本注入、自动更新与窗口管理
 					</p>
 				</div>
 			</Card>
@@ -63,7 +60,7 @@
 		<div class="flex flex-col items-center gap-4">
 			<div class="flex flex-col gap-3 sm:flex-row">
 				<Button
-					tooltip="Download Whispering Desktop App"
+					tooltip="下载 Whispering 桌面应用"
 					href="https://github.com/EpicenterHQ/epicenter/releases"
 					target="_blank"
 					rel="noopener noreferrer"
@@ -72,10 +69,10 @@
 					class="min-w-[200px]"
 				>
 					<DownloadIcon class="size-5" />
-					Download for Desktop
+					下载桌面版
 				</Button>
 				<Button
-					tooltip="Get the Chrome Extension"
+					tooltip="获取 Chrome 扩展程序"
 					href="https://chromewebstore.google.com/detail/whispering/oilbfihknpdbpfkcncojikmooipnlglo"
 					target="_blank"
 					rel="noopener noreferrer"
@@ -83,7 +80,7 @@
 					size="lg"
 				>
 					<ChromeWebStoreIcon class="size-5" />
-					Chrome Extension
+					Chrome 扩展程序
 				</Button>
 			</div>
 
@@ -92,7 +89,7 @@
 				variant="ghost"
 				class="mt-2"
 			>
-				Go back
+				返回
 			</Button>
 		</div>
 	</div>

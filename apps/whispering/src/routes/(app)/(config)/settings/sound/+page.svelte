@@ -5,20 +5,20 @@
 </script>
 
 <svelte:head>
-	<title>Sound Settings - Whispering</title>
+	<title>声音设置 - Whispering</title>
 </svelte:head>
 
 <Field.Set>
-	<Field.Legend>Sound</Field.Legend>
+	<Field.Legend>声音</Field.Legend>
 	<Field.Description>
-		Configure your Whispering sound preferences.
+		配置你的 Whispering 声音偏好。
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
 		<Field.Set>
-			<Field.Legend variant="label">Manual Recording Sounds</Field.Legend>
+			<Field.Legend variant="label">手动录音声音</Field.Legend>
 			<Field.Description>
-				Configure sounds for manual recording events.
+				配置手动录音事件的声音。
 			</Field.Description>
 			<Field.Group>
 				<Field.Field orientation="horizontal">
@@ -30,7 +30,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.manual-start">
-						Play sound when starting manual recording
+						手动录音开始时播放声音
 					</Field.Label>
 				</Field.Field>
 
@@ -43,7 +43,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.manual-stop">
-						Play sound when stopping manual recording
+						手动录音停止时播放声音
 					</Field.Label>
 				</Field.Field>
 
@@ -56,7 +56,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.manual-cancel">
-						Play sound when canceling manual recording
+						取消手动录音时播放声音
 					</Field.Label>
 				</Field.Field>
 			</Field.Group>
@@ -65,9 +65,9 @@
 		<Field.Separator />
 
 		<Field.Set>
-			<Field.Legend variant="label">VAD Recording Sounds</Field.Legend>
+			<Field.Legend variant="label">VAD 录音声音</Field.Legend>
 			<Field.Description>
-				Configure sounds for voice-activated detection events.
+				配置语音活动检测事件的声音。
 			</Field.Description>
 			<Field.Group>
 				<Field.Field orientation="horizontal">
@@ -79,7 +79,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.vad-start">
-						Play sound when starting VAD recording session
+						VAD 录音会话开始时播放声音
 					</Field.Label>
 				</Field.Field>
 
@@ -92,7 +92,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.vad-capture">
-						Play sound on VAD capture
+						VAD 捕获时播放声音
 					</Field.Label>
 				</Field.Field>
 
@@ -105,7 +105,7 @@
 						}
 					/>
 					<Field.Label for="sound.playOn.vad-stop">
-						Play sound when stopping VAD recording session
+						VAD 录音会话停止时播放声音
 					</Field.Label>
 				</Field.Field>
 			</Field.Group>
@@ -114,9 +114,9 @@
 		<Field.Separator />
 
 		<Field.Set>
-			<Field.Legend variant="label">Completion Sounds</Field.Legend>
+			<Field.Legend variant="label">完成声音</Field.Legend>
 			<Field.Description>
-				Configure sounds for transcription and transformation completion.
+				配置转录和转换完成时的声音。
 			</Field.Description>
 			<Field.Group>
 				<Field.Field orientation="horizontal">
@@ -128,7 +128,7 @@
 						}
 					/>
 					<Field.Label for="play-sound-transcription">
-						Play sound after transcription
+						转录后播放声音
 					</Field.Label>
 				</Field.Field>
 
@@ -142,7 +142,7 @@
 						}
 					/>
 					<Field.Label for="play-sound-transformation">
-						Play sound after transformation
+						转换后播放声音
 					</Field.Label>
 				</Field.Field>
 			</Field.Group>

@@ -10,13 +10,13 @@ export const GROQ_MODELS = [
 	{
 		name: 'whisper-large-v3',
 		description:
-			'Best accuracy (10.3% WER) and full multilingual support, including translation. Recommended for error-sensitive applications requiring multilingual support.',
+			'准确度最佳(10.3% WER),支持完整多语言,包括翻译。推荐用于对错误敏感且需要多语言支持的应用。',
 		cost: '$0.111/hour',
 	},
 	{
 		name: 'whisper-large-v3-turbo',
 		description:
-			'Fast multilingual model with good accuracy (12% WER). Best price-to-performance ratio for multilingual applications.',
+			'快速多语言模型,准确度良好(12% WER)。多语言应用的最佳性价比之选。',
 		cost: '$0.04/hour',
 	},
 ] as const;
@@ -51,11 +51,11 @@ export function createGroqTranscriptionService() {
 				// Check 1: Official Groq API requires an API key
 				if (!options.apiKey) {
 					return WhisperingErr({
-						title: '🔑 API Key Required',
-						description: 'Please enter your Groq API key in settings.',
+						title: '🔑 需要API密钥',
+						description: '请在设置中输入您的 Groq API 密钥。',
 						action: {
 							type: 'link',
-							label: 'Add API key',
+							label: '添加 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -68,12 +68,12 @@ export function createGroqTranscriptionService() {
 
 				if (!hasValidGroqKeyFormat) {
 					return WhisperingErr({
-						title: '🔑 Invalid API Key Format',
+						title: '🔑 API 密钥格式无效',
 						description:
-							'Your Groq API key should start with "gsk_" or "xai-". Please check and update your API key.',
+							'您的 Groq API 密钥应以 "gsk_" 或 "xai-" 开头。请检查并更新您的 API 密钥。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -84,8 +84,8 @@ export function createGroqTranscriptionService() {
 			const blobSizeInMb = audioBlob.size / (1024 * 1024);
 			if (blobSizeInMb > MAX_FILE_SIZE_MB) {
 				return WhisperingErr({
-					title: `The file size (${blobSizeInMb}MB) is too large`,
-					description: `Please upload a file smaller than ${MAX_FILE_SIZE_MB}MB.`,
+					title: `文件大小 (${blobSizeInMb}MB) 过大`,
+					description: `请上传小于 ${MAX_FILE_SIZE_MB}MB 的文件。`,
 				});
 			}
 
@@ -99,9 +99,9 @@ export function createGroqTranscriptionService() {
 					),
 				catch: (error) =>
 					WhisperingErr({
-						title: '📄 File Creation Failed',
+						title: '📄 文件创建失败',
 						description:
-							'Failed to create audio file for transcription. Please try again.',
+							'为转录创建音频文件失败。请重试。',
 						action: { type: 'more-details', error },
 					}),
 			});
@@ -146,10 +146,10 @@ export function createGroqTranscriptionService() {
 				// 400 - BadRequestError
 				if (status === 400) {
 					return WhisperingErr({
-						title: '❌ Bad Request',
+						title: '❌ 请求无效',
 						description:
 							message ??
-							`Invalid request to Groq API. ${error?.message ?? ''}`.trim(),
+							`对 Groq API 的请求无效。${error?.message ?? ''}`.trim(),
 						action: { type: 'more-details', error: groqApiError },
 					});
 				}
@@ -157,13 +157,13 @@ export function createGroqTranscriptionService() {
 				// 401 - AuthenticationError
 				if (status === 401) {
 					return WhisperingErr({
-						title: '🔑 Authentication Required',
+						title: '🔑 需要认证',
 						description:
 							message ??
-							'Your API key appears to be invalid or expired. Please update your API key in settings to continue transcribing.',
+							'您的 API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥以继续转录。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -172,10 +172,10 @@ export function createGroqTranscriptionService() {
 				// 403 - PermissionDeniedError
 				if (status === 403) {
 					return WhisperingErr({
-						title: '⛔ Permission Denied',
+						title: '⛔ 权限被拒绝',
 						description:
 							message ??
-							"Your account doesn't have access to this feature. This may be due to plan limitations or account restrictions.",
+							'您的账户无权访问此功能。可能是由于套餐限制或账户限制。',
 						action: { type: 'more-details', error: groqApiError },
 					});
 				}
@@ -183,10 +183,10 @@ export function createGroqTranscriptionService() {
 				// 404 - NotFoundError
 				if (status === 404) {
 					return WhisperingErr({
-						title: '🔍 Not Found',
+						title: '🔍 未找到',
 						description:
 							message ??
-							'The requested resource was not found. This might indicate an issue with the model or API endpoint.',
+							'未找到请求的资源。这可能表示模型或 API 端点存在问题。',
 						action: { type: 'more-details', error: groqApiError },
 					});
 				}
@@ -194,13 +194,13 @@ export function createGroqTranscriptionService() {
 				// 422 - UnprocessableEntityError
 				if (status === 422) {
 					return WhisperingErr({
-						title: '⚠️ Invalid Input',
+						title: '⚠️ 输入无效',
 						description:
 							message ??
-							'The request was valid but the server cannot process it. Please check your audio file and parameters.',
+							'请求有效,但服务器无法处理。请检查您的音频文件和参数。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -209,12 +209,12 @@ export function createGroqTranscriptionService() {
 				// 429 - RateLimitError
 				if (status === 429) {
 					return WhisperingErr({
-						title: '⏱️ Rate Limit Reached',
+						title: '⏱️ 已达请求频率限制',
 						description:
-							message ?? 'Too many requests. Please try again later.',
+							message ?? '请求过于频繁。请稍后重试。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -223,10 +223,10 @@ export function createGroqTranscriptionService() {
 				// >=500 - InternalServerError
 				if (status && status >= 500) {
 					return WhisperingErr({
-						title: '🔧 Service Unavailable',
+						title: '🔧 服务不可用',
 						description:
 							message ??
-							`The transcription service is temporarily unavailable (Error ${status}). Please try again in a few minutes.`,
+							`转录服务暂时不可用(错误 ${status})。请稍后重试。`,
 						action: { type: 'more-details', error: groqApiError },
 					});
 				}
@@ -234,19 +234,19 @@ export function createGroqTranscriptionService() {
 				// Handle APIConnectionError (no status code)
 				if (!status && name === 'APIConnectionError') {
 					return WhisperingErr({
-						title: '🌐 Connection Issue',
+						title: '🌐 连接问题',
 						description:
 							message ??
-							'Unable to connect to the Groq service. This could be a network issue or temporary service interruption.',
+							'无法连接到 Groq 服务。这可能是网络问题或服务暂时中断。',
 						action: { type: 'more-details', error: groqApiError },
 					});
 				}
 
 				// Return the error directly for other API errors
 				return WhisperingErr({
-					title: '❌ Unexpected Error',
+					title: '❌ 意外错误',
 					description:
-						message ?? 'An unexpected error occurred. Please try again.',
+						message ?? '发生了意外错误。请重试。',
 					action: { type: 'more-details', error: groqApiError },
 				});
 			}

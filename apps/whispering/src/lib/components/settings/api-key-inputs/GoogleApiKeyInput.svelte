@@ -6,11 +6,11 @@
 </script>
 
 <Field.Field>
-	<Field.Label for="google-api-key">Google API Key</Field.Label>
+	<Field.Label for="google-api-key">Google API 密钥</Field.Label>
 	<Input
 		id="google-api-key"
 		type="password"
-		placeholder="Your Google API Key"
+		placeholder="你的 Google API 密钥"
 		autocomplete="off"
 		bind:value={
 			() => settings.value['apiKeys.google'],
@@ -18,12 +18,12 @@
 		}
 	/>
 	<Field.Description>
-		You can find your Google API key in your <Link
+		你可以在 <Link
 			href="https://aistudio.google.com/app/apikey"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
 			Google AI Studio
-		</Link>.
+		</Link> 中找到你的 Google API 密钥。
 	</Field.Description>
 </Field.Field>

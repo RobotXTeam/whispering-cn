@@ -4,13 +4,13 @@ import { desktopRpc } from '$lib/query';
 import { settings } from '$lib/stores/settings.svelte';
 
 export const COMPRESSION_RECOMMENDED_MESSAGE =
-	"Since you're using CPAL recording with cloud transcription, we recommend enabling audio compression to reduce file sizes and upload times.";
+	'你正在使用 CPAL 录音配合云端转录，我们建议启用音频压缩以减小文件大小和上传时间。';
 
 export const NAVIGATOR_LOCAL_TRANSCRIPTION_MESSAGE =
-	'Browser API recording produces compressed audio that requires FFmpeg for local transcription. Switch to CPAL recording or install FFmpeg.';
+	'浏览器 API 录音产生的压缩音频需要 FFmpeg 才能进行本地转录。请切换到 CPAL 录音或安装 FFmpeg。';
 
 export const RECORDING_COMPATIBILITY_MESSAGE =
-	'Browser API recording produces compressed audio that requires FFmpeg for local transcription. Switch to CPAL recording, install FFmpeg, or use a cloud transcription service.';
+	'浏览器 API 录音产生的压缩音频需要 FFmpeg 才能进行本地转录。请切换到 CPAL 录音、安装 FFmpeg，或使用云端转录服务。';
 
 function isUsingLocalTranscription(): boolean {
 	const service = settings.value['transcription.selectedTranscriptionService'];
@@ -76,11 +76,11 @@ export async function checkFfmpegRecordingMethodCompatibility() {
 	if (ffmpegInstalled) return; // FFmpeg is installed, all good
 
 	// FFmpeg recording method selected but not installed
-	toast.warning('FFmpeg Required for FFmpeg Recording Method', {
+	toast.warning('FFmpeg 录音方式需要 FFmpeg', {
 		description:
-			'You have selected FFmpeg as your recording method, but FFmpeg is not installed.',
+			'你已选择 FFmpeg 作为录音方式，但未安装 FFmpeg。',
 		action: {
-			label: 'Install FFmpeg',
+			label: '安装 FFmpeg',
 			onClick: () => goto('/install-ffmpeg'),
 		},
 		duration: 15000,
@@ -112,10 +112,10 @@ export async function checkLocalTranscriptionCompatibility() {
 		return;
 
 	// Recording compatibility issue with local transcription models
-	toast.warning('Recording Settings Incompatible', {
+	toast.warning('录音设置不兼容', {
 		description: RECORDING_COMPATIBILITY_MESSAGE,
 		action: {
-			label: 'Go to Recording Settings',
+			label: '前往录音设置',
 			onClick: () => goto('/settings/recording'),
 		},
 		duration: 15000,
@@ -146,10 +146,10 @@ export async function checkCompressionRecommendation() {
 	if (ffmpegInstalled) return; // FFmpeg is required for compression
 
 	// FFmpeg is RECOMMENDED for compression
-	toast.info('Enable Compression for Faster Uploads', {
+	toast.info('启用压缩以加快上传', {
 		description: COMPRESSION_RECOMMENDED_MESSAGE,
 		action: {
-			label: 'Go to Transcription Settings',
+			label: '前往转录设置',
 			onClick: () => goto('/settings/transcription'),
 		},
 		duration: 10000,

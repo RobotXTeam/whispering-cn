@@ -40,7 +40,7 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							`Invalid request to Anthropic API. ${error?.message ?? ''}`.trim(),
+							`对 Anthropic API 的请求无效。${error?.message ?? ''}`.trim(),
 					});
 				}
 
@@ -49,7 +49,7 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							'Your API key appears to be invalid or expired. Please update your API key in settings.',
+							'您的 Anthropic API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥。',
 					});
 				}
 
@@ -58,7 +58,7 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							"Your account doesn't have access to this model or feature.",
+							"您的 Anthropic 账户无权访问此模型或功能。",
 					});
 				}
 
@@ -67,7 +67,7 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							'The requested model was not found. Please check the model name.',
+							'在 Anthropic 上未找到请求的模型。请检查模型名称。',
 					});
 				}
 
@@ -76,14 +76,14 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							'The request was valid but the server cannot process it. Please check your parameters.',
+							'请求有效,但 Anthropic 无法处理。请检查您的参数。',
 					});
 				}
 
 				// 429 - RateLimitError
 				if (status === 429) {
 					return CompletionServiceErr({
-						message: message ?? 'Too many requests. Please try again later.',
+						message: message ?? '已超过 Anthropic 的请求频率限制。请稍后重试。',
 					});
 				}
 
@@ -92,7 +92,7 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							`The Anthropic service is temporarily unavailable (Error ${status}). Please try again in a few minutes.`,
+							`Anthropic 服务暂时不可用(错误 ${status})。请稍后重试。`,
 					});
 				}
 
@@ -101,13 +101,13 @@ export function createAnthropicCompletionService(): CompletionService {
 					return CompletionServiceErr({
 						message:
 							message ??
-							'Unable to connect to the Anthropic service. This could be a network issue or temporary service interruption.',
+							'无法连接到 Anthropic 服务。这可能是网络问题或服务暂时中断。',
 					});
 				}
 
 				// Catch-all for unexpected errors
 				return CompletionServiceErr({
-					message: message ?? 'An unexpected error occurred. Please try again.',
+					message: message ?? 'Anthropic 发生了意外错误。请重试。',
 				});
 			}
 
@@ -119,7 +119,7 @@ export function createAnthropicCompletionService(): CompletionService {
 
 			if (!responseText) {
 				return CompletionServiceErr({
-					message: 'Anthropic API returned an empty response',
+					message: 'Anthropic API 返回了空响应',
 				});
 			}
 

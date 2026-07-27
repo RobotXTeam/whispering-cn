@@ -35,7 +35,7 @@ export function createNotificationServiceDesktop(): NotificationService {
 				try: async () => await active(),
 				catch: (error) =>
 					NotificationServiceErr({
-						message: `Unable to retrieve active desktop notifications: ${extractErrorMessage(error)}`,
+						message: `无法获取活动的桌面通知:${extractErrorMessage(error)}`,
 					}),
 			});
 		if (activeNotificationsError) return Err(activeNotificationsError);
@@ -47,7 +47,7 @@ export function createNotificationServiceDesktop(): NotificationService {
 				try: async () => await removeActive([matchingActiveNotification]),
 				catch: (error) =>
 					NotificationServiceErr({
-						message: `Unable to remove notification with id ${id}: ${extractErrorMessage(error)}`,
+						message: `无法移除 ID 为 ${id} 的通知:${extractErrorMessage(error)}`,
 					}),
 			});
 			if (removeActiveError) return Err(removeActiveError);
@@ -86,7 +86,7 @@ export function createNotificationServiceDesktop(): NotificationService {
 				},
 				catch: (error) =>
 					NotificationServiceErr({
-						message: `Could not send notification: ${extractErrorMessage(error)}`,
+						message: `无法发送通知:${extractErrorMessage(error)}`,
 					}),
 			});
 			if (notifyError) return Err(notifyError);

@@ -11,19 +11,19 @@ export const OPENAI_TRANSCRIPTION_MODELS = [
 	{
 		name: 'whisper-1',
 		description:
-			"OpenAI's flagship speech-to-text model with multilingual support. Reliable and accurate transcription for a wide variety of use cases.",
+			'OpenAI 旗舰级语音转文本模型,支持多语言。适用于各种用例,提供可靠且准确的转录。',
 		cost: '$0.36/hour',
 	},
 	{
 		name: 'gpt-4o-transcribe',
 		description:
-			'GPT-4o powered transcription with enhanced understanding and context. Best for complex audio requiring deep comprehension.',
+			'由 GPT-4o 驱动的转录,具备增强的理解和上下文能力。最适合需要深度理解的复杂音频。',
 		cost: '$0.36/hour',
 	},
 	{
 		name: 'gpt-4o-mini-transcribe',
 		description:
-			'Cost-effective GPT-4o mini transcription model. Good balance of performance and cost for standard transcription needs.',
+			'高性价比的 GPT-4o mini 转录模型。在性能与成本之间取得良好平衡,适合标准转录需求。',
 		cost: '$0.18/hour',
 	},
 ] as const satisfies {
@@ -62,12 +62,12 @@ export function createOpenaiTranscriptionService() {
 				// Check 1: Official OpenAI API requires an API key
 				if (!options.apiKey) {
 					return WhisperingErr({
-						title: '🔑 API Key Required',
+						title: '🔑 需要API密钥',
 						description:
-							'Please enter your OpenAI API key in settings to use Whisper transcription.',
+							'请在设置中输入您的 OpenAI API 密钥以使用 Whisper 转录。',
 						action: {
 							type: 'link',
-							label: 'Add API key',
+							label: '添加 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -76,12 +76,12 @@ export function createOpenaiTranscriptionService() {
 				// Check 2: Official OpenAI API keys always start with "sk-"
 				if (!options.apiKey.startsWith('sk-')) {
 					return WhisperingErr({
-						title: '🔑 Invalid API Key Format',
+						title: '🔑 API 密钥格式无效',
 						description:
-							'Your OpenAI API key should start with "sk-". Please check and update your API key.',
+							'您的 OpenAI API 密钥应以 "sk-" 开头。请检查并更新您的 API 密钥。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -92,8 +92,8 @@ export function createOpenaiTranscriptionService() {
 			const blobSizeInMb = audioBlob.size / (1024 * 1024);
 			if (blobSizeInMb > MAX_FILE_SIZE_MB) {
 				return WhisperingErr({
-					title: `The file size (${blobSizeInMb}MB) is too large`,
-					description: `Please upload a file smaller than ${MAX_FILE_SIZE_MB}MB.`,
+					title: `文件大小 (${blobSizeInMb}MB) 过大`,
+					description: `请上传小于 ${MAX_FILE_SIZE_MB}MB 的文件。`,
 				});
 			}
 
@@ -107,9 +107,9 @@ export function createOpenaiTranscriptionService() {
 					),
 				catch: (_error) =>
 					WhisperingErr({
-						title: '📁 File Creation Failed',
+						title: '📁 文件创建失败',
 						description:
-							'Failed to create audio file for transcription. Please try again.',
+							'为转录创建音频文件失败。请重试。',
 					}),
 			});
 
@@ -153,10 +153,10 @@ export function createOpenaiTranscriptionService() {
 				// 400 - BadRequestError
 				if (status === 400) {
 					return WhisperingErr({
-						title: '❌ Bad Request',
+						title: '❌ 请求无效',
 						description:
 							message ??
-							`Invalid request to OpenAI API. ${error?.message ?? ''}`.trim(),
+							`对 OpenAI API 的请求无效。${error?.message ?? ''}`.trim(),
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -164,13 +164,13 @@ export function createOpenaiTranscriptionService() {
 				// 401 - AuthenticationError
 				if (status === 401) {
 					return WhisperingErr({
-						title: '🔑 Authentication Required',
+						title: '🔑 需要认证',
 						description:
 							message ??
-							'Your API key appears to be invalid or expired. Please update your API key in settings to continue transcribing.',
+							'您的 API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥以继续转录。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -179,10 +179,10 @@ export function createOpenaiTranscriptionService() {
 				// 403 - PermissionDeniedError
 				if (status === 403) {
 					return WhisperingErr({
-						title: '⛔ Permission Denied',
+						title: '⛔ 权限被拒绝',
 						description:
 							message ??
-							"Your account doesn't have access to this feature. This may be due to plan limitations or account restrictions.",
+							'您的账户无权访问此功能。可能是由于套餐限制或账户限制。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -190,10 +190,10 @@ export function createOpenaiTranscriptionService() {
 				// 404 - NotFoundError
 				if (status === 404) {
 					return WhisperingErr({
-						title: '🔍 Not Found',
+						title: '🔍 未找到',
 						description:
 							message ??
-							'The requested resource was not found. This might indicate an issue with the model or API endpoint.',
+							'未找到请求的资源。这可能表示模型或 API 端点存在问题。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -201,10 +201,10 @@ export function createOpenaiTranscriptionService() {
 				// 413 - Request Entity Too Large
 				if (status === 413) {
 					return WhisperingErr({
-						title: '📦 Audio File Too Large',
+						title: '📦 音频文件过大',
 						description:
 							message ??
-							'Your audio file exceeds the maximum size limit (25MB). Try splitting it into smaller segments or reducing the audio quality.',
+							'您的音频文件超过了最大大小限制 (25MB)。请尝试将其分割成更小的片段或降低音频质量。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -212,10 +212,10 @@ export function createOpenaiTranscriptionService() {
 				// 415 - Unsupported Media Type
 				if (status === 415) {
 					return WhisperingErr({
-						title: '🎵 Unsupported Format',
+						title: '🎵 不支持的格式',
 						description:
 							message ??
-							"This audio format isn't supported. Please convert your file to MP3, WAV, M4A, or another common audio format.",
+							'不支持此音频格式。请将您的文件转换为 MP3、WAV、M4A 或其他常见音频格式。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -223,10 +223,10 @@ export function createOpenaiTranscriptionService() {
 				// 422 - UnprocessableEntityError
 				if (status === 422) {
 					return WhisperingErr({
-						title: '⚠️ Invalid Input',
+						title: '⚠️ 输入无效',
 						description:
 							message ??
-							'The request was valid but the server cannot process it. Please check your audio file and parameters.',
+							'请求有效,但服务器无法处理。请检查您的音频文件和参数。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -234,12 +234,12 @@ export function createOpenaiTranscriptionService() {
 				// 429 - RateLimitError
 				if (status === 429) {
 					return WhisperingErr({
-						title: '⏱️ Rate Limit Reached',
+						title: '⏱️ 已达请求频率限制',
 						description:
-							message ?? 'Too many requests. Please try again later.',
+							message ?? '请求过于频繁。请稍后重试。',
 						action: {
 							type: 'link',
-							label: 'Update API key',
+							label: '更新 API 密钥',
 							href: '/settings/transcription',
 						},
 					});
@@ -248,10 +248,10 @@ export function createOpenaiTranscriptionService() {
 				// >=500 - InternalServerError
 				if (status && status >= 500) {
 					return WhisperingErr({
-						title: '🔧 Service Unavailable',
+						title: '🔧 服务不可用',
 						description:
 							message ??
-							`The transcription service is temporarily unavailable (Error ${status}). Please try again in a few minutes.`,
+							`转录服务暂时不可用(错误 ${status})。请稍后重试。`,
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
@@ -259,19 +259,19 @@ export function createOpenaiTranscriptionService() {
 				// Handle APIConnectionError (no status code)
 				if (!status && name === 'APIConnectionError') {
 					return WhisperingErr({
-						title: '🌐 Connection Issue',
+						title: '🌐 连接问题',
 						description:
 							message ??
-							'Unable to connect to the OpenAI service. This could be a network issue or temporary service interruption.',
+							'无法连接到 OpenAI 服务。这可能是网络问题或服务暂时中断。',
 						action: { type: 'more-details', error: openaiApiError },
 					});
 				}
 
 				// Return the error directly for other API errors
 				return WhisperingErr({
-					title: '❌ Unexpected Error',
+					title: '❌ 意外错误',
 					description:
-						message ?? 'An unexpected error occurred. Please try again.',
+						message ?? '发生了意外错误。请重试。',
 					action: { type: 'more-details', error: openaiApiError },
 				});
 			}

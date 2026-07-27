@@ -58,7 +58,7 @@ export function createGlobalShortcutManager() {
 
 			if (!isValidElectronAccelerator(accelerator)) {
 				return InvalidAcceleratorErr({
-					message: `Invalid accelerator format: '${accelerator}'. Must follow Electron accelerator specification.`,
+					message: `无效的快捷键格式:'${accelerator}'。必须遵循 Electron 快捷键规范。`,
 				});
 			}
 
@@ -71,7 +71,7 @@ export function createGlobalShortcutManager() {
 					}),
 				catch: (error) =>
 					GlobalShortcutServiceErr({
-						message: `Failed to register global shortcut '${accelerator}': ${extractErrorMessage(error)}`,
+						message: `注册全局快捷键 '${accelerator}' 失败:${extractErrorMessage(error)}`,
 					}),
 			});
 			/**
@@ -102,7 +102,7 @@ export function createGlobalShortcutManager() {
 				try: () => tauriUnregister(accelerator),
 				catch: (error) =>
 					GlobalShortcutServiceErr({
-						message: `Failed to unregister global shortcut '${accelerator}': ${extractErrorMessage(error)}`,
+						message: `注销全局快捷键 '${accelerator}' 失败:${extractErrorMessage(error)}`,
 					}),
 			});
 			if (unregisterError) return Err(unregisterError);
@@ -119,7 +119,7 @@ export function createGlobalShortcutManager() {
 				try: () => tauriUnregisterAll(),
 				catch: (error) =>
 					GlobalShortcutServiceErr({
-						message: `Failed to unregister all global shortcuts: ${extractErrorMessage(error)}`,
+						message: `注销所有全局快捷键失败:${extractErrorMessage(error)}`,
 					}),
 			});
 			if (unregisterAllError) return Err(unregisterAllError);
@@ -188,12 +188,12 @@ export function pressedKeysToTauriAccelerator(
 	// Must have exactly one key code
 	if (keyCodes.length === 0) {
 		return InvalidAcceleratorErr({
-			message: 'No valid key code found in pressed keys',
+			message: '在按下的键中未找到有效的键码',
 		});
 	}
 	if (keyCodes.length > 1) {
 		return InvalidAcceleratorErr({
-			message: 'Multiple key codes not allowed in accelerator',
+			message: '快捷键中不允许包含多个键码',
 		});
 	}
 
@@ -208,7 +208,7 @@ export function pressedKeysToTauriAccelerator(
 	// Final validation
 	if (!isValidElectronAccelerator(accelerator)) {
 		return InvalidAcceleratorErr({
-			message: `Generated invalid accelerator: ${accelerator}`,
+			message: `生成了无效的快捷键:${accelerator}`,
 		});
 	}
 

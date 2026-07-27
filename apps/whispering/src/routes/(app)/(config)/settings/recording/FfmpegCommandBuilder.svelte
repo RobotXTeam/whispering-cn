@@ -55,26 +55,26 @@
 	// Source of truth: Clean data structure optimized for lookups
 	const AUDIO_FORMATS = {
 		wav: {
-			label: 'WAV - Best quality & compatibility',
+			label: 'WAV - 最佳质量与兼容性',
 			codec: 'pcm_s16le',
 			extension: 'wav',
 		},
 		mp3: {
-			label: 'MP3 - Compressed & compatible',
+			label: 'MP3 - 压缩且兼容',
 			codec: 'libmp3lame',
 			extension: 'mp3',
 		},
 		ogg: {
-			label: 'OGG - Good compression',
+			label: 'OGG - 压缩较好',
 			codec: 'libvorbis',
 			extension: 'ogg',
 		},
 		opus: {
-			label: 'Opus - Smallest files',
+			label: 'Opus - 文件最小',
 			codec: 'libopus',
 			extension: 'opus',
 		},
-		aac: { label: 'AAC - Apple devices', codec: 'aac', extension: 'm4a' },
+		aac: { label: 'AAC - 苹果设备', codec: 'aac', extension: 'm4a' },
 	} as const;
 
 	type AudioFormat = keyof typeof AUDIO_FORMATS;
@@ -148,27 +148,27 @@
 		{ value: '0', label: 'Q0 - ~64 kbps' },
 		{ value: '2', label: 'Q2 - ~96 kbps' },
 		{ value: '3', label: 'Q3 - ~112 kbps' },
-		{ value: '5', label: 'Q5 - ~160 kbps (Recommended)' },
+		{ value: '5', label: 'Q5 - ~160 kbps（推荐）' },
 		{ value: '7', label: 'Q7 - ~224 kbps' },
-		{ value: '10', label: 'Q10 - ~500 kbps (Maximum)' },
+		{ value: '10', label: 'Q10 - ~500 kbps（最大）' },
 	];
 	const qualityLabel = $derived(
 		qualityItems.find((o) => o.value === selected.quality)?.label,
 	);
 
 	const bitrateItems = [
-		{ value: '64', label: '64 kbps - Smaller files' },
-		{ value: '128', label: '128 kbps - Good quality' },
-		{ value: '192', label: '192 kbps - Better quality' },
-		{ value: '256', label: '256 kbps - Excellent' },
-		{ value: '320', label: '320 kbps - Maximum' },
+		{ value: '64', label: '64 kbps - 文件更小' },
+		{ value: '128', label: '128 kbps - 质量良好' },
+		{ value: '192', label: '192 kbps - 质量更好' },
+		{ value: '256', label: '256 kbps - 优秀' },
+		{ value: '320', label: '320 kbps - 最大' },
 	];
 	const bitrateLabel = $derived(
 		bitrateItems.find((o) => o.value === selected.bitrate)?.label,
 	);
 
 	// State variable to hold the preview command
-	let previewCommand = $state('Loading...');
+	let previewCommand = $state('加载中...');
 
 	// Function to update the preview command
 	async function updatePreviewCommand() {
@@ -234,7 +234,7 @@
 	<!-- Left Panel: Settings -->
 	<div class="space-y-4">
 		<div class="flex items-center justify-between">
-			<h4 class="text-sm font-semibold">FFmpeg Settings</h4>
+			<h4 class="text-sm font-semibold">FFmpeg 设置</h4>
 			<button
 				onclick={() => {
 					globalOptions = FFMPEG_DEFAULT_GLOBAL_OPTIONS;
@@ -243,7 +243,7 @@
 				}}
 				class="text-xs text-muted-foreground hover:text-foreground transition-colors"
 			>
-				Reset all
+				全部重置
 			</button>
 		</div>
 
@@ -251,14 +251,14 @@
 		<div class="rounded-lg border p-4 space-y-3">
 			<div class="flex items-center justify-between">
 				<h5 class="text-sm font-medium flex items-baseline gap-2">
-					<span class="text-primary">Output</span>
+					<span class="text-primary">输出</span>
 					<span class="text-xs text-muted-foreground font-normal"
-						>Primary settings</span
+						>主要设置</span
 					>
 				</h5>
 				{#if selected.format !== DEFAULT.format || selected.sampleRate !== DEFAULT.sampleRate || selected.bitrate !== DEFAULT.bitrate || selected.quality !== DEFAULT.quality || outputOptions !== FFMPEG_DEFAULT_OUTPUT_OPTIONS}
 					<Button
-						tooltip="Reset output settings"
+						tooltip="重置输出设置"
 						variant="ghost"
 						size="icon"
 						class="h-6 w-6"
@@ -272,16 +272,16 @@
 			</div>
 
 			<p class="text-xs text-muted-foreground">
-				Choose based on your needs: file size, compatibility, or quality. Note:
-				Some formats may not play in the browser preview but will work for
-				transcription.
+				根据需要选择：文件大小、兼容性或质量。注意：
+				某些格式可能无法在浏览器预览中播放，但可用于
+				转录。
 			</p>
 
 			<!-- Flexible layout that adapts to number of controls -->
 			<div class="flex flex-col sm:flex-row gap-3">
 				<div class="flex-1">
 					<Field.Field>
-						<Field.Label for="ffmpeg-format">Format</Field.Label>
+						<Field.Label for="ffmpeg-format">格式</Field.Label>
 						<Select.Root
 							type="single"
 							bind:value={
@@ -295,7 +295,7 @@
 							}
 						>
 							<Select.Trigger id="ffmpeg-format" class="w-full">
-								{formatLabel ?? 'Select format'}
+								{formatLabel ?? '选择格式'}
 							</Select.Trigger>
 							<Select.Content>
 								{#each audioFormatOptions as item}
@@ -308,7 +308,7 @@
 
 				<div class="flex-1">
 					<Field.Field>
-						<Field.Label for="ffmpeg-sample-rate">Sample Rate</Field.Label>
+						<Field.Label for="ffmpeg-sample-rate">采样率</Field.Label>
 						<Select.Root
 							type="single"
 							bind:value={
@@ -322,7 +322,7 @@
 							}
 						>
 							<Select.Trigger id="ffmpeg-sample-rate" class="w-full">
-								{sampleRateLabel ?? 'Sample rate'}
+								{sampleRateLabel ?? '采样率'}
 							</Select.Trigger>
 							<Select.Content>
 								{#each SAMPLE_RATE_OPTIONS as item}
@@ -337,7 +337,7 @@
 					<!-- Quality scale for OGG Vorbis -->
 					<div class="flex-1">
 						<Field.Field>
-							<Field.Label for="ffmpeg-quality">Quality</Field.Label>
+							<Field.Label for="ffmpeg-quality">质量</Field.Label>
 							<Select.Root
 								type="single"
 								bind:value={
@@ -351,7 +351,7 @@
 								}
 							>
 								<Select.Trigger id="ffmpeg-quality" class="w-full">
-									{qualityLabel ?? 'Quality'}
+									{qualityLabel ?? '质量'}
 								</Select.Trigger>
 								<Select.Content>
 									{#each qualityItems as item}
@@ -365,7 +365,7 @@
 					<!-- Bitrate for MP3, Opus, AAC -->
 					<div class="flex-1">
 						<Field.Field>
-							<Field.Label for="ffmpeg-bitrate">Bitrate</Field.Label>
+							<Field.Label for="ffmpeg-bitrate">比特率</Field.Label>
 							<Select.Root
 								type="single"
 								bind:value={
@@ -379,7 +379,7 @@
 								}
 							>
 								<Select.Trigger id="ffmpeg-bitrate" class="w-full">
-									{bitrateLabel ?? 'Bitrate'}
+									{bitrateLabel ?? '比特率'}
 								</Select.Trigger>
 								<Select.Content>
 									{#each bitrateItems as item}
@@ -398,14 +398,14 @@
 			<summary
 				class="cursor-pointer select-none rounded-lg border px-4 py-3 hover:bg-muted/50 transition-colors flex items-baseline gap-2"
 			>
-				<span class="text-sm font-medium">Advanced Options</span>
-				<span class="text-xs text-muted-foreground">Raw FFmpeg parameters</span>
+				<span class="text-sm font-medium">高级选项</span>
+				<span class="text-xs text-muted-foreground">原始 FFmpeg 参数</span>
 			</summary>
 
 			<div class="mt-3 space-y-3 rounded-lg border p-4">
 				<!-- Global Options -->
 				<Field.Field>
-					<Field.Label for="ffmpeg-global">Global Options</Field.Label>
+					<Field.Label for="ffmpeg-global">全局选项</Field.Label>
 					<div class="flex gap-2">
 						<Input
 							id="ffmpeg-global"
@@ -415,7 +415,7 @@
 						/>
 						{#if globalOptions !== FFMPEG_DEFAULT_GLOBAL_OPTIONS}
 							<Button
-								tooltip="Reset"
+								tooltip="重置"
 								variant="ghost"
 								size="icon"
 								class="h-8 w-8"
@@ -426,23 +426,23 @@
 						{/if}
 					</div>
 					<Field.Description>
-						Controls FFmpeg general behavior: logging, file overwriting, etc.
+						控制 FFmpeg 的常规行为：日志、文件覆盖等。
 					</Field.Description>
 				</Field.Field>
 
 				<!-- Input Options -->
 				<Field.Field>
-					<Field.Label for="ffmpeg-input">Input Options</Field.Label>
+					<Field.Label for="ffmpeg-input">输入选项</Field.Label>
 					<div class="flex gap-2">
 						<Input
 							id="ffmpeg-input"
 							bind:value={inputOptions}
-							placeholder={FFMPEG_DEFAULT_INPUT_OPTIONS || 'Auto-detect'}
+							placeholder={FFMPEG_DEFAULT_INPUT_OPTIONS || '自动检测'}
 							class="font-mono text-xs h-8 flex-1"
 						/>
 						{#if inputOptions !== FFMPEG_DEFAULT_INPUT_OPTIONS}
 							<Button
-								tooltip="Reset to platform default"
+								tooltip="重置为平台默认值"
 								variant="ghost"
 								size="icon"
 								class="h-8 w-8"
@@ -455,17 +455,17 @@
 					<Field.Description>
 						<div class="space-y-1">
 							<p>
-								Configure audio input settings like channels, duration, and
-								buffer size.
+								配置音频输入设置，如声道、时长和
+								缓冲区大小。
 							</p>
 							<div>
-								Common: <code class="px-1 rounded bg-muted">-ac 1</code> (mono),
-								<code class="px-1 rounded bg-muted">-t 60</code> (60s limit)
+								常用： <code class="px-1 rounded bg-muted">-ac 1</code>（单声道），
+								<code class="px-1 rounded bg-muted">-t 60</code>（60秒限制）
 								{#if PLATFORM_TYPE === 'windows'}
 									, <code class="px-1 rounded bg-muted"
 										>-audio_buffer_size 20</code
 									>
-									(low latency)
+									（低延迟）
 								{/if}
 							</div>
 						</div>
@@ -474,17 +474,17 @@
 
 				<!-- Output Options -->
 				<Field.Field>
-					<Field.Label for="ffmpeg-output">Output Options</Field.Label>
+					<Field.Label for="ffmpeg-output">输出选项</Field.Label>
 					<div class="flex gap-2">
 						<Input
 							id="ffmpeg-output"
 							bind:value={outputOptions}
-							placeholder="Raw output options"
+							placeholder="原始输出选项"
 							class="font-mono text-xs h-8 flex-1"
 						/>
 						{#if outputOptions !== FFMPEG_DEFAULT_OUTPUT_OPTIONS}
 							<Button
-								tooltip="Reset to default"
+								tooltip="重置为默认值"
 								variant="ghost"
 								size="icon"
 								class="h-8 w-8"
@@ -497,8 +497,8 @@
 						{/if}
 					</div>
 					<Field.Description>
-						Auto-generated from your selections above. Edit directly for custom
-						parameters.
+						根据上方选择自动生成。可直接编辑以自定义
+						参数。
 					</Field.Description>
 				</Field.Field>
 			</div>
@@ -509,9 +509,9 @@
 	<div class="flex flex-col h-full">
 		<div class="rounded-lg border bg-muted/30 flex-1 flex flex-col">
 			<div class="p-4 border-b bg-background/50">
-				<h5 class="text-sm font-medium">Command Preview</h5>
+				<h5 class="text-sm font-medium">命令预览</h5>
 				<p class="text-xs text-muted-foreground mt-0.5">
-					Live updates as you modify settings
+					修改设置时实时更新
 				</p>
 			</div>
 
@@ -525,7 +525,7 @@
 				<!-- Visual breakdown of command parts -->
 				<div class="mt-4 space-y-2 text-xs">
 					<div class="flex items-start gap-2">
-						<span class="text-muted-foreground shrink-0">Input:</span>
+						<span class="text-muted-foreground shrink-0">输入：</span>
 						<code class="text-primary">
 							{formatDeviceForPlatform(
 								selectedDeviceId ?? FFMPEG_DEFAULT_DEVICE_IDENTIFIER,
@@ -533,7 +533,7 @@
 						</code>
 					</div>
 					<div class="flex items-start gap-2">
-						<span class="text-muted-foreground shrink-0">Output:</span>
+						<span class="text-muted-foreground shrink-0">输出：</span>
 						<code class="text-primary">
 							{AUDIO_FORMATS[selected.format].extension} • {selected.sampleRate}Hz{selected.format ===
 							'ogg'

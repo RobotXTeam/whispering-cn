@@ -22,7 +22,7 @@
 				{...props}
 				variant="ghost"
 				size="icon"
-				tooltip="View Transformation Runs"
+				tooltip="查看转换运行"
 			>
 				<HistoryIcon class="size-4" />
 			</Button>
@@ -30,14 +30,14 @@
 	</Dialog.Trigger>
 	<Dialog.Content class="sm:max-w-4xl">
 		<Dialog.Header>
-			<Dialog.Title>Transformation Runs</Dialog.Title>
+			<Dialog.Title>转换运行</Dialog.Title>
 			<Dialog.Description>
-				View all transformation runs for this recording
+				查看此录音的所有转换运行
 			</Dialog.Description>
 		</Dialog.Header>
 		<div class="max-h-[60vh] overflow-y-auto">
 			{#if transformationRunsByRecordingIdQuery.isPending}
-				<div class="text-muted-foreground text-sm">Loading runs...</div>
+				<div class="text-muted-foreground text-sm">加载运行中...</div>
 			{:else if transformationRunsByRecordingIdQuery.error}
 				<div class="text-destructive text-sm">
 					{transformationRunsByRecordingIdQuery.error.message}
@@ -47,7 +47,7 @@
 			{/if}
 		</div>
 		<Dialog.Footer>
-			<Button variant="outline" onclick={() => (isOpen = false)}>Close</Button>
+			<Button variant="outline" onclick={() => (isOpen = false)}>关闭</Button>
 		</Dialog.Footer>
 	</Dialog.Content>
 </Dialog.Root>

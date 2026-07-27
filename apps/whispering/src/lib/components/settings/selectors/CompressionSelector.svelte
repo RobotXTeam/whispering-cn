@@ -31,8 +31,8 @@
 				{...props}
 				class={cn('relative', className)}
 				tooltip={isCompressionEnabled
-					? 'Compression enabled - click to configure'
-					: 'Audio compression disabled - click to enable'}
+					? '压缩已启用 - 点击配置'
+					: '音频压缩已禁用 - 点击启用'}
 				variant="ghost"
 				size="icon"
 			>
@@ -70,7 +70,7 @@
 			}}
 		>
 			<SettingsIcon class="h-4 w-4" />
-			Configure in transcription settings
+			在转录设置中配置
 		</Button>
 	</Popover.Content>
 </Popover.Root>

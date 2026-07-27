@@ -52,18 +52,18 @@
 	{:else}
 		<Button
 			tooltip={recording.transcriptionStatus === 'UNPROCESSED'
-				? 'Start transcribing this recording'
+				? '开始转录此录音'
 				: recording.transcriptionStatus === 'TRANSCRIBING'
-					? 'Currently transcribing...'
+					? '正在转录...'
 					: recording.transcriptionStatus === 'DONE'
-						? 'Retry transcription'
-						: 'Transcription failed - click to try again'}
+						? '重新转录'
+						: '转录失败 - 点击重试'}
 			onclick={() => {
 				const toastId = nanoid();
 				rpc.notify.loading.execute({
 					id: toastId,
-					title: '📋 Transcribing...',
-					description: 'Your recording is being transcribed...',
+					title: '📋 正在转录...',
+					description: '您的录音正在转录...',
 				});
 				transcribeRecording.mutate(recording, {
 					onError: (error) => {
@@ -73,8 +73,8 @@
 						}
 						rpc.notify.error.execute({
 							id: toastId,
-							title: '❌ Failed to transcribe recording',
-							description: 'Your recording could not be transcribed.',
+							title: '❌ 转录录音失败',
+							description: '您的录音无法转录。',
 							action: { type: 'more-details', error: error },
 						});
 					},
@@ -127,7 +127,7 @@
 					{/snippet}
 				</Tooltip.Trigger>
 				<Tooltip.Content class="max-w-xs text-center">
-					Error fetching latest transformation run output
+					获取最新转换运行输出时出错
 				</Tooltip.Content>
 			</Tooltip.Root>
 		{:else}
@@ -149,7 +149,7 @@
 		<ViewTransformationRunsDialog {recordingId} />
 
 		<Button
-			tooltip="Download recording"
+			tooltip="下载录音"
 			onclick={() =>
 				downloadRecording.mutate(recording, {
 					onError: (error) => {
@@ -158,15 +158,15 @@
 							return;
 						}
 						rpc.notify.error.execute({
-							title: 'Failed to download recording!',
-							description: 'Your recording could not be downloaded.',
+							title: '下载录音失败!',
+							description: '您的录音无法下载。',
 							action: { type: 'more-details', error },
 						});
 					},
 					onSuccess: () => {
 						rpc.notify.success.execute({
-							title: 'Recording downloaded!',
-							description: 'Your recording has been downloaded.',
+							title: '录音已下载!',
+							description: '您的录音已下载。',
 						});
 					},
 				})}
@@ -181,25 +181,25 @@
 		</Button>
 
 		<Button
-			tooltip="Delete recording"
+			tooltip="删除录音"
 			onclick={() => {
 				confirmationDialog.open({
-					title: 'Delete recording',
-					description: 'Are you sure you want to delete this recording?',
-					confirm: { text: 'Delete', variant: 'destructive' },
+					title: '删除录音',
+					description: '确定要删除此录音吗?',
+					confirm: { text: '删除', variant: 'destructive' },
 					onConfirm: async () => {
 						const { error } = await rpc.db.recordings.delete.execute(recording);
 						if (error) {
 							rpc.notify.error.execute({
-								title: 'Failed to delete recording!',
-								description: 'Your recording could not be deleted.',
+								title: '删除录音失败!',
+								description: '您的录音无法删除。',
 								action: { type: 'more-details', error },
 							});
 							throw error;
 						}
 						rpc.notify.success.execute({
-							title: 'Deleted recording!',
-							description: 'Your recording has been deleted.',
+							title: '已删除录音!',
+							description: '您的录音已删除。',
 						});
 					},
 				});

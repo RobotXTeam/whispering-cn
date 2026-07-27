@@ -93,7 +93,7 @@
 				renderComponent(Checkbox, {
 					checked: row.getIsSelected(),
 					onCheckedChange: (value) => row.toggleSelected(!!value),
-					'aria-label': 'Select row',
+					'aria-label': '选择行',
 				}),
 			enableSorting: false,
 			enableHiding: false,
@@ -129,7 +129,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Title',
+					headerText: '标题',
 				}),
 		},
 		{
@@ -138,7 +138,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Subtitle',
+					headerText: '副标题',
 				}),
 		},
 		{
@@ -147,7 +147,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Timestamp',
+					headerText: '时间戳',
 				}),
 			cell: formattedCell(DATE_FORMAT),
 		},
@@ -157,7 +157,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Created At',
+					headerText: '创建时间',
 				}),
 			cell: formattedCell(DATE_FORMAT),
 		},
@@ -167,7 +167,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Updated At',
+					headerText: '更新时间',
 				}),
 			cell: formattedCell(DATE_FORMAT),
 		},
@@ -177,7 +177,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Transcript',
+					headerText: '转录文本',
 				}),
 			cell: ({ getValue, row }) => {
 				const transcribedText = getValue<string>();
@@ -194,7 +194,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Latest Transformation Run Output',
+					headerText: '最新转换运行输出',
 				}),
 			cell: ({ getValue }) => {
 				const recordingId = getValue<string>();
@@ -209,7 +209,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Audio',
+					headerText: '音频',
 				}),
 			cell: ({ getValue }) => {
 				const id = getValue<string>();
@@ -222,7 +222,7 @@
 			header: ({ column }) =>
 				renderComponent(SortableTableHeader, {
 					column,
-					headerText: 'Actions',
+					headerText: '操作',
 				}),
 			cell: ({ getValue }) => {
 				const recording = getValue<Recording>();
@@ -359,21 +359,21 @@
 </script>
 
 <svelte:head>
-	<title>All Recordings</title>
+	<title>所有录音记录</title>
 </svelte:head>
 
 <main class="flex w-full flex-1 flex-col gap-2 px-4 py-4 sm:px-8 mx-auto">
 	<h1 class="scroll-m-20 text-4xl font-bold tracking-tight lg:text-5xl">
-		Recordings
+		录音记录
 	</h1>
 	<p class="text-muted-foreground">
-		Your latest recordings and transcriptions, stored locally
-		{window.__TAURI_INTERNALS__ ? 'on your file system' : 'in IndexedDB'}.
+		您最近的录音记录和转录,已本地存储
+		{window.__TAURI_INTERNALS__ ? '在文件系统中' : '在 IndexedDB 中'}。
 	</p>
 	<Card class="flex flex-col gap-4 p-6">
 		<div class="flex flex-col md:flex-row items-center justify-between gap-2">
 			<Input
-				placeholder="Filter transcripts..."
+				placeholder="筛选转录文本..."
 				type="text"
 				class="w-full md:max-w-sm"
 				bind:value={globalFilter}
@@ -381,7 +381,7 @@
 			<div class="flex w-full items-center justify-between gap-2">
 				{#if selectedRecordingRows.length > 0}
 					<Button
-						tooltip="Transcribe selected recordings"
+						tooltip="转录选中的录音记录"
 						variant="outline"
 						size="icon"
 						disabled={transcribeRecordings.isPending}
@@ -389,8 +389,8 @@
 							const toastId = nanoid();
 							rpc.notify.loading.execute({
 								id: toastId,
-								title: 'Transcribing queries.recordings...',
-								description: 'This may take a while.',
+								title: '正在转录 queries.recordings...',
+								description: '这可能需要一些时间。',
 							});
 							transcribeRecordings.mutate(
 								selectedRecordingRows.map(({ original }) => original),
@@ -401,8 +401,8 @@
 											const n = oks.length;
 											rpc.notify.success.execute({
 												id: toastId,
-												title: `Transcribed ${n} recording${n === 1 ? '' : 's'}!`,
-												description: `Your ${n} recording${n === 1 ? ' has' : 's have'} been transcribed successfully.`,
+												title: `已转录 ${n} 条录音！`,
+												description: `您的 ${n} 条录音已成功转录。`,
 											});
 											return;
 										}
@@ -411,11 +411,11 @@
 											const n = errs.length;
 											rpc.notify.error.execute({
 												id: toastId,
-												title: `Failed to transcribe ${n} recording${n === 1 ? '' : 's'}`,
+												title: `${n} 条录音转录失败`,
 												description:
 													n === 1
-														? 'Your recording could not be transcribed.'
-														: 'None of your recordings could be transcribed.',
+														? '您的录音无法转录。'
+														: '您的录音均无法转录。',
 												action: { type: 'more-details', error: errs },
 											});
 											return;
@@ -423,8 +423,8 @@
 										// Mixed results
 										rpc.notify.warning.execute({
 											id: toastId,
-											title: `Transcribed ${oks.length} of ${oks.length + errs.length} recordings`,
-											description: `${oks.length} succeeded, ${errs.length} failed.`,
+											title: `已转录 ${oks.length} / ${oks.length + errs.length} 条录音记录`,
+											description: `${oks.length} 成功,${errs.length} 失败。`,
 											action: { type: 'more-details', error: errs },
 										});
 									},
@@ -455,7 +455,7 @@
 					>
 						<Dialog.Trigger>
 							<Button
-								tooltip="Copy transcripts from selected recordings"
+								tooltip="复制所选录音的转录文本"
 								variant="outline"
 								size="icon"
 							>
@@ -464,15 +464,14 @@
 						</Dialog.Trigger>
 						<Dialog.Content>
 							<Dialog.Header>
-								<Dialog.Title>Copy Transcripts</Dialog.Title>
+								<Dialog.Title>复制转录文本</Dialog.Title>
 								<Dialog.Description>
-									Make changes to your profile here. Click save when you're
-									done.
+									在此处修改您的配置文件。完成后点击保存。
 								</Dialog.Description>
 							</Dialog.Header>
 							<div class="grid gap-4 py-4">
 								<div class="grid grid-cols-4 items-center gap-4">
-									<Label for="template" class="text-right">Template</Label>
+									<Label for="template" class="text-right">模板</Label>
 									<Textarea
 										id="template"
 										bind:value={template}
@@ -480,7 +479,7 @@
 									/>
 								</div>
 								<div class="grid grid-cols-4 items-center gap-4">
-									<Label for="delimiter" class="text-right">Delimiter</Label>
+									<Label for="delimiter" class="text-right">分隔符</Label>
 									<Textarea
 										id="delimiter"
 										bind:value={delimiter}
@@ -489,7 +488,7 @@
 								</div>
 							</div>
 							<Textarea
-								placeholder="Preview of copied text"
+								placeholder="复制文本预览"
 								readonly
 								class="h-32"
 								value={joinedTranscriptionsText}
@@ -503,38 +502,38 @@
 										if (status === 'success') isDialogOpen = false;
 									}}
 								>
-									Copy Transcriptions
+									复制转录
 								</CopyButton>
 							</Dialog.Footer>
 						</Dialog.Content>
 					</Dialog.Root>
 
 					<Button
-						tooltip="Delete selected recordings"
+						tooltip="删除选中的录音记录"
 						variant="outline"
 						size="icon"
 						onclick={() => {
 							confirmationDialog.open({
-								title: 'Delete recordings',
+								title: '删除录音记录',
 								description:
-									'Are you sure you want to delete these recordings?',
-								confirm: { text: 'Delete', variant: 'destructive' },
+									'确定要删除这些录音记录吗?',
+								confirm: { text: '删除', variant: 'destructive' },
 								onConfirm: async () => {
 									const { error } = await rpc.db.recordings.delete.execute(
 										selectedRecordingRows.map(({ original }) => original),
 									);
 									if (error) {
 										rpc.notify.error.execute({
-											title: 'Failed to delete recordings!',
-											description: 'Your recordings could not be deleted.',
+											title: '删除录音记录失败!',
+											description: '您的录音记录无法删除。',
 											action: { type: 'more-details', error },
 										});
 										throw error;
 									}
 									rpc.notify.success.execute({
-										title: 'Deleted recordings!',
+										title: '已删除录音记录!',
 										description:
-											'Your recordings have been deleted successfully.',
+											'您的录音记录已成功删除。',
 									});
 								},
 							});
@@ -546,7 +545,7 @@
 
 				<OpenFolderButton
 					getFolderPath={PATHS.DB.RECORDINGS}
-					tooltipText="Open recordings folder"
+					tooltipText="打开录音记录文件夹"
 				/>
 
 				<DropdownMenu.Root>
@@ -556,7 +555,7 @@
 							'ml-auto items-center transition-all [&[data-state=open]>svg]:rotate-180',
 						)}
 					>
-						Columns <ChevronDownIcon
+						列 <ChevronDownIcon
 							class="size-4 transition-transform duration-200"
 						/>
 					</DropdownMenu.Trigger>
@@ -635,16 +634,16 @@
 										</Empty.Media>
 										<Empty.Title>
 											{#if globalFilter}
-												No recordings found
+												未找到录音记录
 											{:else}
-												No recordings yet
+												暂无录音记录
 											{/if}
 										</Empty.Title>
 										<Empty.Description>
 											{#if globalFilter}
-												Try adjusting your search or filters.
+												请尝试调整搜索或筛选条件。
 											{:else}
-												Start recording to add one.
+												开始录音以添加记录。
 											{/if}
 										</Empty.Description>
 									</Empty.Header>
@@ -658,8 +657,8 @@
 
 		<div class="flex items-center justify-between">
 			<div class="text-muted-foreground text-sm">
-				{selectedRecordingRows.length} of {table.getFilteredRowModel().rows
-					.length} row(s) selected.
+				{selectedRecordingRows.length} / {table.getFilteredRowModel().rows
+					.length} 行已选。
 			</div>
 			<ButtonGroup.Root>
 				<Button
@@ -668,7 +667,7 @@
 					onclick={() => table.previousPage()}
 					disabled={!table.getCanPreviousPage()}
 				>
-					Previous
+					上一页
 				</Button>
 				<Button
 					variant="outline"
@@ -676,7 +675,7 @@
 					onclick={() => table.nextPage()}
 					disabled={!table.getCanNextPage()}
 				>
-					Next
+					下一页
 				</Button>
 			</ButtonGroup.Root>
 		</div>

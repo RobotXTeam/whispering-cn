@@ -22,13 +22,13 @@ export function registerAccessibilityPermission() {
 
 		if (!isAccessibilityGranted) {
 			// Toast if permission not granted
-			toast.warning('Accessibility Permission Issue', {
+			toast.warning('辅助功能权限问题', {
 				id: accessibilityToastId,
 				description:
-					'Whispering needs accessibility permissions. This often requires removing and re-adding the app after updates.',
+					'Whispering 需要辅助功能权限。这通常需要在更新后移除并重新添加应用。',
 				duration: Number.POSITIVE_INFINITY,
 				action: {
-					label: 'View Guide',
+					label: '查看指南',
 					onClick: () => {
 						goto('/macos-enable-accessibility');
 						// Dismiss the toast
@@ -63,19 +63,19 @@ export function registerMicrophonePermission() {
 
 		if (!isMicrophoneGranted) {
 			// Toast if permission not granted
-			toast.info('Microphone Permission Required', {
+			toast.info('需要麦克风权限', {
 				id: microphoneToastId,
-				description: 'Whispering needs microphone access to record audio',
+				description: 'Whispering 需要麦克风访问权限才能录制音频',
 				duration: Number.POSITIVE_INFINITY,
 				action: {
-					label: 'Enable Permission',
+					label: '启用权限',
 					onClick: async () => {
 						const { error: requestError } =
 							await desktopServices.permissions.microphone.request();
 
 						if (requestError) {
-							toast.error('Failed to request microphone permission', {
-								description: 'Please check your system settings',
+							toast.error('请求麦克风权限失败', {
+								description: '请检查你的系统设置',
 							});
 							return;
 						}

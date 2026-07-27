@@ -84,7 +84,7 @@
 
 <Command.Root loop class={className}>
 	<Command.Input {placeholder} bind:ref={inputElement} />
-	<Command.Empty>No transformation found.</Command.Empty>
+	<Command.Empty>未找到转换。</Command.Empty>
 	<Command.Group class="overflow-y-auto max-h-[400px]">
 		{#each transformations as transformation, index (transformation.id)}
 			<Command.Item
@@ -114,6 +114,6 @@
 		class="rounded-none p-2 bg-muted/50 text-muted-foreground"
 	>
 		<LayersIcon class="size-4 mx-2.5" />
-		Manage transformations
+		管理转换
 	</Command.Item>
 </Command.Root>

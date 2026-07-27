@@ -41,7 +41,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting all recordings from both sources',
+						message: '从两个数据源获取所有录音时出错',
 					});
 				}
 
@@ -97,7 +97,7 @@ export function createDbServiceDesktop({
 					return Err({
 						name: 'DbServiceError' as const,
 						message:
-							'Error getting transcribing recording ids from both sources',
+							'从两个数据源获取正在转录的录音 ID 时出错',
 					});
 				}
 
@@ -132,7 +132,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting recording by id from both sources',
+						message: '从两个数据源按 ID 获取录音时出错',
 					});
 				}
 
@@ -162,7 +162,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error deleting recording(s) from both sources',
+						message: '从两个数据源删除录音时出错',
 					});
 				}
 
@@ -181,7 +181,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error cleaning up expired recordings from both sources',
+						message: '从两个数据源清理过期录音时出错',
 					});
 				}
 
@@ -211,12 +211,12 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting audio blob from both sources',
+						message: '从两个数据源获取音频 blob 时出错',
 					});
 				}
 
 				// Not found in either source (but no errors)
-				throw new Error(`Audio not found for recording ${recordingId}`);
+				throw new Error(`找不到录音 ${recordingId} 的音频`);
 			},
 
 			ensureAudioPlaybackUrl: async (recordingId) => {
@@ -242,12 +242,12 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting audio playback URL from both sources',
+						message: '从两个数据源获取音频回放 URL 时出错',
 					});
 				}
 
 				// Not found in either source (but no errors)
-				throw new Error(`Audio not found for recording ${recordingId}`);
+				throw new Error(`找不到录音 ${recordingId} 的音频`);
 			},
 
 			revokeAudioUrl: (recordingId) => {
@@ -267,7 +267,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error clearing recordings from both sources',
+						message: '从两个数据源清空录音时出错',
 					});
 				}
 
@@ -292,7 +292,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting all transformations from both sources',
+						message: '从两个数据源获取所有转换时出错',
 					});
 				}
 
@@ -335,7 +335,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting transformation by id from both sources',
+						message: '从两个数据源按 ID 获取转换时出错',
 					});
 				}
 
@@ -366,7 +366,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error deleting transformation(s) from both sources',
+						message: '从两个数据源删除转换时出错',
 					});
 				}
 
@@ -385,7 +385,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error clearing transformations from both sources',
+						message: '从两个数据源清空转换时出错',
 					});
 				}
 
@@ -411,7 +411,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting all transformation runs from both sources',
+						message: '从两个数据源获取所有转换运行时出错',
 					});
 				}
 
@@ -454,7 +454,7 @@ export function createDbServiceDesktop({
 				if (fsResult.error && idbResult.error) {
 					return Err({
 						name: 'DbServiceError' as const,
-						message: 'Error getting transformation run by id from both sources',
+						message: '从两个数据源按 ID 获取转换运行时出错',
 					});
 				}
 
@@ -474,7 +474,7 @@ export function createDbServiceDesktop({
 					return Err({
 						name: 'DbServiceError' as const,
 						message:
-							'Error getting transformation runs by transformation id from both sources',
+							'从两个数据源按转换 ID 获取转换运行时出错',
 					});
 				}
 
@@ -515,7 +515,7 @@ export function createDbServiceDesktop({
 					return Err({
 						name: 'DbServiceError' as const,
 						message:
-							'Error getting transformation runs by recording id from both sources',
+							'从两个数据源按录音 ID 获取转换运行时出错',
 					});
 				}
 
@@ -579,7 +579,7 @@ export function createDbServiceDesktop({
 				// If both failed, return an error
 				if (fsResult.error && idbResult.error) {
 					return DbServiceErr({
-						message: 'Error deleting transformation run(s) from both sources',
+						message: '从两个数据源删除转换运行时出错',
 					});
 				}
 
@@ -597,7 +597,7 @@ export function createDbServiceDesktop({
 				// If both failed, return an error
 				if (fsResult.error && idbResult.error) {
 					return DbServiceErr({
-						message: 'Error clearing transformation runs from both sources',
+						message: '从两个数据源清空转换运行时出错',
 					});
 				}
 

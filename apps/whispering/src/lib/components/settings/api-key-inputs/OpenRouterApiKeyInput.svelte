@@ -6,11 +6,11 @@
 </script>
 
 <Field.Field>
-	<Field.Label for="openrouter-api-key">OpenRouter API Key</Field.Label>
+	<Field.Label for="openrouter-api-key">OpenRouter API 密钥</Field.Label>
 	<Input
 		id="openrouter-api-key"
 		type="password"
-		placeholder="Your OpenRouter API Key"
+		placeholder="你的 OpenRouter API 密钥"
 		autocomplete="off"
 		bind:value={
 			() => settings.value['apiKeys.openrouter'],
@@ -18,12 +18,12 @@
 		}
 	/>
 	<Field.Description>
-		You can find your OpenRouter API key in your <Link
+		你可以在 <Link
 			href="https://openrouter.ai/keys"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			OpenRouter dashboard
-		</Link>.
+			OpenRouter 控制面板
+		</Link> 中找到你的 OpenRouter API 密钥。
 	</Field.Description>
 </Field.Field>

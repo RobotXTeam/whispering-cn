@@ -77,7 +77,7 @@
 					style="view-transition-name: {id}"
 					{rows}
 					{disabled}
-					aria-label="Click to view {label}"
+					aria-label="点击查看 {label}"
 				></textarea>
 			{/snippet}
 		</Dialog.Trigger>
@@ -99,7 +99,7 @@
 		<Textarea readonly value={text} rows={20} />
 		<Dialog.Footer>
 			<Button variant="outline" onclick={() => (isDialogOpen = false)}>
-				Close
+				关闭
 			</Button>
 			<CopyButton
 				{text}
@@ -110,7 +110,7 @@
 					if (status === 'success') isDialogOpen = false;
 				}}
 			>
-				Copy Text
+				复制文本
 			</CopyButton>
 		</Dialog.Footer>
 	</Dialog.Content>

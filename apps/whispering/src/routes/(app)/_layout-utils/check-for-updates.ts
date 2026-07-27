@@ -7,15 +7,20 @@ import {
 import { rpc } from '$lib/query';
 
 export async function checkForUpdates() {
+	// [self-build on Ubuntu 22.04] Disable startup update check.
+	// The official prebuilt deb needs GLIBC 2.38+ and won't run here; an auto-update
+	// to it would re-break the app. Network/DNS here also can't reach the endpoint,
+	// which would surface a user-visible "Failed to check for updates" toast every launch.
+	return;
 	try {
 		const update = await (shouldUseMockUpdates() ? mockCheck() : check());
 		if (update) {
 			await rpc.notify.info.execute({
-				title: `Update ${update.version} available`,
-				description: 'A new version of Whispering is available.',
+				title: `更新 ${update.version} 可用`,
+				description: 'Whispering 有新版本可用。',
 				action: {
 					type: 'button',
-					label: 'View Update',
+					label: '查看更新',
 					onClick: () => updateDialog.open(update),
 				},
 				persist: true,
@@ -23,7 +28,7 @@ export async function checkForUpdates() {
 		}
 	} catch (error) {
 		rpc.notify.error.execute({
-			title: 'Failed to check for updates',
+			title: '检查更新失败',
 			description: extractErrorMessage(error),
 		});
 	}

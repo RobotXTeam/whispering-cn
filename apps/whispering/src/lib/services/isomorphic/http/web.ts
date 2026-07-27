@@ -16,7 +16,7 @@ export function createHttpServiceWeb(): HttpService {
 					}),
 				catch: (error) =>
 					ConnectionErr({
-						message: `Failed to establish connection: ${extractErrorMessage(error)}`,
+						message: `建立连接失败:${extractErrorMessage(error)}`,
 					}),
 			});
 			if (responseError) return Err(responseError);
@@ -41,7 +41,7 @@ export function createHttpServiceWeb(): HttpService {
 				},
 				catch: (error) =>
 					ParseErr({
-						message: `Failed to parse response: ${extractErrorMessage(error)}`,
+						message: `解析响应失败:${extractErrorMessage(error)}`,
 					}),
 			});
 			return parseResult;

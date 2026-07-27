@@ -28,20 +28,20 @@
 	const RECORDING_METHODS = {
 		cpal: {
 			label: 'CPAL',
-			description: 'Native audio recording with low latency',
-			badge: 'Recommended',
+			description: '原生音频录音,低延迟',
+			badge: '推荐',
 			isAvailable: window.__TAURI_INTERNALS__, // Desktop only
 		},
 		ffmpeg: {
 			label: 'FFmpeg',
-			description: 'Customizable command-line recording',
-			badge: 'Advanced',
+			description: '可自定义的命令行录音',
+			badge: '高级',
 			isAvailable: window.__TAURI_INTERNALS__, // Desktop only
 		},
 		navigator: {
 			label: 'Navigator',
-			description: 'Browser MediaRecorder API',
-			badge: 'Universal',
+			description: '浏览器 MediaRecorder API',
+			badge: '通用',
 			isAvailable: true, // Always available
 		},
 	} as const;
@@ -64,8 +64,8 @@
 			<Button
 				{...props}
 				tooltip={isDeviceSelected
-					? `Recording via ${RECORDING_METHODS[selectedMethod].label} - Change device or method`
-					: `Select recording device (${RECORDING_METHODS[selectedMethod].label} method)`}
+					? `通过 ${RECORDING_METHODS[selectedMethod].label} 录音 - 更改设备或方式`
+					: `选择录音设备(${RECORDING_METHODS[selectedMethod].label} 方式)`}
 				role="combobox"
 				aria-expanded={combobox.open}
 				variant="ghost"
@@ -81,12 +81,12 @@
 	</Popover.Trigger>
 	<Popover.Content class="p-0">
 		<Command.Root loop>
-			<Command.Input placeholder="Search devices and methods..." />
+			<Command.Input placeholder="搜索设备和方式..." />
 			<Command.List class="max-h-[40vh]">
-				<Command.Empty>No recording devices found.</Command.Empty>
+				<Command.Empty>未找到录音设备。</Command.Empty>
 
 				<!-- Recording Method Selection -->
-				<Command.Group heading="Recording Method">
+				<Command.Group heading="录音方式">
 					{#each Object.entries(RECORDING_METHODS) as [methodKey, method]}
 						{@const isSelected = selectedMethod === methodKey}
 						{#if method.isAvailable}
@@ -129,10 +129,10 @@
 				<Command.Separator />
 
 				<!-- Device Selection -->
-				<Command.Group heading="Recording Device">
+				<Command.Group heading="录音设备">
 					{#if getDevicesQuery.isPending}
 						<div class="p-4 text-center text-sm text-muted-foreground">
-							Loading devices...
+							加载设备中...
 						</div>
 					{:else if getDevicesQuery.isError}
 						<div class="p-4 text-center text-sm text-destructive">
@@ -176,7 +176,7 @@
 						{:else}
 							<RefreshCwIcon class="size-4" />
 						{/if}
-						Refresh devices
+						刷新设备
 					</Command.Item>
 				</Command.Group>
 			</Command.List>

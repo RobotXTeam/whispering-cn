@@ -7,11 +7,11 @@
 
 <Field.Group>
 	<Field.Field>
-		<Field.Label for="groq-api-key">Groq API Key</Field.Label>
+		<Field.Label for="groq-api-key">Groq API 密钥</Field.Label>
 		<Input
 			id="groq-api-key"
 			type="password"
-			placeholder="Your Groq API Key"
+			placeholder="你的 Groq API 密钥"
 			autocomplete="off"
 			bind:value={
 				() => settings.value['apiKeys.groq'],
@@ -19,22 +19,22 @@
 			}
 		/>
 		<Field.Description>
-			You can find your Groq API key in your <Link
+			你可以在<Link
 				href="https://console.groq.com/keys"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				Groq console
-			</Link>.
+				Groq 控制台
+			</Link>中找到你的 Groq API 密钥。
 		</Field.Description>
 	</Field.Field>
 
 	<Field.Field>
-		<Field.Label for="groq-base-url">Groq Base URL</Field.Label>
+		<Field.Label for="groq-base-url">Groq 基础 URL</Field.Label>
 		<Input
 			id="groq-base-url"
 			type="url"
-			placeholder="https://api.groq.com/openai/v1 (default)"
+			placeholder="https://api.groq.com/openai/v1(默认)"
 			autocomplete="off"
 			bind:value={
 				() => settings.value['apiEndpoints.groq'],
@@ -42,8 +42,8 @@
 			}
 		/>
 		<Field.Description>
-			Override the default Groq API endpoint. Useful for reverse proxies or
-			Groq-compatible services. Leave empty to use the official Groq API.
+			覆盖默认的 Groq API 端点。适用于反向代理或
+			Groq 兼容的服务。留空则使用官方 Groq API。
 		</Field.Description>
 	</Field.Field>
 </Field.Group>

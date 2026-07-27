@@ -34,7 +34,7 @@ export async function toggle(): Promise<void> {
 		// Create new window (only happens once)
 		windowInstance = new WebviewWindow(WINDOW_LABEL, {
 			url: '/transform-clipboard',
-			title: 'Transform Clipboard',
+			title: '转换剪贴板',
 			width: 700,
 			height: 600,
 			center: true,

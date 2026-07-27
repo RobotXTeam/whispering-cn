@@ -22,9 +22,9 @@
 
 <div class="flex flex-col gap-6 overflow-y-auto h-full px-2">
 	<SectionHeader.Root>
-		<SectionHeader.Title>Test Transformation</SectionHeader.Title>
+		<SectionHeader.Title>测试转换</SectionHeader.Title>
 		<SectionHeader.Description>
-			Try out your transformation with sample input
+			使用示例输入测试您的转换
 		</SectionHeader.Description>
 	</SectionHeader.Root>
 
@@ -32,21 +32,21 @@
 
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 		<Field.Field>
-			<Field.Label for="input">Input Text</Field.Label>
+			<Field.Label for="input">输入文本</Field.Label>
 			<Textarea
 				id="input"
 				bind:value={input}
-				placeholder="Enter text to transform..."
+				placeholder="输入要转换的文本..."
 				rows={5}
 			/>
 		</Field.Field>
 
 		<Field.Field>
-			<Field.Label for="output">Output Text</Field.Label>
+			<Field.Label for="output">输出文本</Field.Label>
 			<Textarea
 				id="output"
 				value={output}
-				placeholder="Transformed text will appear here..."
+				placeholder="转换后的文本将显示在此处..."
 				rows={5}
 				readonly
 			/>
@@ -74,7 +74,7 @@
 			<PlayIcon class="size-4" />
 		{/if}
 		{transformInput.isPending
-			? 'Running Transformation...'
-			: 'Run Transformation'}
+			? '转换运行中...'
+			: '运行转换'}
 	</Button>
 </div>

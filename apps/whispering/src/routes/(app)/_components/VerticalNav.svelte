@@ -29,20 +29,20 @@
 	// Navigation items
 	const navItems = [
 		{
-			label: 'Home',
+			label: '首页',
 			href: '/',
 			icon: HomeIcon,
 			isActive: (pathname: string) => pathname === '/',
 		},
 		{
-			label: 'Recordings',
+			label: '录音记录',
 			href: '/recordings',
 			icon: ListIcon,
 			isActive: (pathname: string) =>
 				pathname === '/recordings' || pathname.startsWith('/recordings/'),
 		},
 		{
-			label: 'Transformations',
+			label: '转换',
 			href: '/transformations',
 			icon: LayersIcon,
 			isActive: (pathname: string) =>
@@ -50,7 +50,7 @@
 				pathname.startsWith('/transformations/'),
 		},
 		{
-			label: 'Settings',
+			label: '设置',
 			href: '/settings',
 			icon: SettingsIcon,
 			isActive: (pathname: string) =>
@@ -77,7 +77,7 @@
 							<div class="grid flex-1 text-left text-sm leading-tight">
 								<span class="truncate font-semibold">Whispering</span>
 								<span class="truncate text-xs text-muted-foreground"
-									>Speech to text</span
+									>语音转文字</span
 								>
 							</div>
 						</button>
@@ -90,7 +90,7 @@
 	<Sidebar.Content>
 		<!-- Navigation Group -->
 		<Sidebar.Group>
-			<Sidebar.GroupLabel>Navigation</Sidebar.GroupLabel>
+			<Sidebar.GroupLabel>导航</Sidebar.GroupLabel>
 			<Sidebar.GroupContent>
 				<Sidebar.Menu>
 					{#each navItems as item}
@@ -132,7 +132,7 @@
 							<MoonIcon
 								class="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
 							/>
-							<span>Toggle theme</span>
+							<span>切换主题</span>
 						</button>
 					{/snippet}
 				</Sidebar.MenuButton>
@@ -161,7 +161,7 @@
 					{#snippet child({ props })}
 						<button onclick={() => (notificationLog.isOpen = true)} {...props}>
 							<LogsIcon />
-							<span>Notifications</span>
+							<span>通知</span>
 						</button>
 					{/snippet}
 				</Sidebar.MenuButton>
@@ -177,7 +177,7 @@
 								class="group/menu-button relative flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0"
 							>
 								<Database />
-								<span>Database Migration</span>
+								<span>数据库迁移</span>
 								<span
 									class="absolute right-2 top-2 size-2 rounded-full bg-warning before:absolute before:left-0 before:top-0 before:h-full before:w-full before:rounded-full before:bg-warning/50 before:animate-ping"
 								></span>
@@ -198,7 +198,7 @@
 								{...props}
 							>
 								<Minimize2Icon />
-								<span>Minimize</span>
+								<span>最小化</span>
 							</button>
 						{/snippet}
 					</Sidebar.MenuButton>

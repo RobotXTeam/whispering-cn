@@ -117,19 +117,19 @@
 </script>
 
 <svelte:head>
-	<title>Transcription Settings - Whispering</title>
+	<title>转录设置 - Whispering</title>
 </svelte:head>
 
 <Field.Set>
-	<Field.Legend>Transcription</Field.Legend>
+	<Field.Legend>转录</Field.Legend>
 	<Field.Description>
-		Configure your Whispering transcription preferences.
+		配置你的 Whispering 转录偏好。
 	</Field.Description>
 	<Field.Separator />
 	<Field.Group>
 		<TranscriptionServiceSelect
 			id="selected-transcription-service"
-			label="Transcription Service"
+			label="转录服务"
 			bind:selected={
 				() => settings.value['transcription.selectedTranscriptionService'],
 				(selected) =>
@@ -142,7 +142,7 @@
 
 		{#if settings.value['transcription.selectedTranscriptionService'] === 'OpenAI'}
 			<Field.Field>
-				<Field.Label for="openai-model">OpenAI Model</Field.Label>
+				<Field.Label for="openai-model">OpenAI 模型</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -151,7 +151,7 @@
 					}
 				>
 					<Select.Trigger id="openai-model" class="w-full">
-						{openaiModelLabel ?? 'Select a model'}
+						{openaiModelLabel ?? '选择模型'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each openaiModelItems as item}
@@ -162,19 +162,19 @@
 					</Select.Content>
 				</Select.Root>
 				<Field.Description>
-					You can find more details about the models in the <Link
+					你可以在 <Link
 						href="https://platform.openai.com/docs/guides/speech-to-text"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						OpenAI docs
-					</Link>.
+						OpenAI 文档
+					</Link>中找到关于这些模型的更多详情。
 				</Field.Description>
 			</Field.Field>
 			<OpenAiApiKeyInput />
 		{:else if settings.value['transcription.selectedTranscriptionService'] === 'Groq'}
 			<Field.Field>
-				<Field.Label for="groq-model">Groq Model</Field.Label>
+				<Field.Label for="groq-model">Groq 模型</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -183,7 +183,7 @@
 					}
 				>
 					<Select.Trigger id="groq-model" class="w-full">
-						{groqModelLabel ?? 'Select a model'}
+						{groqModelLabel ?? '选择模型'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each groqModelItems as item}
@@ -194,19 +194,19 @@
 					</Select.Content>
 				</Select.Root>
 				<Field.Description>
-					You can find more details about the models in the <Link
+					你可以在 <Link
 						href="https://console.groq.com/docs/speech-to-text"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Groq docs
-					</Link>.
+						Groq 文档
+					</Link>中找到关于这些模型的更多详情。
 				</Field.Description>
 			</Field.Field>
 			<GroqApiKeyInput />
 		{:else if settings.value['transcription.selectedTranscriptionService'] === 'Deepgram'}
 			<Field.Field>
-				<Field.Label for="deepgram-model">Deepgram Model</Field.Label>
+				<Field.Label for="deepgram-model">Deepgram 模型</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -215,7 +215,7 @@
 					}
 				>
 					<Select.Trigger id="deepgram-model" class="w-full">
-						{deepgramModelLabel ?? 'Select a model'}
+						{deepgramModelLabel ?? '选择模型'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each deepgramModelItems as item}
@@ -229,7 +229,7 @@
 			<DeepgramApiKeyInput />
 		{:else if settings.value['transcription.selectedTranscriptionService'] === 'Mistral'}
 			<Field.Field>
-				<Field.Label for="mistral-model">Mistral Model</Field.Label>
+				<Field.Label for="mistral-model">Mistral 模型</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -238,7 +238,7 @@
 					}
 				>
 					<Select.Trigger id="mistral-model" class="w-full">
-						{mistralModelLabel ?? 'Select a model'}
+						{mistralModelLabel ?? '选择模型'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each mistralModelItems as item}
@@ -249,19 +249,19 @@
 					</Select.Content>
 				</Select.Root>
 				<Field.Description>
-					You can find more details about Voxtral speech understanding in the <Link
+					你可以在 <Link
 						href="https://mistral.ai/news/voxtral/"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						Mistral docs
-					</Link>.
+						Mistral 文档
+					</Link>中找到关于 Voxtral 语音理解的更多详情。
 				</Field.Description>
 			</Field.Field>
 			<MistralApiKeyInput />
 		{:else if settings.value['transcription.selectedTranscriptionService'] === 'ElevenLabs'}
 			<Field.Field>
-				<Field.Label for="elevenlabs-model">ElevenLabs Model</Field.Label>
+				<Field.Label for="elevenlabs-model">ElevenLabs 模型</Field.Label>
 				<Select.Root
 					type="single"
 					bind:value={
@@ -270,7 +270,7 @@
 					}
 				>
 					<Select.Trigger id="elevenlabs-model" class="w-full">
-						{elevenlabsModelLabel ?? 'Select a model'}
+						{elevenlabsModelLabel ?? '选择模型'}
 					</Select.Trigger>
 					<Select.Content>
 						{#each elevenlabsModelItems as item}
@@ -281,13 +281,13 @@
 					</Select.Content>
 				</Select.Root>
 				<Field.Description>
-					You can find more details about the models in the <Link
+					你可以在 <Link
 						href="https://elevenlabs.io/docs/capabilities/speech-to-text"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						ElevenLabs docs
-					</Link>.
+						ElevenLabs 文档
+					</Link>中找到关于这些模型的更多详情。
 				</Field.Description>
 			</Field.Field>
 			<ElevenLabsApiKeyInput />
@@ -295,11 +295,11 @@
 			<div class="space-y-4">
 				<Card.Root>
 					<Card.Header>
-						<Card.Title class="text-lg">Speaches Setup</Card.Title>
+						<Card.Title class="text-lg">Speaches 设置</Card.Title>
 						<Card.Description>
-							Install Speaches server and configure Whispering. Speaches is the
-							successor to faster-whisper-server with improved features and
-							active development.
+							安装 Speaches 服务器并配置 Whispering。Speaches 是
+							faster-whisper-server 的继任者,具有改进的功能和
+							积极的开发。
 						</Card.Description>
 					</Card.Header>
 					<Card.Content class="space-y-6">
@@ -309,7 +309,7 @@
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Installation Guide
+								安装指南
 							</Button>
 							<Button
 								variant="outline"
@@ -317,37 +317,37 @@
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Speech-to-Text Setup
+								语音转文本设置
 							</Button>
 						</div>
 
 						<div class="space-y-4">
 							<div>
 								<p class="text-sm font-medium">
-									<span class="text-muted-foreground">Step 1:</span> Install Speaches
-									server
+									<span class="text-muted-foreground">步骤 1:</span> 安装 Speaches
+									服务器
 								</p>
 								<ul class="ml-6 mt-2 space-y-2 text-sm text-muted-foreground">
 									<li class="list-disc">
-										Download the necessary docker compose files from the <Link
+										下载所需的 docker compose 文件,详见 <Link
 											href="https://speaches.ai/installation/"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											installation guide
+											安装指南
 										</Link>
 									</li>
 									<li class="list-disc">
-										Choose CUDA, CUDA with CDI, or CPU variant depending on your
-										system
+										根据你的系统选择 CUDA、带 CDI 的 CUDA 或 CPU
+										变体
 									</li>
 								</ul>
 							</div>
 
 							<div>
 								<p class="text-sm font-medium mb-2">
-									<span class="text-muted-foreground">Step 2:</span> Start Speaches
-									container
+									<span class="text-muted-foreground">步骤 2:</span> 启动 Speaches
+									容器
 								</p>
 								<CopyablePre
 									copyableText="docker compose up --detach"
@@ -357,21 +357,21 @@
 
 							<div>
 								<p class="text-sm font-medium">
-									<span class="text-muted-foreground">Step 3:</span> Download a speech
-									recognition model
+									<span class="text-muted-foreground">步骤 3:</span> 下载语音
+									识别模型
 								</p>
 								<ul class="ml-6 mt-2 space-y-2 text-sm text-muted-foreground">
 									<li class="list-disc">
-										View available models in the <Link
+										查看可用模型,详见 <Link
 											href="https://speaches.ai/usage/speech-to-text/"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											speech-to-text guide
+											语音转文本指南
 										</Link>
 									</li>
 									<li class="list-disc">
-										Run the following command to download a model:
+										运行以下命令下载模型:
 									</li>
 								</ul>
 								<div class="mt-2">
@@ -384,12 +384,12 @@
 
 							<div>
 								<p class="text-sm font-medium">
-									<span class="text-muted-foreground">Step 4:</span> Configure the
-									settings below
+									<span class="text-muted-foreground">步骤 4:</span> 配置
+									以下设置
 								</p>
 								<ul class="ml-6 mt-2 space-y-1 text-sm text-muted-foreground">
-									<li class="list-disc">Enter your Speaches server URL</li>
-									<li class="list-disc">Enter the model ID you downloaded</li>
+									<li class="list-disc">输入你的 Speaches 服务器 URL</li>
+									<li class="list-disc">输入你下载的模型 ID</li>
 								</ul>
 							</div>
 						</div>
@@ -398,7 +398,7 @@
 			</div>
 
 			<Field.Field>
-				<Field.Label for="speaches-base-url">Base URL</Field.Label>
+				<Field.Label for="speaches-base-url">基础 URL</Field.Label>
 				<Input
 					id="speaches-base-url"
 					placeholder="http://localhost:8000"
@@ -410,9 +410,9 @@
 					}
 				/>
 				<Field.Description>
-					The URL where your Speaches server is running (<code>
+					你的 Speaches 服务器运行的 URL(<code>
 						SPEACHES_BASE_URL
-					</code>), typically
+					</code>),通常为
 					<CopyButton
 						text="http://localhost:8000"
 						copyFn={createCopyFn('speaches base url')}
@@ -426,7 +426,7 @@
 			</Field.Field>
 
 			<Field.Field>
-				<Field.Label for="speaches-model-id">Model ID</Field.Label>
+				<Field.Label for="speaches-model-id">模型 ID</Field.Label>
 				<Input
 					id="speaches-model-id"
 					placeholder="Systran/faster-distil-whisper-small.en"
@@ -438,7 +438,7 @@
 					}
 				/>
 				<Field.Description>
-					The model you downloaded in step 3 (<code>MODEL_ID</code>), e.g.
+					你在步骤 3 中下载的模型(<code>MODEL_ID</code>),例如
 					<CopyButton
 						text="Systran/faster-distil-whisper-small.en"
 						copyFn={createCopyFn('speaches model id')}
@@ -456,8 +456,8 @@
 				{#if window.__TAURI_INTERNALS__}
 					<LocalModelSelector
 						models={WHISPER_MODELS}
-						title="Whisper Model"
-						description="Select a pre-built model or browse for your own. Models run locally for private, offline transcription."
+						title="Whisper 模型"
+						description="选择预构建的模型或浏览你自己的模型。模型在本地运行,用于私密的离线transcription."
 						fileSelectionMode="file"
 						fileExtensions={['bin', 'gguf', 'ggml']}
 						bind:value={
@@ -467,7 +467,7 @@
 					>
 						{#snippet prebuiltFooter()}
 							<p class="text-sm text-muted-foreground">
-								Models are downloaded from{' '}
+								模型从{' '}
 								<Link
 									href="https://huggingface.co/ggerganov/whisper.cpp"
 									target="_blank"
@@ -475,35 +475,35 @@
 								>
 									Hugging Face
 								</Link>
-								{' '}and stored locally in your app data directory. Quantized
-								models offer smaller sizes with minimal quality loss.
+								{' '}下载并本地存储在你的应用数据目录中。量化
+								模型体积更小,质量损失极小。
 							</p>
 						{/snippet}
 
 						{#snippet manualInstructions()}
 							<div>
 								<p class="text-sm font-medium mb-2">
-									<span class="text-muted-foreground">Step 1:</span> Download a Whisper
-									model
+									<span class="text-muted-foreground">步骤 1:</span> 下载 Whisper
+									模型
 								</p>
 								<ul class="ml-6 mt-2 space-y-2 text-sm text-muted-foreground">
 									<li class="list-disc">
-										Visit the{' '}
+										访问{' '}
 										<Link
 											href="https://huggingface.co/ggerganov/whisper.cpp/tree/main"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
-											model repository
+											模型仓库
 										</Link>
 									</li>
 									<li class="list-disc">
-										Download any model file (e.g., ggml-base.en.bin for
-										English-only)
+										下载任意模型文件(例如 ggml-base.en.bin,仅支持
+										英语)
 									</li>
 									<li class="list-disc">
-										Quantized models (q5_0, q8_0) offer smaller sizes with
-										minimal quality loss
+										量化模型(q5_0、q8_0)体积更小,
+										质量损失极小
 									</li>
 								</ul>
 							</div>
@@ -514,29 +514,29 @@
 						<Alert.Root class="border-red-500/20 bg-red-500/5">
 							<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 							<Alert.Title class="text-red-600 dark:text-red-400">
-								Browser API Recording Requires FFmpeg
+								浏览器 API 录音需要 FFmpeg
 							</Alert.Title>
 							<Alert.Description>
-								You're using the Browser API recording method, which produces
-								compressed audio that requires FFmpeg for Whisper C++
-								transcription.
+								你正在使用浏览器 API 录音方式,它产生的
+								压缩音频需要 FFmpeg 才能进行 Whisper C++
+								转录。
 								<div class="mt-3 space-y-3">
 									<div class="text-sm">
-										<strong>Option 1:</strong>
+										<strong>选项 1:</strong>
 										<Link href="/settings/recording"
-											>Switch to CPAL recording</Link
+											>切换到 CPAL 录音</Link
 										>
-										for direct compatibility with local transcription
+										以直接兼容本地转录
 									</div>
 									<div class="text-sm">
-										<strong>Option 2:</strong>
-										<Link href="/install-ffmpeg">Install FFmpeg</Link>
-										to keep using Browser API recording
+										<strong>选项 2:</strong>
+										<Link href="/install-ffmpeg">安装 FFmpeg</Link>
+										以继续使用浏览器 API 录音
 									</div>
 									<div class="text-sm">
-										<strong>Option 3:</strong>
-										Switch to a cloud transcription service (OpenAI, Groq, Deepgram,
-										etc.) which work with all recording methods
+										<strong>选项 3:</strong>
+										切换到云转录服务(OpenAI、Groq、Deepgram、
+										等),它们兼容所有录音方式
 									</div>
 								</div>
 							</Alert.Description>
@@ -550,8 +550,8 @@
 				{#if window.__TAURI_INTERNALS__}
 					<LocalModelSelector
 						models={PARAKEET_MODELS}
-						title="Parakeet Model"
-						description="Parakeet is an NVIDIA NeMo model optimized for fast local transcription. It automatically detects the language and doesn't support manual language selection."
+						title="Parakeet 模型"
+						description="Parakeet 是一个 NVIDIA NeMo 模型,针对快速本地转录进行了优化。它会自动检测语言,不支持手动语言选择。"
 						fileSelectionMode="directory"
 						bind:value={
 							() => settings.value['transcription.parakeet.modelPath'],
@@ -560,17 +560,17 @@
 					>
 						{#snippet prebuiltFooter()}
 							<p class="text-sm text-muted-foreground">
-								Models are downloaded from{' '}
+								模型从{' '}
 								<Link
 									href="https://github.com/EpicenterHQ/epicenter/releases/tag/models/parakeet-tdt-0.6b-v3-int8"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
-									GitHub releases
+									GitHub 发布
 								</Link>
-								{' '}and stored in your app data directory. The pre-packaged
-								archive contains the NVIDIA Parakeet model with INT8
-								quantization and is extracted after download.
+								{' '}并存储在你的应用数据目录中。预打包的
+								存档包含 NVIDIA Parakeet 模型,采用 INT8
+								量化,下载后解压。
 							</p>
 						{/snippet}
 
@@ -578,7 +578,7 @@
 							<Card.Root class="bg-muted/50">
 								<Card.Content class="p-4">
 									<h4 class="mb-2 text-sm font-medium">
-										Getting Parakeet Models
+										获取 Parakeet 模型
 									</h4>
 									<ul class="space-y-2 text-sm text-muted-foreground">
 										<li class="flex items-start gap-2">
@@ -586,8 +586,8 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Download pre-built models from the "Pre-built Models"
-												tab
+												从"预构建模型"
+												选项卡下载
 											</span>
 										</li>
 										<li class="flex items-start gap-2">
@@ -595,7 +595,7 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Or download from{' '}
+												或从{' '}
 												<Link
 													href="https://github.com/NVIDIA/NeMo"
 													target="_blank"
@@ -610,7 +610,7 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Parakeet models are directories containing ONNX files
+												Parakeet 模型是包含 ONNX 文件的目录
 											</span>
 										</li>
 									</ul>
@@ -623,29 +623,29 @@
 						<Alert.Root class="border-red-500/20 bg-red-500/5">
 							<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 							<Alert.Title class="text-red-600 dark:text-red-400">
-								Browser API Recording Requires FFmpeg
+								浏览器 API 录音需要 FFmpeg
 							</Alert.Title>
 							<Alert.Description>
-								You're using the Browser API recording method, which produces
-								compressed audio that requires FFmpeg for Parakeet
-								transcription.
+								你正在使用浏览器 API 录音方式,它产生的
+								压缩音频需要 FFmpeg 才能进行 Parakeet
+								转录。
 								<div class="mt-3 space-y-3">
 									<div class="text-sm">
-										<strong>Option 1:</strong>
+										<strong>选项 1:</strong>
 										<Link href="/settings/recording"
-											>Switch to CPAL recording</Link
+											>切换到 CPAL 录音</Link
 										>
-										for direct compatibility with local transcription
+										以直接兼容本地转录
 									</div>
 									<div class="text-sm">
-										<strong>Option 2:</strong>
-										<Link href="/install-ffmpeg">Install FFmpeg</Link>
-										to keep using Browser API recording
+										<strong>选项 2:</strong>
+										<Link href="/install-ffmpeg">安装 FFmpeg</Link>
+										以继续使用浏览器 API 录音
 									</div>
 									<div class="text-sm">
-										<strong>Option 3:</strong>
-										Switch to a cloud transcription service (OpenAI, Groq, Deepgram,
-										etc.) which work with all recording methods
+										<strong>选项 3:</strong>
+										切换到云转录服务(OpenAI、Groq、Deepgram、
+										等),它们兼容所有录音方式
 									</div>
 								</div>
 							</Alert.Description>
@@ -659,8 +659,8 @@
 				{#if window.__TAURI_INTERNALS__}
 					<LocalModelSelector
 						models={MOONSHINE_MODELS}
-						title="Moonshine Model"
-						description="Moonshine is an efficient ONNX model by UsefulSensors. English-only with fast inference and small model sizes (~30 MB)."
+						title="Moonshine 模型"
+						description="Moonshine 是 UsefulSensors 开发的高效 ONNX 模型。仅支持英语,推理快速,模型体积小(约 30 MB)。"
 						fileSelectionMode="directory"
 						bind:value={
 							() => settings.value['transcription.moonshine.modelPath'],
@@ -669,7 +669,7 @@
 					>
 						{#snippet prebuiltFooter()}
 							<p class="text-sm text-muted-foreground">
-								Models are downloaded from{' '}
+								模型从{' '}
 								<Link
 									href="https://huggingface.co/UsefulSensors/moonshine"
 									target="_blank"
@@ -677,8 +677,8 @@
 								>
 									Hugging Face
 								</Link>
-								{' '}and stored in your app data directory. Moonshine uses
-								quantized ONNX models for efficient local inference.
+								{' '}并存储在你的应用数据目录中。Moonshine 使用
+								量化 ONNX 模型以实现高效的本地推理。
 							</p>
 						{/snippet}
 
@@ -686,7 +686,7 @@
 							<Card.Root class="bg-muted/50">
 								<Card.Content class="p-4">
 									<h4 class="mb-2 text-sm font-medium">
-										Getting Moonshine Models
+										获取 Moonshine 模型
 									</h4>
 									<ul class="space-y-2 text-sm text-muted-foreground">
 										<li class="flex items-start gap-2">
@@ -694,8 +694,8 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Download pre-built models from the "Pre-built Models"
-												tab
+												从"预构建模型"
+												选项卡下载
 											</span>
 										</li>
 										<li class="flex items-start gap-2">
@@ -703,13 +703,13 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Or download from{' '}
+												或从{' '}
 												<Link
 													href="https://huggingface.co/UsefulSensors/moonshine"
 													target="_blank"
 													rel="noopener noreferrer"
 												>
-													UsefulSensors on Hugging Face
+													Hugging Face 上的 UsefulSensors
 												</Link>
 											</span>
 										</li>
@@ -718,8 +718,8 @@
 												class="mt-0.5 block size-1.5 rounded-full bg-muted-foreground/50"
 											/>
 											<span>
-												Moonshine models are directories containing ONNX files
-												and tokenizer
+												Moonshine 模型是包含 ONNX 文件
+												和分词器的目录
 											</span>
 										</li>
 									</ul>
@@ -729,20 +729,20 @@
 										<p
 											class="text-xs font-medium text-amber-600 dark:text-amber-400"
 										>
-											Directory Naming Requirement
+											目录命名要求
 										</p>
 										<p class="mt-1 text-xs text-muted-foreground">
-											The model directory must be named{' '}
+											模型目录必须命名为{' '}
 											<code class="rounded bg-muted px-1 py-0.5 font-mono"
 												>moonshine-&#123;variant&#125;-&#123;lang&#125;</code
 											>
-											{' '}(e.g.,
+											{' '}(例如,
 											<code class="rounded bg-muted px-1 py-0.5 font-mono"
 												>moonshine-tiny-en</code
 											>,
 											{' '}<code class="rounded bg-muted px-1 py-0.5 font-mono"
 												>moonshine-base-en</code
-											>). The variant (tiny/base) determines model architecture.
+											>)。变体(tiny/base)决定模型架构。
 										</p>
 									</div>
 								</Card.Content>
@@ -754,29 +754,29 @@
 						<Alert.Root class="border-red-500/20 bg-red-500/5">
 							<InfoIcon class="size-4 text-red-600 dark:text-red-400" />
 							<Alert.Title class="text-red-600 dark:text-red-400">
-								Browser API Recording Requires FFmpeg
+								浏览器 API 录音需要 FFmpeg
 							</Alert.Title>
 							<Alert.Description>
-								You're using the Browser API recording method, which produces
-								compressed audio that requires FFmpeg for Moonshine
-								transcription.
+								你正在使用浏览器 API 录音方式,它产生的
+								压缩音频需要 FFmpeg 才能进行 Moonshine
+								转录。
 								<div class="mt-3 space-y-3">
 									<div class="text-sm">
-										<strong>Option 1:</strong>
+										<strong>选项 1:</strong>
 										<Link href="/settings/recording"
-											>Switch to CPAL recording</Link
+											>切换到 CPAL 录音</Link
 										>
-										for direct compatibility with local transcription
+										以直接兼容本地转录
 									</div>
 									<div class="text-sm">
-										<strong>Option 2:</strong>
-										<Link href="/install-ffmpeg">Install FFmpeg</Link>
-										to keep using Browser API recording
+										<strong>选项 2:</strong>
+										<Link href="/install-ffmpeg">安装 FFmpeg</Link>
+										以继续使用浏览器 API 录音
 									</div>
 									<div class="text-sm">
-										<strong>Option 3:</strong>
-										Switch to a cloud transcription service (OpenAI, Groq, Deepgram,
-										etc.) which work with all recording methods
+										<strong>选项 3:</strong>
+										切换到云转录服务(OpenAI、Groq、Deepgram、
+										等),它们兼容所有录音方式
 									</div>
 								</div>
 							</Alert.Description>
@@ -790,7 +790,7 @@
 		<CompressionBody />
 
 		<Field.Field>
-			<Field.Label for="output-language">Output Language</Field.Label>
+			<Field.Label for="output-language">输出语言</Field.Label>
 			<Select.Root
 				type="single"
 				bind:value={
@@ -800,7 +800,7 @@
 				disabled={!currentServiceCapabilities.supportsLanguage}
 			>
 				<Select.Trigger id="output-language" class="w-full">
-					{outputLanguageLabel ?? 'Select a language'}
+					{outputLanguageLabel ?? '选择语言'}
 				</Select.Trigger>
 				<Select.Content>
 					{#each SUPPORTED_LANGUAGES_OPTIONS as item}
@@ -812,14 +812,14 @@
 				<Field.Description>
 					{settings.value['transcription.selectedTranscriptionService'] ===
 					'moonshine'
-						? 'Moonshine is English-only'
-						: 'Parakeet automatically detects the language'}
+						? 'Moonshine 仅支持英语'
+						: 'Parakeet 自动检测语言'}
 				</Field.Description>
 			{/if}
 		</Field.Field>
 
 		<Field.Field>
-			<Field.Label for="temperature">Temperature</Field.Label>
+			<Field.Label for="temperature">温度</Field.Label>
 			<Input
 				id="temperature"
 				type="number"
@@ -837,16 +837,16 @@
 			/>
 			<Field.Description>
 				{currentServiceCapabilities.supportsTemperature
-					? "Controls randomness in the model's output. 0 is focused and deterministic, 1 is more creative."
-					: 'Temperature is not supported for local models (transcribe-rs)'}
+					? "控制模型输出的随机性。0 代表专注且确定,1 代表更具创造性。"
+					: '本地模型(transcribe-rs)不支持温度'}
 			</Field.Description>
 		</Field.Field>
 
 		<Field.Field>
-			<Field.Label for="transcription-prompt">System Prompt</Field.Label>
+			<Field.Label for="transcription-prompt">系统提示词</Field.Label>
 			<Textarea
 				id="transcription-prompt"
-				placeholder="e.g., This is an academic lecture about quantum physics with technical terms like 'eigenvalue' and 'Schrödinger'"
+				placeholder="例如:这是一堂关于量子物理的学术讲座,包含'eigenvalue'和'Schrödinger'等技术术语"
 				disabled={!currentServiceCapabilities.supportsPrompt}
 				bind:value={
 					() => settings.value['transcription.prompt'],
@@ -855,8 +855,8 @@
 			/>
 			<Field.Description>
 				{currentServiceCapabilities.supportsPrompt
-					? 'Helps transcription service (e.g., Whisper) better recognize specific terms, names, or context during initial transcription. Not for text transformations - use the Transformations tab for post-processing rules.'
-					: 'System prompt is not supported for local models (Parakeet, Moonshine)'}
+					? '帮助转录服务(例如 Whisper)在初始转录时更好地识别特定术语、名称或上下文。不适用于文本转换 — 请使用"转换"选项卡进行后处理规则。'
+					: '本地模型(Parakeet、Moonshine)不支持系统提示词'}
 			</Field.Description>
 		</Field.Field>
 	</Field.Group>

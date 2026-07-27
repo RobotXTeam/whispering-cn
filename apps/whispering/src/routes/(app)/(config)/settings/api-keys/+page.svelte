@@ -16,26 +16,26 @@
 </script>
 
 <svelte:head>
-	<title>API Keys - Whispering</title>
+	<title>API 密钥 - Whispering</title>
 </svelte:head>
 
 <Field.Set>
-	<Field.Legend>API Keys</Field.Legend>
-	<Field.Description>Configure your API keys for Whispering.</Field.Description>
+	<Field.Legend>API 密钥</Field.Legend>
+	<Field.Description>配置你的 Whispering API 密钥。</Field.Description>
 	<Field.Separator />
 
 	<Tabs.Root value="all" class="w-full">
 		<Tabs.List class="grid w-full grid-cols-3">
 			<Tabs.Trigger value="all">
-				All
+				全部
 				<Badge variant="secondary">9</Badge>
 			</Tabs.Trigger>
 			<Tabs.Trigger value="transcription">
-				Transcription
+				转录
 				<Badge variant="secondary">5</Badge>
 			</Tabs.Trigger>
 			<Tabs.Trigger value="transformation">
-				Transformation
+				转换
 				<Badge variant="secondary">7</Badge>
 			</Tabs.Trigger>
 		</Tabs.List>

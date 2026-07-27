@@ -38,7 +38,7 @@
 	)}
 	style="view-transition-name: {viewTransition.global.header}"
 >
-	<Button tooltip="Go home" href="/" variant="ghost" class="-ml-4">
+	<Button tooltip="返回主页" href="/" variant="ghost" class="-ml-4">
 		<span class="text-lg font-bold">whispering</span>
 	</Button>
 
@@ -47,7 +47,7 @@
 			{#if settings.value['recording.mode'] === 'manual'}
 				{#if getRecorderStateQuery.data === 'RECORDING'}
 					<Button
-						tooltip="Cancel recording"
+						tooltip="取消录音"
 						onclick={() => commandCallbacks.cancelManualRecording()}
 						variant="ghost"
 						size="icon"
@@ -63,7 +63,7 @@
 				{/if}
 				{#if getRecorderStateQuery.data === 'RECORDING'}
 					<Button
-						tooltip="Stop recording"
+						tooltip="停止录音"
 						onclick={() => commandCallbacks.toggleManualRecording()}
 						variant="ghost"
 						size="icon"
@@ -74,7 +74,7 @@
 				{:else}
 					<div class="flex">
 						<Button
-							tooltip="Start recording"
+							tooltip="开始录音"
 							onclick={() => commandCallbacks.toggleManualRecording()}
 							variant="ghost"
 							size="icon"
@@ -96,7 +96,7 @@
 				{#if vadRecorder.state === 'IDLE'}
 					<div class="flex">
 						<Button
-							tooltip="Start voice activated recording"
+							tooltip="开始语音激活录音"
 							onclick={() => commandCallbacks.toggleVadRecording()}
 							variant="ghost"
 							size="icon"
@@ -109,7 +109,7 @@
 					</div>
 				{:else}
 					<Button
-						tooltip="Stop voice activated recording"
+						tooltip="停止语音激活录音"
 						onclick={() => commandCallbacks.toggleVadRecording()}
 						variant="ghost"
 						size="icon"
@@ -130,10 +130,10 @@
 				<TransformationSelector />
 				<div class="flex">
 					<Button
-						tooltip="Toggle live recording"
+						tooltip="切换实时录音"
 						onclick={() => {
 							// TODO: Implement live recording toggle
-							alert('Live recording not yet implemented');
+							alert('实时录音尚未实现');
 						}}
 						variant="ghost"
 						size="icon"

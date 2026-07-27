@@ -74,9 +74,9 @@
 		}
 
 		confirmationDialog.open({
-			title: 'Unsaved changes',
-			description: 'You have unsaved changes. Are you sure you want to leave?',
-			confirm: { text: 'Leave' },
+			title: '有未保存的更改',
+			description: '您有未保存的更改。确定要离开吗?',
+			confirm: { text: '离开' },
 			onConfirm: () => {
 				// Reset working copy and dirty flag
 				workingCopy = transformation;
@@ -93,7 +93,7 @@
 		{#snippet child({ props })}
 			<Button
 				{...props}
-				tooltip="Edit transformation, test transformation, and view run history"
+				tooltip="编辑转换、测试转换并查看运行历史"
 				variant="ghost"
 				class={className}
 			>
@@ -120,7 +120,7 @@
 		}}
 	>
 		<Modal.Header>
-			<Modal.Title>Transformation Settings</Modal.Title>
+			<Modal.Title>转换设置</Modal.Title>
 			<Separator />
 		</Modal.Header>
 
@@ -138,26 +138,26 @@
 			<Button
 				onclick={() => {
 					confirmationDialog.open({
-						title: 'Delete transformation',
-						description: 'Are you sure? This action cannot be undone.',
-						confirm: { text: 'Delete', variant: 'destructive' },
+						title: '删除转换',
+						description: '确定吗?此操作无法撤销。',
+						confirm: { text: '删除', variant: 'destructive' },
 						onConfirm: async () => {
 							const { error } = await rpc.db.transformations.delete.execute(
 								$state.snapshot(transformation),
 							);
 							if (error) {
 								rpc.notify.error.execute({
-									title: 'Failed to delete transformation!',
-									description: 'Your transformation could not be deleted.',
+									title: '删除转换失败!',
+									description: '无法删除您的转换。',
 									action: { type: 'more-details', error },
 								});
 								throw error;
 							}
 							isDialogOpen = false;
 							rpc.notify.success.execute({
-								title: 'Deleted transformation!',
+								title: '已删除转换!',
 								description:
-									'Your transformation has been deleted successfully.',
+									'您的转换已成功删除。',
 							});
 						},
 					});
@@ -165,28 +165,28 @@
 				variant="destructive"
 			>
 				<TrashIcon class="size-4" />
-				Delete
+				删除
 			</Button>
 			<div class="flex items-center gap-2">
 				<MarkTransformationActiveButton {transformation} />
 				<Button variant="outline" onclick={() => promptUserConfirmLeave()}>
-					Close
+					关闭
 				</Button>
 				<Button
 					onclick={() => {
 						updateTransformation.mutate($state.snapshot(workingCopy), {
 							onSuccess: () => {
 								rpc.notify.success.execute({
-									title: 'Updated transformation!',
+									title: '已更新转换!',
 									description:
-										'Your transformation has been updated successfully.',
+										'您的转换已成功更新。',
 								});
 								isDialogOpen = false;
 							},
 							onError: (error) => {
 								rpc.notify.error.execute({
-									title: 'Failed to update transformation!',
-									description: 'Your transformation could not be updated.',
+									title: '更新转换失败!',
+									description: '无法更新您的转换。',
 									action: { type: 'more-details', error },
 								});
 							},
@@ -197,7 +197,7 @@
 					{#if updateTransformation.isPending}
 						<Spinner />
 					{/if}
-					Save
+					保存
 				</Button>
 			</div>
 		</Modal.Footer>

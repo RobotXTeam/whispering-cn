@@ -53,9 +53,9 @@ export function createSpeachesTranscriptionService({
 				switch (postError.name) {
 					case 'ConnectionError': {
 						return WhisperingErr({
-							title: '🌐 Connection Issue',
+							title: '🌐 连接问题',
 							description:
-								'Unable to connect to the transcription service. This could be a network issue or temporary service interruption. Please try again in a moment.',
+								'无法连接到转录服务。这可能是网络问题或服务临时中断。请稍后重试。',
 							action: { type: 'more-details', error: postError },
 						});
 					}
@@ -68,12 +68,12 @@ export function createSpeachesTranscriptionService({
 
 						if (status === 401) {
 							return WhisperingErr({
-								title: '🔑 Authentication Required',
+								title: '🔑 需要身份验证',
 								description:
-									'Your API key appears to be invalid or expired. Please update your API key in settings to continue transcribing.',
+									'您的 API 密钥似乎无效或已过期。请在设置中更新您的 API 密钥以继续转录。',
 								action: {
 									type: 'link',
-									label: 'Update API key',
+									label: '更新 API 密钥',
 									href: '/settings/transcription',
 								},
 							});
@@ -81,27 +81,27 @@ export function createSpeachesTranscriptionService({
 
 						if (status === 403) {
 							return WhisperingErr({
-								title: '⛔ Access Restricted',
+								title: '⛔ 访问受限',
 								description:
-									"Your account doesn't have access to this feature. This may be due to plan limitations or account restrictions. Please check your account status.",
+									"您的账户无权访问此功能。这可能是由于套餐限制或账户限制造成的。请检查您的账户状态。",
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 413) {
 							return WhisperingErr({
-								title: '📦 Audio File Too Large',
+								title: '📦 音频文件过大',
 								description:
-									'Your audio file exceeds the maximum size limit (typically 25MB). Try splitting it into smaller segments or reducing the audio quality.',
+									'您的音频文件超过了最大大小限制(通常为 25MB)。请尝试将其分割成较小的片段或降低音频质量。',
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						if (status === 415) {
 							return WhisperingErr({
-								title: '🎵 Unsupported Format',
+								title: '🎵 不支持的格式',
 								description:
-									"This audio format isn't supported. Please convert your file to MP3, WAV, M4A, or another common audio format.",
+									"不支持此音频格式。请将您的文件转换为 MP3、WAV、M4A 或其他常见音频格式。",
 								action: { type: 'more-details', error: postError },
 							});
 						}
@@ -109,11 +109,11 @@ export function createSpeachesTranscriptionService({
 						// Rate limiting
 						if (status === 429) {
 							return WhisperingErr({
-								title: '⏱️ Rate Limit Reached',
+								title: '⏱️ 已达速率限制',
 								description: message,
 								action: {
 									type: 'link',
-									label: 'Update API key',
+									label: '更新 API 密钥',
 									href: '/settings/transcription',
 								},
 							});
@@ -121,32 +121,32 @@ export function createSpeachesTranscriptionService({
 
 						if (status >= 500) {
 							return WhisperingErr({
-								title: '🔧 Service Unavailable',
-								description: `The transcription service is temporarily unavailable (Error ${status}). Please try again in a few minutes.`,
+								title: '🔧 服务不可用',
+								description: `转录服务暂时不可用(错误 ${status})。请几分钟后重试。`,
 								action: { type: 'more-details', error: postError },
 							});
 						}
 
 						return WhisperingErr({
-							title: '❌ Request Failed',
-							description: `The request failed with error ${status}. This may be temporary - please try again. If the problem persists, please contact support.`,
+							title: '❌ 请求失败',
+							description: `请求失败,错误为 ${status}。这可能是临时的——请重试。如果问题持续存在,请联系支持。`,
 							action: { type: 'more-details', error: postError },
 						});
 					}
 
 					case 'ParseError':
 						return WhisperingErr({
-							title: '🔍 Response Error',
+							title: '🔍 响应错误',
 							description:
-								'Received an unexpected response from the transcription service. This is usually temporary - please try again.',
+								'从转录服务收到意外响应。这通常是临时的——请重试。',
 							action: { type: 'more-details', error: postError },
 						});
 
 					default:
 						return WhisperingErr({
-							title: '❓ Unexpected Error',
+							title: '❓ 意外错误',
 							description:
-								'An unexpected error occurred during transcription. Please try again, and contact support if the issue continues.',
+								'转录过程中发生了意外错误。请重试,如果问题持续存在,请联系支持。',
 							action: { type: 'more-details', error: postError },
 						});
 				}
@@ -154,7 +154,7 @@ export function createSpeachesTranscriptionService({
 
 			if ('error' in whisperApiResponse) {
 				return WhisperingErr({
-					title: '🔧 Speaches Connection Issue',
+					title: '🔧 Speaches 连接问题',
 					description: whisperApiResponse.error.message,
 				});
 			}

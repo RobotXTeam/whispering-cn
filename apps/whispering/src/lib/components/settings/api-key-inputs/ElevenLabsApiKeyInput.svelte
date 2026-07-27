@@ -6,11 +6,11 @@
 </script>
 
 <Field.Field>
-	<Field.Label for="elevenlabs-api-key">ElevenLabs API Key</Field.Label>
+	<Field.Label for="elevenlabs-api-key">ElevenLabs API 密钥</Field.Label>
 	<Input
 		id="elevenlabs-api-key"
 		type="password"
-		placeholder="Your ElevenLabs API Key"
+		placeholder="你的 ElevenLabs API 密钥"
 		autocomplete="off"
 		bind:value={
 			() => settings.value['apiKeys.elevenlabs'],
@@ -18,12 +18,12 @@
 		}
 	/>
 	<Field.Description>
-		You can find your ElevenLabs API key in your <Link
+		你可以在 <Link
 			href="https://elevenlabs.io/app/settings/api-keys"
 			target="_blank"
 			rel="noopener noreferrer"
 		>
-			ElevenLabs console
-		</Link>.
+			ElevenLabs 控制台
+		</Link> 中找到你的 ElevenLabs API 密钥。
 	</Field.Description>
 </Field.Field>

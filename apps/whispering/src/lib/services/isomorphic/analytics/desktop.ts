@@ -17,7 +17,7 @@ export function createAnalyticsServiceDesktop(): AnalyticsService {
 				},
 				catch: (error) =>
 					AnalyticsServiceErr({
-						message: `Failed to log analytics event via Tauri: ${extractErrorMessage(error)}`,
+						message: `通过 Tauri 记录分析事件失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

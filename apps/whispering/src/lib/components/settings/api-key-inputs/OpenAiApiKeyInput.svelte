@@ -7,11 +7,11 @@
 
 <Field.Group>
 	<Field.Field>
-		<Field.Label for="openai-api-key">OpenAI API Key</Field.Label>
+		<Field.Label for="openai-api-key">OpenAI API 密钥</Field.Label>
 		<Input
 			id="openai-api-key"
 			type="password"
-			placeholder="Your OpenAI API Key"
+			placeholder="你的 OpenAI API 密钥"
 			autocomplete="off"
 			bind:value={
 				() => settings.value['apiKeys.openai'],
@@ -19,29 +19,29 @@
 			}
 		/>
 		<Field.Description>
-			You can find your API key in your <Link
+			你可以在你的 <Link
 				href="https://platform.openai.com/api-keys"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				account settings
-			</Link>. Make sure <Link
+				账户设置
+			</Link> 中找到你的 API 密钥。确保 <Link
 				href="https://platform.openai.com/settings/organization/billing/overview"
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				billing
+				账单
 			</Link>
-			is enabled.
+			已启用。
 		</Field.Description>
 	</Field.Field>
 
 	<Field.Field>
-		<Field.Label for="openai-base-url">OpenAI Base URL</Field.Label>
+		<Field.Label for="openai-base-url">OpenAI 基础 URL</Field.Label>
 		<Input
 			id="openai-base-url"
 			type="url"
-			placeholder="https://api.openai.com/v1 (default)"
+			placeholder="https://api.openai.com/v1(默认)"
 			autocomplete="off"
 			bind:value={
 				() => settings.value['apiEndpoints.openai'],
@@ -49,8 +49,7 @@
 			}
 		/>
 		<Field.Description>
-			Override the default OpenAI API endpoint. Useful for reverse proxies or
-			OpenAI-compatible services. Leave empty to use the official OpenAI API.
+			覆盖默认的 OpenAI API 端点。适用于反向代理或			OpenAI 兼容的服务。留空则使用官方 OpenAI API。
 		</Field.Description>
 	</Field.Field>
 </Field.Group>

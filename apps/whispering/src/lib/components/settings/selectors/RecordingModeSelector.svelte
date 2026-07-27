@@ -39,8 +39,8 @@
 				{...props}
 				class={cn('relative', className)}
 				tooltip={currentMode
-					? `Recording mode: ${currentMode.label}`
-					: 'Select recording mode'}
+					? `录音模式:${currentMode.label}`
+					: '选择录音模式'}
 				role="combobox"
 				aria-expanded={combobox.open}
 				variant="ghost"

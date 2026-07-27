@@ -19,7 +19,7 @@ export function createFsServiceDesktop() {
 				try: () => createBlobFromPath(path),
 				catch: (error) =>
 					FsServiceErr({
-						message: `Failed to read file as Blob: ${path}: ${extractErrorMessage(error)}`,
+						message: `读取文件为 Blob 失败:${path}:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -32,7 +32,7 @@ export function createFsServiceDesktop() {
 				try: () => createFileFromPath(path),
 				catch: (error) =>
 					FsServiceErr({
-						message: `Failed to read file as File: ${path}: ${extractErrorMessage(error)}`,
+						message: `读取文件为 File 失败:${path}:${extractErrorMessage(error)}`,
 					}),
 			}),
 
@@ -45,7 +45,7 @@ export function createFsServiceDesktop() {
 				try: () => Promise.all(paths.map(createFileFromPath)),
 				catch: (error) =>
 					FsServiceErr({
-						message: `Failed to read files: ${paths.join(', ')}: ${extractErrorMessage(error)}`,
+						message: `读取文件失败:${paths.join(', ')}:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

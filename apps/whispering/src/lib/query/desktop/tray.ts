@@ -20,7 +20,7 @@ export const tray = {
 
 			if (error) {
 				return WhisperingErr({
-					title: '⚠️ Failed to set tray icon',
+					title: '⚠️ 设置托盘图标失败',
 					serviceError: error,
 				});
 			}

@@ -18,7 +18,7 @@
 
 	const {
 		title,
-		placeholder = 'Press a key combination',
+		placeholder = '按下按键组合',
 		autoFocus = true,
 		rawKeyCombination,
 		keyRecorder,
@@ -49,10 +49,10 @@
 			onclick={() => keyRecorder.clear()}
 		>
 			<XIcon class="size-4" />
-			<span class="sr-only">Clear shortcut</span>
+			<span class="sr-only">清除快捷键</span>
 		</Button>
 	{:else}
-		<span class="text-sm text-muted-foreground">Not set</span>
+		<span class="text-sm text-muted-foreground">未设置</span>
 	{/if}
 
 	<Popover.Root
@@ -71,9 +71,9 @@
 		<Popover.Trigger>
 			<Button variant="ghost" size="sm" class="h-8 font-normal">
 				{#if rawKeyCombination}
-					<span class="text-xs">Set shortcut</span>
+					<span class="text-xs">设置快捷键</span>
 				{:else}
-					<span class="text-xs text-muted-foreground">+ Add</span>
+					<span class="text-xs text-muted-foreground">+ 添加</span>
 				{/if}
 			</Button>
 		</Popover.Trigger>
@@ -92,9 +92,9 @@
 					<h4 class="mb-1 text-sm font-medium leading-none">{title}</h4>
 					<p class="text-xs text-muted-foreground">
 						{#if isManualMode}
-							Enter shortcut manually (e.g., ctrl+shift+a)
+							手动输入快捷键（例如:ctrl+shift+a）
 						{:else}
-							Click to record or edit manually
+							点击录制或手动编辑
 						{/if}
 					</p>
 				</div>
@@ -103,12 +103,12 @@
 					<Alert.Root variant="warning" class="text-xs">
 						<AlertTriangle class="size-4" />
 						<Alert.Title class="text-xs font-medium"
-							>macOS Option Key Note</Alert.Title
+							>macOS Option 键说明</Alert.Title
 						>
 						<Alert.Description class="text-xs">
-							Some Option+key combinations (E, I, N, U, `) may not record
-							properly. Try recording in reverse (press letter first, then
-							Option) or edit manually.
+							某些 Option+键组合(E、I、N、U、`)可能无法正确录制
+							。尝试反向录制（先按字母，再按
+							Option）或手动编辑。
 						</Alert.Description>
 					</Alert.Root>
 				{/if}
@@ -127,8 +127,8 @@
 						}}
 						tabindex="0"
 						aria-label={keyRecorder.isListening
-							? 'Recording keyboard shortcut'
-							: 'Click to record keyboard shortcut'}
+							? '正在录制键盘快捷键'
+							: '点击录制键盘快捷键'}
 					>
 						<div class="flex w-full items-center justify-between">
 							<div
@@ -155,8 +155,8 @@
 								aria-live="polite"
 							>
 								<div class="flex flex-col items-center gap-1 px-4 py-2">
-									<p class="text-sm font-medium">Press key combination</p>
-									<p class="text-xs text-muted-foreground">Esc to cancel</p>
+									<p class="text-sm font-medium">按下按键组合</p>
+									<p class="text-xs text-muted-foreground">按 Esc 取消</p>
 								</div>
 							</div>
 						{/if}
@@ -171,7 +171,7 @@
 								onclick={() => keyRecorder.clear()}
 							>
 								<XIcon class="size-3" />
-								Clear
+								清除
 							</Button>
 						{/if}
 						<Button
@@ -185,7 +185,7 @@
 							}}
 						>
 							<Pencil class="size-3" />
-							Edit manually
+							手动编辑
 						</Button>
 					</div>
 				{:else}
@@ -204,7 +204,7 @@
 					>
 						<Input
 							type="text"
-							placeholder="e.g., ctrl+shift+a"
+							placeholder="例如:ctrl+shift+a"
 							bind:value={manualValue}
 							class="font-mono text-sm"
 							autofocus
@@ -220,7 +220,7 @@
 									manualValue = rawKeyCombination ?? '';
 								}}
 							>
-								Cancel
+								取消
 							</Button>
 							<Button
 								type="submit"
@@ -228,7 +228,7 @@
 								class="flex-1"
 								disabled={!manualValue}
 							>
-								Save
+								保存
 							</Button>
 						</div>
 					</form>

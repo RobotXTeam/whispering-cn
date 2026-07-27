@@ -12,14 +12,14 @@ export type LayoutMode = (typeof LAYOUT_MODES)[number];
 export const LAYOUT_MODE_OPTIONS = [
 	{
 		value: 'sidebar' as const,
-		label: 'Sidebar Navigation',
+		label: '侧边栏导航',
 		description:
-			'Use the collapsible sidebar on the left. Best for desktop with a larger screen.',
+			'使用左侧可折叠侧边栏。适合屏幕较大的桌面端。',
 	},
 	{
 		value: 'nav-items' as const,
-		label: 'Header Navigation',
+		label: '顶栏导航',
 		description:
-			'Use navigation items in the header bar. Cleaner look, works well on smaller screens.',
+			'使用顶栏中的导航项。更简洁,适合较小的屏幕。',
 	},
 ] satisfies { value: LayoutMode; label: string; description: string }[];

@@ -16,9 +16,9 @@
 
 <Card.Root class="w-full max-w-4xl">
 	<Card.Header>
-		<Card.Title>Create Transformation</Card.Title>
+		<Card.Title>创建转换</Card.Title>
 		<Card.Description>
-			Create a new transformation to transform text.
+			创建新的转换以处理文本。
 		</Card.Description>
 	</Card.Header>
 	<Card.Content class="space-y-6">
@@ -30,21 +30,21 @@
 						onSuccess: () => {
 							goto('/transformations');
 							rpc.notify.success.execute({
-								title: 'Created transformation!',
+								title: '已创建转换!',
 								description:
-									'Your transformation has been created successfully.',
+									'您的转换已成功创建。',
 							});
 						},
 						onError: (error) => {
 							rpc.notify.error.execute({
-								title: 'Failed to create transformation!',
-								description: 'Your transformation could not be created.',
+								title: '创建转换失败!',
+								description: '无法创建您的转换。',
 								action: { type: 'more-details', error },
 							});
 						},
 					})}
 			>
-				Create Transformation
+				创建转换
 			</Button>
 		</Card.Footer>
 	</Card.Content>

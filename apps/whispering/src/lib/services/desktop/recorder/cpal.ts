@@ -45,7 +45,7 @@ export function createCpalRecorderService(): RecorderService {
 			await invoke<string[]>('enumerate_recording_devices');
 		if (enumerateRecordingDevicesError) {
 			return RecorderServiceErr({
-				message: 'Failed to enumerate recording devices',
+				message: '枚举录音设备失败',
 			});
 		}
 		// On desktop, device names serve as both ID and label
@@ -70,7 +70,7 @@ export function createCpalRecorderService(): RecorderService {
 			if (getRecorderStateError)
 				return RecorderServiceErr({
 					message:
-						'We encountered an issue while getting the recorder state. This could be because your microphone is being used by another app, your microphone permissions are denied, or the selected recording device is disconnected',
+						'获取录音器状态时遇到问题。可能是因为您的麦克风正被其他应用占用、麦克风权限被拒绝,或所选录音设备已断开连接',
 				});
 
 			return Ok(recordingId ? 'RECORDING' : 'IDLE');
@@ -109,16 +109,16 @@ export function createCpalRecorderService(): RecorderService {
 				if (!fallbackDeviceId) {
 					return RecorderServiceErr({
 						message: selectedDeviceId
-							? "We couldn't find the selected microphone. Make sure it's connected and try again!"
-							: "We couldn't find any microphones. Make sure they're connected and try again!",
+							? '找不到所选的麦克风。请确保其已连接后重试!'
+							: '找不到任何麦克风。请确保其已连接后重试!',
 					});
 				}
 
 				if (!selectedDeviceId) {
 					sendStatus({
-						title: '🔍 No Device Selected',
+						title: '🔍 未选择设备',
 						description:
-							"No worries! We'll find the best microphone for you automatically...",
+							'别担心!我们会自动为您找到最合适的麦克风……',
 					});
 					return Ok({
 						outcome: 'fallback',
@@ -134,9 +134,9 @@ export function createCpalRecorderService(): RecorderService {
 					return Ok({ outcome: 'success', deviceId: selectedDeviceId });
 
 				sendStatus({
-					title: '⚠️ Finding a New Microphone',
+					title: '⚠️ 寻找新麦克风',
 					description:
-						"That microphone isn't available. Let's try finding another one...",
+						'该麦克风不可用。让我们尝试找另一个……',
 				});
 
 				return Ok({
@@ -155,9 +155,9 @@ export function createCpalRecorderService(): RecorderService {
 
 			// Now initialize recording with the chosen device
 			sendStatus({
-				title: '🎤 Setting Up',
+				title: '🎤 正在准备',
 				description:
-					'Initializing your recording session and checking microphone access...',
+					'正在初始化您的录音会话并检查麦克风访问权限……',
 			});
 
 			// Convert sample rate string to number if provided
@@ -177,20 +177,20 @@ export function createCpalRecorderService(): RecorderService {
 			if (initRecordingSessionError)
 				return RecorderServiceErr({
 					message:
-						'We encountered an issue while setting up your recording session. This could be because your microphone is being used by another app, your microphone permissions are denied, or the selected recording device is disconnected',
+						'设置录音会话时遇到问题。可能是因为您的麦克风正被其他应用占用、麦克风权限被拒绝,或所选录音设备已断开连接',
 				});
 
 			sendStatus({
-				title: '🎙️ Starting Recording',
+				title: '🎙️ 开始录音',
 				description:
-					'Recording session initialized, now starting to capture audio...',
+					'录音会话已初始化,现在开始捕获音频……',
 			});
 			const { error: startRecordingError } =
 				await invoke<void>('start_recording');
 			if (startRecordingError)
 				return RecorderServiceErr({
 					message:
-						'Unable to start recording. Please check your microphone and try again.',
+						'无法开始录音。请检查您的麦克风后重试。',
 				});
 
 			return Ok(deviceOutcome);
@@ -209,7 +209,7 @@ export function createCpalRecorderService(): RecorderService {
 				await invoke<AudioRecording>('stop_recording');
 			if (stopRecordingError) {
 				return RecorderServiceErr({
-					message: 'Unable to save your recording. Please try again.',
+					message: '无法保存您的录音。请重试。',
 				});
 			}
 
@@ -217,27 +217,27 @@ export function createCpalRecorderService(): RecorderService {
 			// Desktop recorder should always write to a file
 			if (!filePath) {
 				return RecorderServiceErr({
-					message: 'Recording file path not provided by method.',
+					message: '未提供录音文件路径。',
 				});
 			}
 			// audioRecording is now AudioRecordingWithFile
 
 			// Read the WAV file from disk
 			sendStatus({
-				title: '📁 Reading Recording',
-				description: 'Loading your recording from disk...',
+				title: '📁 正在读取录音',
+				description: '正在从磁盘加载您的录音……',
 			});
 
 			const { data: blob, error: readRecordingFileError } =
 				await FsServiceLive.pathToBlob(filePath);
 			if (readRecordingFileError)
 				return RecorderServiceErr({
-					message: `Unable to read recording file: ${readRecordingFileError.message}`,
+					message: `无法读取录音文件:${readRecordingFileError.message}`,
 				});
 			// Close the recording session after stopping
 			sendStatus({
-				title: '🔄 Closing Session',
-				description: 'Cleaning up recording resources...',
+				title: '🔄 正在关闭会话',
+				description: '正在清理录音资源……',
 			});
 			const { error: closeError } = await invoke<void>(
 				'close_recording_session',
@@ -266,7 +266,7 @@ export function createCpalRecorderService(): RecorderService {
 			if (getRecordingIdError) {
 				return RecorderServiceErr({
 					message:
-						'Unable to check recording state. Please try closing the app and starting again.',
+						'无法检查录音状态。请尝试关闭应用后重新启动。',
 				});
 			}
 
@@ -275,9 +275,9 @@ export function createCpalRecorderService(): RecorderService {
 			}
 
 			sendStatus({
-				title: '🛑 Cancelling',
+				title: '🛑 正在取消',
 				description:
-					'Safely stopping your recording and cleaning up resources...',
+					'正在安全停止您的录音并清理资源……',
 			});
 
 			// First get the recording data to know if there's a file to delete
@@ -291,21 +291,21 @@ export function createCpalRecorderService(): RecorderService {
 					try: () => remove(filePath),
 					catch: (error) =>
 						RecorderServiceErr({
-							message: `Failed to delete recording file: ${extractErrorMessage(error)}`,
+							message: `删除录音文件失败:${extractErrorMessage(error)}`,
 						}),
 				});
 				if (removeError)
 					sendStatus({
-						title: '❌ Error Deleting Recording File',
+						title: '❌ 删除录音文件出错',
 						description:
-							"We couldn't delete the recording file. Continuing with the cancellation process...",
+							'我们无法删除该录音文件。正在继续执行取消流程……',
 					});
 			}
 
 			// Close the recording session after cancelling
 			sendStatus({
-				title: '🔄 Closing Session',
-				description: 'Cleaning up recording resources...',
+				title: '🔄 正在关闭会话',
+				description: '正在清理录音资源……',
 			});
 			const { error: closeError } = await invoke<void>(
 				'close_recording_session',

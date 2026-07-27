@@ -7,8 +7,8 @@ import type { AcceleratorPossibleKey } from './possible-keys';
  */
 export const ACCELERATOR_SECTIONS = [
 	{
-		title: 'Modifiers',
-		description: 'Modifier keys for global shortcuts',
+		title: '修饰键',
+		description: '全局快捷键的修饰键',
 		keys: [
 			'Command',
 			'Cmd', // macOS Command key
@@ -23,8 +23,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Letters',
-		description: 'Uppercase letters A-Z',
+		title: '字母',
+		description: '大写字母 A-Z',
 		keys: [
 			'A',
 			'B',
@@ -55,8 +55,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Numbers',
-		description: 'Number keys 0-9',
+		title: '数字',
+		description: '数字键 0-9',
 		keys: [
 			'0',
 			'1',
@@ -71,8 +71,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Function Keys',
-		description: 'F1-F24 function keys',
+		title: '功能键',
+		description: 'F1-F24 功能键',
 		keys: [
 			'F1',
 			'F2',
@@ -101,8 +101,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Punctuation',
-		description: 'Symbol and punctuation keys',
+		title: '标点符号',
+		description: '符号和标点键',
 		keys: [
 			')',
 			'!',
@@ -140,8 +140,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Special Keys',
-		description: 'Navigation and control keys',
+		title: '特殊键',
+		description: '导航和控制键',
 		keys: [
 			'Plus',
 			'Space',
@@ -175,8 +175,8 @@ export const ACCELERATOR_SECTIONS = [
 		] as const satisfies AcceleratorPossibleKey[],
 	},
 	{
-		title: 'Numpad Keys',
-		description: 'Numeric keypad keys',
+		title: '小键盘键',
+		description: '数字小键盘键',
 		keys: [
 			'num0',
 			'num1',

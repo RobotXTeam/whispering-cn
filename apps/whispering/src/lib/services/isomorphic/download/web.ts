@@ -20,7 +20,7 @@ export function createDownloadServiceWeb(): DownloadService {
 				},
 				catch: (error) =>
 					DownloadServiceErr({
-						message: `There was an error saving the recording in your browser. Please try again. ${extractErrorMessage(error)}`,
+						message: `在浏览器中保存录音时出错。请重试。 ${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

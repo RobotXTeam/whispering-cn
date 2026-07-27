@@ -13,12 +13,12 @@ export const CustomCompletionServiceLive =
 		validateParams: (params) => {
 			if (!params.baseUrl) {
 				return CompletionServiceErr({
-					message: 'Custom provider requires a base URL.',
+					message: '自定义服务商需要基础 URL。',
 				});
 			}
 			if (!params.model) {
 				return CompletionServiceErr({
-					message: 'Custom provider requires a model name.',
+					message: '自定义服务商需要模型名称。',
 				});
 			}
 			return Ok(undefined);

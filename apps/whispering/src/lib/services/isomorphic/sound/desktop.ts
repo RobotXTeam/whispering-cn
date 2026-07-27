@@ -13,7 +13,7 @@ export function createPlaySoundServiceDesktop(): PlaySoundService {
 				},
 				catch: (error) =>
 					PlaySoundServiceErr({
-						message: `Failed to play sound: ${extractErrorMessage(error)}`,
+						message: `播放声音失败:${extractErrorMessage(error)}`,
 					}),
 			}),
 	};

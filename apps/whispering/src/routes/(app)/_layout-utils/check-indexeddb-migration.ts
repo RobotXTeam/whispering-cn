@@ -15,12 +15,12 @@ export async function checkIndexedDBMigration(): Promise<void> {
 
 	if (migrationDialog.hasIndexedDBData) {
 		rpc.notify.info.execute({
-			title: 'Database Migration Available',
+			title: '数据库迁移可用',
 			description:
-				'You have data in IndexedDB. Click here to migrate to the faster file system storage.',
+				'您在 IndexedDB 中有数据。点击此处迁移到更快的文件系统存储。',
 			action: {
 				type: 'button',
-				label: 'View Update',
+				label: '查看更新',
 				onClick: () => {
 					migrationDialog.isOpen = true;
 				},

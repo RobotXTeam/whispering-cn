@@ -4,7 +4,7 @@
 
 <svelte:head>
 	<title>
-		{page.status === 404 ? 'Page Not Found' : 'Error'} - Whispering
+		{page.status === 404 ? '页面未找到' : '错误'} - Whispering
 	</title>
 </svelte:head>
 
@@ -12,17 +12,17 @@
 	<div class="text-center space-y-6">
 		<h1 class="text-4xl font-bold text-foreground">
 			{#if page.status === 404}
-				404 - Page Not Found
+				404 - 页面未找到
 			{:else}
-				Something Went Wrong
+				出错了
 			{/if}
 		</h1>
 
 		<p class="text-muted-foreground text-lg">
 			{#if page.status === 404}
-				The page you're looking for doesn't exist.
+				您要找的页面不存在。
 			{:else}
-				An unexpected error occurred.
+				发生了意外错误。
 			{/if}
 		</p>
 
@@ -31,7 +31,7 @@
 				href="/"
 				class="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90 transition-colors"
 			>
-				Go Home
+				返回首页
 			</a>
 		</div>
 	</div>
