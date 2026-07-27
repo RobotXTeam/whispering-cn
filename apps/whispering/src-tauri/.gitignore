@@ -9,3 +9,6 @@
 # Environment variables
 .env
 .env.local
+
+# Local scratch test (hardcoded machine paths — keep local, never commit)
+/examples/engine_test.rs
